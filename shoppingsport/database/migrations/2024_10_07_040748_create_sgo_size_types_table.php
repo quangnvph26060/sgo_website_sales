@@ -16,6 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // Tên loại kích thước
             $table->timestamps();
+
+
+            
         });
 
         // Thêm dữ liệu mẫu cho loại kích thước
