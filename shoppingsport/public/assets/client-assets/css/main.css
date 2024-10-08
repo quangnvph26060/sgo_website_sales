@@ -32,9 +32,7 @@
 body,
 html {
     overflow-x: hidden;
-}
-
-
+} */
 
 .d-none {
     display: none !important;
@@ -445,19 +443,6 @@ html {
     /* .dots-custom .s-wrap .s-content {
         width: 400px !important;
     } */
-
-    .cart-wrap__list table tfoot .actions-wrapper .button.remove-all {
-        margin-bottom: 1rem;
-        width: 100%;
-    }
-
-    #search_mobile {
-        display: block !important;
-    }
-
-    body, html {
-        padding-top: 50px !important;
-    }
 
     .top-gallery {
         width: 100%;
