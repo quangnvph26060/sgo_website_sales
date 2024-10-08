@@ -11,3 +11,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    var positionToc = parseInt('1')
+</script>
