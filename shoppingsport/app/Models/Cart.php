@@ -12,5 +12,5 @@ class Cart extends Model
     protected $table = 'sgo_cart';
 
     // Các cột có thể gán giá trị hàng loạt
-    protected $fillable = ['user_id', 'product_id', 'quantity'];
+    protected $fillable = ['user_id', 'product_id', 'quantity', 'size'];
 }
