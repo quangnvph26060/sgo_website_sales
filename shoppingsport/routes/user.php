@@ -20,9 +20,17 @@ Route::name('user.')->group(function () {
         return view('client.pages.home-page');
     })->name('home-page');
 
+    Route::get('cart', function () {
+        return view('client.pages.cart-page');
+    })->name('cart-page');
+
     Route::get('details', function () {
         return view('client.pages.detail');
     })->name('details');
+
+    Route::get('danh-sach', function () {
+        return view('client.pages.list');
+    })->name('list');
 
     Route::get('login', function () {
         return view('client.pages.auth.login');

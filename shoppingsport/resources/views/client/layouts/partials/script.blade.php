@@ -1,3 +1,5 @@
+<script>var errorMessage = 'Có lỗi xảy ra. Vui lòng thử lại sau!';</script>
+
 <script src="{{asset('assets/client-assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/client-assets/js/general.min.js')}}"></script>
 <script src="{{asset('assets/client-assets/js/main.min.js')}}"></script>

@@ -92,6 +92,9 @@
 
     <script>
         $(function() {
+            const web_datas = $('#web_datas').html();
+            const mobile_datas = $('#mobile_datas').html();
+            
             function checkScreenSize() {
                 if ($(window).width() <= 575) {
                     $(".short-product__content .categories").addClass("mobile");
@@ -107,6 +110,11 @@
                     $('.footer-top .footer-top__wrap .footer-left').addClass('w-100');
                     $('.footer-bottom__wrap').removeClass('flex-center-between');
                     $('.footer-bottom__wrap .right').removeClass('flex-center-right').addClass('flex-center-left');
+                    $('#listdata .product').addClass('column-2').removeClass('column-4');
+                    $('#listdata .product .product-item').addClass('mobile-item');
+                    $('.product-categories__data').removeClass('flex-left');
+                    $('#web_datas').remove();
+                    $('.datas-top').html(mobile_datas);
                 } else {
                     // Xóa các lớp đã thêm cho chế độ mobile
                     $(".short-product__content .categories").removeClass("mobile");
@@ -122,6 +130,11 @@
                     $('.footer-top .footer-top__wrap .footer-left').removeClass('w-100');
                     $('.footer-bottom__wrap').addClass('flex-center-between');
                     $('.footer-bottom__wrap .right').addClass('flex-center-right').removeClass('flex-center-left');
+                    $('#listdata .product').removeClass('column-2').addClass('column-4');
+                    $('#listdata .product .product-item').removeClass('mobile-item');
+                    $('.product-categories__data').addClass('flex-left');
+                    $('#mobile_datas').remove();
+                    $('.datas-top').html(web_datas);
                 }
             }
 
