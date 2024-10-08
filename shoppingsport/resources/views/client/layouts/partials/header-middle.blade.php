@@ -19,7 +19,7 @@
             </a>
           </div>
         </div>
-        <div class="search form-search flex-inline-center">
+        <div class="search form-search flex-inline-center" id="search-header">
           <form method="GET" class="search-form w-100 input-wrapper flex">
             <input
               type="text"

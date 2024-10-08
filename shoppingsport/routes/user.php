@@ -24,6 +24,10 @@ Route::name('user.')->group(function () {
         return view('client.pages.detail');
     })->name('details');
 
+    Route::get('danh-sach', function () {
+        return view('client.pages.list');
+    })->name('list');
+
     Route::get('login', function () {
         return view('client.pages.auth.login');
     })->name('login');
