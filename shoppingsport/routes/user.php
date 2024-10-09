@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::name('user.')->group(function () {
-    Route::get('/', function () {
-        return view('client.pages.home-page');
-    })->name('home-page');
+
 
     Route::get('cart', function () {
         return view('client.pages.cart-page');
@@ -40,3 +37,4 @@ Route::name('user.')->group(function () {
         return view('client.pages.auth.register');
     })->name('register');
 });
+

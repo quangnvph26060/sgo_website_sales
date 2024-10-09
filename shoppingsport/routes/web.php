@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +28,58 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
+// Route::get('/products', [CategoryController::class, 'index'])->name('products.index');
+// Route::post('/products/fetch', [CategoryController::class, 'fetch'])->name('products.fetch');
 
 Route::middleware(['checkLogin', 'checkRole:1,2'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+    Route::prefix('category')->name('category.')->group(function (){
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::post('/fetch/{type}', [CategoryController::class, 'fetch'])->name('fetch');
+        Route::get('/add', [CategoryController::class, 'add'])->name('add');
+        Route::post('/add', [CategoryController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
+
+        Route::get('/add_brand', [CategoryController::class, 'addbrand'])->name('add.brand');
+        Route::get('/get-brands-category_child/{categoryId}', [CategoryController::class, 'getBrands'])->name('brand.category.child');
+    });
+
+    Route::prefix('brand')->name('brand.')->group(function (){
+        Route::get('/', [BrandController::class, 'index'])->name('index');
+        Route::post('/fetch', [BrandController::class, 'fetch'])->name('fetch');
+        Route::get('/add', [BrandController::class, 'add'])->name('add');
+        Route::post('/store', [BrandController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [BrandController::class, 'update'])->name('update');
+        Route::post('/delete/{id}', [BrandController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('product')->name('product.')->group(function (){
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::post('/fetch', [ProductController::class, 'fetch'])->name('fetch');
+        Route::get('/add', [ProductController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::post('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+    });
+});
+
+
+Route::name('user.')->group(function () {
+    Route::get('', [HomeController::class, 'index'])->name('home-page');
+
+    Route::get('details', function () {
+        return view('client.pages.detail');
+    })->name('details');
+
+    Route::get('login', function () {
+        return view('client.pages.auth.login');
+    })->name('login');
+
+    Route::get('register', function () {
+        return view('client.pages.auth.register');
+    })->name('register');
 });
