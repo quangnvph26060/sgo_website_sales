@@ -36,5 +36,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('register', function () {
         return view('client.pages.auth.register');
     })->name('register');
-});
+
 
