@@ -45,35 +45,36 @@
                     <div class="row">
                         <div class="col col-lg-7 top-gallery">
                             <div class="top-gallery__wrap">
-                                <div class="thumnail">
-                                    <div class="thumnail-lists s-wrap" id="thumnails-lists">
-                                        <div class="slides s-content">
-                                            <div class="item" data-src="giay-bong-chuyen-beyono-sky-xanh-la-1-2.jpg"
-                                                data-thumnail="https://thanhloisport.com/thumbnails/products/tiny/giay-bong-chuyen-beyono-sky-xanh-la-1-2.jpg.webp">
-                                                <img src="https://thanhloisport.com/thumbnails/products/large/giay-bong-chuyen-beyono-sky-xanh-la-1-2.jpg.webp"
-                                                    alt="giay-bong-chuyen-beyono-sky-xanh-la-1-2" width=600px height=600px>
-                                            </div>
-                                            <div class="item"
-                                                data-src="https://thanhloisport.com//uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-2.jpg"
-                                                data-thumnail="https://thanhloisport.com/thumbnails/products/tiny/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-2.jpg.webp">
-                                                <img loading="lazy"
-                                                    src="https://thanhloisport.com/thumbnails/products/large/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-2.jpg.webp"
-                                                    alt="giay-bong-chuyen-beyono-sky-xanh-la-2" width=600px height=600px>
-                                            </div>
-                                            <div class="item"
-                                                data-src="https://thanhloisport.com//uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-3.jpg"
-                                                data-thumnail="https://thanhloisport.com/thumbnails/products/tiny/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-3.jpg.webp">
-                                                <img loading="lazy"
-                                                    src="https://thanhloisport.com/thumbnails/products/large/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-3.jpg.webp"
-                                                    alt="giay-bong-chuyen-beyono-sky-xanh-la-3" width=600px height=600px>
-                                            </div>
-                                            <div class="item"
-                                                data-src="https://thanhloisport.com//uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-4.jpg"
-                                                data-thumnail="https://thanhloisport.com/thumbnails/products/tiny/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-4.jpg.webp">
-                                                <img loading="lazy"
-                                                    src="https://thanhloisport.com/thumbnails/products/large/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-4.jpg.webp"
-                                                    alt="giay-bong-chuyen-beyono-sky-xanh-la-4" width=600px height=600px>
-                                            </div>
+                                <div class="swiper-container gallery-top">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/600x400?text=Image+1" alt="Image 1" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/600x400?text=Image+2" alt="Image 2" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/600x400?text=Image+3" alt="Image 3" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/600x400?text=Image+4" alt="Image 4" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-container gallery-thumbs" style="margin-top: 5px">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/100x80?text=Thumb+1" alt="Thumbnail 1" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/100x80?text=Thumb+2" alt="Thumbnail 2" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/100x80?text=Thumb+3" alt="Thumbnail 3" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://via.placeholder.com/100x80?text=Thumb+4" alt="Thumbnail 4" />
                                         </div>
                                     </div>
                                 </div>
@@ -747,9 +748,112 @@
 @endsection
 
 @push('library-script')
-    <script src="{{ asset('assets/client-assets/js/resizeImg.js') }}"></script>
     <script src="{{ asset('assets/client-assets/js/comments.min.js') }}"></script>
+    <script src="{{ asset('assets/client-assets/js/resizeImg.js') }}"></script>
     <script src="{{ asset('assets/client-assets/js/product-single.min.js') }}"></script>
     <script src="{{ asset('assets/client-assets/js/mobile/resizeImg.js') }}"></script>
     <script src="{{ asset('assets/client-assets/js/toc/main.min.js') }}"></script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+@endpush
+
+@push('library-style')
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+@endpush
+
+@push('style')
+    <style>
+        .product-single__wrap {
+            width: 100%;
+            /* Đảm bảo phần tử cha chiếm toàn bộ chiều rộng */
+            overflow: hidden;
+            /* Ẩn bất kỳ phần nào tràn ra ngoài */
+        }
+
+        .top-gallery {
+            position: relative;
+            /* Để cho các phần tử con có thể được định vị đúng cách */
+        }
+
+        .swiper-container {
+            width: 100%;
+            /* Đảm bảo Swiper chiếm toàn bộ chiều rộng */
+            height: auto;
+            /* Tự động điều chỉnh chiều cao */
+        }
+
+        .swiper-slide {
+            display: flex;
+            /* Dùng flex để căn giữa nội dung */
+            justify-content: center;
+            /* Căn giữa nội dung theo chiều ngang */
+            align-items: center;
+            /* Căn giữa nội dung theo chiều dọc */
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            /* Chiếm toàn bộ chiều rộng của slide */
+            height: auto;
+            /* Giữ tỷ lệ khung hình của hình ảnh */
+            max-height: 400px;
+            /* Giới hạn chiều cao tối đa để giữ sự hài hòa */
+        }
+
+        .gallery-thumbs .swiper-slide {
+            width: auto;
+            /* Để cho thumbs có thể điều chỉnh kích thước tự do */
+            height: auto;
+            /* Tương tự cho chiều cao */
+        }
+
+        .gallery-thumbs img {
+            width: 100%;
+            /* Chiếm toàn bộ chiều rộng của thumbnail */
+            height: auto;
+            /* Giữ tỷ lệ khung hình của thumbnail */
+            object-fit: cover;
+            /* Đảm bảo thumbnail không bị biến dạng */
+        }
+
+        .top-gallery__wrap {
+            overflow: hidden;
+        }
+    </style>
+@endpush
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+
+            $('.middle-tab__nav .item').click(function() {
+                // Lấy id của nội dung tab tương ứng
+                var targetId = $(this).data('id');
+
+                // Xóa class active và ẩn tất cả các nội dung
+                $('.middle-tab__nav .item').removeClass('active');
+                $('.middle-tab__content .item').removeClass('active').hide();
+
+                // Thêm class active cho tab đang được nhấp và hiển thị nội dung tương ứng
+                $(this).addClass('active');
+                $(targetId).addClass('active').show();
+            });
+
+            var galleryThumbs = new Swiper(".gallery-thumbs", {
+                spaceBetween: 10,
+                slidesPerView: 4,
+                freeMode: true,
+                watchSlidesVisibility: true,
+                watchSlidesProgress: true,
+            });
+
+            var galleryTop = new Swiper(".gallery-top", {
+                spaceBetween: 10,
+                effect: "slide", // Kiểu vuốt chuyển ảnh
+                thumbs: {
+                    swiper: galleryThumbs, // Kết nối với slider thumbnails
+                },
+            });
+        })
+    </script>
 @endpush
