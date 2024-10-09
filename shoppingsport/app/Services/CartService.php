@@ -125,7 +125,7 @@ class CartService
             // Tính tổng từ database
             $cartItems = Cart::with('product')->where('user_id', Auth::id())->get();
             foreach ($cartItems as $item) {
-                $total += $item->product->price * $item->quantity;
+                $total += $item->product->price_new * $item->quantity;
             }
         } else {
             // Tính tổng từ session

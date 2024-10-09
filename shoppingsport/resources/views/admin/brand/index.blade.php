@@ -1,14 +1,7 @@
 @extends('admin.layout.index')
 
 @section('content')
-<style>
-    .sorting{
-        font-size: 10px !important;
-    }
-    .ds td{
-        font-size: 12px !important;
-    }
-</style>
+
 <div class="page-inner">
     <div class="page-header">
         <ul class="breadcrumbs mb-3">
@@ -21,13 +14,13 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Sản phẩm</a>
+                <a href="#">Thương hiệu</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#"> Danh sách sản phẩm</a>
+                <a href="#"> Danh sách thương hiệu</a>
             </li>
         </ul>
     </div>
@@ -37,7 +30,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
 
-                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.product.add') }}"  >
+                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.brand.add') }}"  >
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </a>
@@ -76,38 +69,26 @@
                                         role="grid" aria-describedby="add-row_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 60px;">ID</th>
-                                                <th class="sorting" data-sort="name" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Tên: activate to sort column ascending" style="width: 150px;">Tên</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Hình ảnh: activate to sort column ascending" style="width: 150px;">Hình ảnh</th>
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Giá gốc: activate to sort column ascending" style="width: 100px;">Giá gốc</th>
-
-                                                <th class="sorting" data-sort="brand_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Thương hiệu: activate to sort column ascending" style="width: 100px;">Thương hiệu</th>
-                                                <th class="sorting" data-sort="categori_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Danh mục: activate to sort column ascending" style="width: 150px;">Danh mục</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Action: activate to sort column ascending" style="width: 260px;">Action</th>
+                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="id: activate to sort column descending"
+                                                    style="width: 60.016px;">ID</th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 250.484px;">Tên thương hiệu</th>
+                                                <th class="sorting" style="width: 120.688px;" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Action: activate to sort column ascending">Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Tên</th>
-
-                                                <th rowspan="1" colspan="1">Hình ảnh</th>
-                                                <th rowspan="1" colspan="1">Giá gốc</th>
-                                                <th rowspan="1" colspan="1">Thương hiệu</th>
-                                                <th rowspan="1" colspan="1">Danh mục</th>
+                                                <th rowspan="1" colspan="1">Tên thương hiệu</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
                                         </tfoot>
-
                                         <tbody id="product-list">
 
                                         </tbody>
@@ -156,7 +137,7 @@
 
         function fetchProducts(page = 1, search = '', per_page = perPage) {
             $.ajax({
-                url: '{{ route("admin.product.fetch") }}',
+                url: '{{ route("admin.brand.fetch") }}',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -168,23 +149,16 @@
                 },
                 success: function (data) {
                     $('#product-list').empty();
-                    console.log(data.data);
-                    $.each(data.data, function (index, product) {
+                    $.each(data.data, function (index, brand) {
                         $('#product-list').append(`
-                        <tr class = 'ds'>
-                            <td>${product.id}</td>
-                            <td>${product.name}</td>
-
-                            <td></td>
-                            <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
-                            <td>${product.brand.name}</td>
-                            <td>${product.category.name}</td>
-
+                        <tr>
+                            <td>${brand.id}</td>
+                            <td>${brand.name}</td>
                             <td>
-                                <button class="btn btn-warning btn-sm edit" data-id="${product.id}">
+                                <button class="btn btn-warning btn-sm edit" data-id="${brand.id}">
                                     <i class="fas fa-edit"></i> Sửa
                                 </button>
-                                <button class="btn btn-danger btn-sm delete" data-id="${product.id}">
+                                <button class="btn btn-danger btn-sm delete" data-id="${brand.id}">
                                     <i class="fas fa-trash"></i> Xóa
                                 </button>
                             </td>
@@ -194,12 +168,6 @@
                     });
                     bindDeleteEvent();
 
-                    $('#product-list').on('click', '.edit', function() {
-                        var productId = $(this).data('id');
-                        var editRoute = "{{ route('admin.product.edit', ':id') }}"; // Route Blade có tham số id
-                        var finalRoute = editRoute.replace(':id', productId); // Thêm type vào query string
-                        window.location.href = finalRoute;
-                    });
 
                     updateInfoAndPagination(data, page);
                 },

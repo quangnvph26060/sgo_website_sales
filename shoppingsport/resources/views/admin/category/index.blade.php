@@ -1,14 +1,7 @@
 @extends('admin.layout.index')
 
 @section('content')
-<style>
-    .sorting{
-        font-size: 10px !important;
-    }
-    .ds td{
-        font-size: 12px !important;
-    }
-</style>
+
 <div class="page-inner">
     <div class="page-header">
         <ul class="breadcrumbs mb-3">
@@ -21,13 +14,13 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Sản phẩm</a>
+                <a href="#">Danh mục</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#"> Danh sách sản phẩm</a>
+                <a href="#"> {{ $type == 'child' ? 'Danh mục con' : 'Danh mục cha' }} </a>
             </li>
         </ul>
     </div>
@@ -36,10 +29,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-
-                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.product.add') }}"  >
+                        <h4 class="card-title">Add Row {{ $type }}</h4>
+                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.category.add', ['type' => $type]) }}"  >
                             <i class="fa fa-plus"></i>
-                            Thêm mới
+                            Add Row
                         </a>
                     </div>
                 </div>
@@ -76,38 +69,35 @@
                                         role="grid" aria-describedby="add-row_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 60px;">ID</th>
-                                                <th class="sorting" data-sort="name" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Tên: activate to sort column ascending" style="width: 150px;">Tên</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Hình ảnh: activate to sort column ascending" style="width: 150px;">Hình ảnh</th>
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Giá gốc: activate to sort column ascending" style="width: 100px;">Giá gốc</th>
-
-                                                <th class="sorting" data-sort="brand_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Thương hiệu: activate to sort column ascending" style="width: 100px;">Thương hiệu</th>
-                                                <th class="sorting" data-sort="categori_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Danh mục: activate to sort column ascending" style="width: 150px;">Danh mục</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Action: activate to sort column ascending" style="width: 260px;">Action</th>
+                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="id: activate to sort column descending"
+                                                    style="width: 60.016px;">ID</th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 250.484px;">Danh mục</th>
+                                                @if($type == 'child')
+                                                <th class="sorting" data-sort="id" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Parent Category: activate to sort column ascending"
+                                                    style="width: 250.484px;">Danh mục cha</th>
+                                                @endif
+                                                <th class="sorting" style="width: 120.688px;" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Action: activate to sort column ascending">Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Tên</th>
-
-                                                <th rowspan="1" colspan="1">Hình ảnh</th>
-                                                <th rowspan="1" colspan="1">Giá gốc</th>
-                                                <th rowspan="1" colspan="1">Thương hiệu</th>
                                                 <th rowspan="1" colspan="1">Danh mục</th>
+                                                @if($type == 'child')
+                                                <th rowspan="1" colspan="1">Danh mục cha</th>
+                                                @endif
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
                                         </tfoot>
-
                                         <tbody id="product-list">
 
                                         </tbody>
@@ -154,9 +144,11 @@
         let sortOrder = 'asc';
         let perPage = 10; // Giá trị mặc định
 
+        let type = '{{ $type }}'; // Gán giá trị cho biến type ở đây
+        let fetchUrl = '{{ route("admin.category.fetch", ["type" => "__type__"]) }}'.replace('__type__', type);
         function fetchProducts(page = 1, search = '', per_page = perPage) {
             $.ajax({
-                url: '{{ route("admin.product.fetch") }}',
+                url: fetchUrl,
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -168,18 +160,13 @@
                 },
                 success: function (data) {
                     $('#product-list').empty();
-                    console.log(data.data);
+                    console.log(data);
                     $.each(data.data, function (index, product) {
                         $('#product-list').append(`
-                        <tr class = 'ds'>
+                        <tr>
                             <td>${product.id}</td>
                             <td>${product.name}</td>
-
-                            <td></td>
-                            <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
-                            <td>${product.brand.name}</td>
-                            <td>${product.category.name}</td>
-
+                            ${type === 'child' ? `<td>${product.parent.name}</td>` : ''} <!-- Thêm tên danh mục cha nếu type là 'child' -->
                             <td>
                                 <button class="btn btn-warning btn-sm edit" data-id="${product.id}">
                                     <i class="fas fa-edit"></i> Sửa
@@ -192,15 +179,15 @@
                         `);
 
                     });
-                    bindDeleteEvent();
 
                     $('#product-list').on('click', '.edit', function() {
                         var productId = $(this).data('id');
-                        var editRoute = "{{ route('admin.product.edit', ':id') }}"; // Route Blade có tham số id
-                        var finalRoute = editRoute.replace(':id', productId); // Thêm type vào query string
+                        var editRoute = "{{ route('admin.category.edit', ':id') }}"; // Route Blade có tham số id
+                        var finalRoute = editRoute.replace(':id', productId) + '?type=' + type; // Thêm type vào query string
                         window.location.href = finalRoute;
                     });
 
+                    // Cập nhật thông tin bản ghi hiển thị và phân trang
                     updateInfoAndPagination(data, page);
                 },
                 error: function (xhr) {
@@ -249,61 +236,6 @@
                 if (page) {
                     fetchProducts(page, $('#search').val(), perPage); // Gọi hàm với số lượng mục hiển thị
                 }
-            });
-        }
-
-        /// delete
-
-        function bindDeleteEvent() {
-            $('.delete').on('click', function () {
-                let brandId = $(this).data('id');
-
-                // Sử dụng SweetAlert2 để hiển thị thông báo xác nhận
-                Swal.fire({
-                    title: 'Bạn có chắc chắn muốn xóa?',
-                    text: "Hành động này không thể hoàn tác!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Xóa',
-                    cancelButtonText: 'Hủy'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `/admin/brand/delete/${brandId}`,
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    $(`tr[data-id="${brandId}"]`).remove(); // Xóa dòng từ bảng
-                                    fetchProducts();
-                                    Swal.fire(
-                                        'Đã xóa!',
-                                        'Thương hiệu đã được xóa thành công.',
-                                        'success'
-                                    );
-                                } else {
-                                    Swal.fire(
-                                        'Lỗi!',
-                                        'Không thể xóa thương hiệu này.',
-                                        'error'
-                                    );
-                                }
-                            },
-                            error: function (xhr) {
-                                console.error(xhr);
-                                Swal.fire(
-                                    'Lỗi!',
-                                    'Có lỗi xảy ra khi xóa.',
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
             });
         }
 

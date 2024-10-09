@@ -15,20 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::name('user.')->group(function () {
-    Route::get('/', function () {
-        return view('client.pages.home-page');
-    })->name('home-page');
 
-    Route::get('details', function () {
-        return view('client.pages.detail');
-    })->name('details');
-
-    Route::get('login', function () {
-        return view('client.pages.auth.login');
-    })->name('login');
-
-    Route::get('register', function () {
-        return view('client.pages.auth.register');
-    })->name('register');
-});
