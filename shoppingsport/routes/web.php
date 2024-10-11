@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\AuthController;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +16,23 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('admin/dang-nhap', function () {
-    return view('admin.login.index');
-})->name('form_login');
 
-Route::post('', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('admin')->name('admin.')->group(function () {
 
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::middleware('admin.guest')->group(function () {
+        // Trang đăng nhập cho admin không cần yêu cầu đã đăng nhập
+        Route::get('login', function () {
+            return view('admin.login.index');
+        })->name('login');
 
+        Route::post('login', [AuthController::class, 'login'])->name('login');
 
+        Route::post('/register', [AuthController::class, 'register'])->name('register');
+    });
 
-Route::middleware(['checkLogin', 'checkRole:1,2'])->prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('', [DashboardController::class, 'index'])->name('index');
-
+    Route::middleware('admin.auth')->group(function () {
+        // Các route yêu cầu đã đăng nhập mới truy cập được
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
 });
