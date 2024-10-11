@@ -59,18 +59,12 @@ class BrandService
         try {
 
             Log::info("Creating a new Brand with name: {$data['name']}");
-            $image = $data['images'];
-            $filename = 'image_' . $image->getClientOriginalName();
-            $filePath = 'storage/brand/' . $filename;
-            if (!Storage::exists($filePath)) {
-                $image->storeAs('public/brand', $filename);
-            }
-            Storage::putFileAs('public/brand', $image, $filename);
+
             $brand = $this->brand->create([
                 'name' => $data['name'],
-                'logo' => $filePath,
                 'slug' => Str::slug($data['name']),
                 'description' => $data['description'],
+
             ]);
             DB::commit();
             return $brand;
@@ -100,27 +94,12 @@ class BrandService
             $brand = $this->getBrandById($id);
             Log::info("Updating product with ID: $id");
 
-            if (!empty($data['images'])) {
-                $image = $data['images'];
-                $filename = 'image_' . $image->getClientOriginalName();
-                $filePath = 'storage/brand/' . $filename;
-                if (!Storage::exists($filePath)) {
-                    $image->storeAs('public/brand', $filename);
-                }
-                $update = $brand->update([
-                    'name' => $data['name'],
-                    'logo' => $filePath,
-                    'slug' => Str::slug($data['name']),
-                    'description' => $data['description'],
-                ]);
-            }else{
                 $update = $brand->update([
                     'name' => $data['name'],
                     'slug' => Str::slug($data['name']),
                     'description' => $data['description'],
-                ]);
-            }
 
+                ]);
 
             DB::commit();
             return $brand;
@@ -144,20 +123,14 @@ class BrandService
 
     public function deleteBrand($id)
     {
-        try{
+        try {
             $brand = $this->getBrandById($id);
             $brand->delete();
             DB::commit();
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             DB::rollBack();
-            Log::error("Failed to delete brand:" .$e->getMessage());
+            Log::error("Failed to delete brand:" . $e->getMessage());
             throw new Exception("Failed to delete brand");
         }
     }
-
-
-
-
 }

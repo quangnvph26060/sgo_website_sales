@@ -45,6 +45,7 @@ Route::middleware(['checkLogin', 'checkRole:1,2'])->prefix('admin')->name('admin
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
 
         Route::get('/add_brand', [CategoryController::class, 'addbrand'])->name('add.brand');
+        Route::post('/add_brand', [CategoryController::class, 'storebrand'])->name('store.brand');
         Route::get('/get-brands-category_child/{categoryId}', [CategoryController::class, 'getBrands'])->name('brand.category.child');
     });
 

@@ -168,6 +168,12 @@
                     });
                     bindDeleteEvent();
 
+                    $('#product-list').on('click', '.edit', function() {
+                        var productId = $(this).data('id');
+                        var editRoute = "{{ route('admin.brand.edit', ':id') }}"; // Route Blade có tham số id
+                        var finalRoute = editRoute.replace(':id', productId); // Thêm type vào query string
+                        window.location.href = finalRoute;
+                    });
 
                     updateInfoAndPagination(data, page);
                 },

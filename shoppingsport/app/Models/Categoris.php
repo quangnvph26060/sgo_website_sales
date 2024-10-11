@@ -12,7 +12,7 @@ class Categoris extends Model
     protected $table = 'sgo_categories';
 
     // Các cột có thể gán giá trị hàng loạt
-    protected $fillable = ['name', 'description', 'parent_id'];
+    protected $fillable = ['name', 'description', 'parent_id', 'title_seo', 'description_seo', 'keyword_seo'];
 
     public function brands()
     {
