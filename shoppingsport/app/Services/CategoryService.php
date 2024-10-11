@@ -53,6 +53,10 @@ class CategoryService
                 'description' => $data['description'],
                 'parent_id' => $data['parent_id'] ?? null, // Nếu không có parent_id, để null
                 'slug' => Str::slug($data['name']),
+                'title_seo' => $data['title_seo'],
+                'description_seo' => $data['description_seo'],
+                'keyword_seo' => $data['keyword_seo'],
+
             ]);
 
             DB::commit();
@@ -77,7 +81,7 @@ class CategoryService
         return $category;
     }
 
-    public function updateCategory(int $id, array $data): Categoris
+    public function updateCategory( array $data, int $id): Categoris
     {
         DB::beginTransaction();
         try {
@@ -87,8 +91,11 @@ class CategoryService
             $category->update([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'parent_id' => $data['parent_id'] ?? $category->parent_id, // Giữ nguyên parent_id nếu không cập nhật
+                'parent_id' => $data['parent_id'] ?? null, // Nếu không có parent_id, để null
                 'slug' => Str::slug($data['name']),
+                'title_seo' => $data['title_seo'],
+                'description_seo' => $data['description_seo'],
+                'keyword_seo' => $data['keyword_seo'],
             ]);
 
             DB::commit();

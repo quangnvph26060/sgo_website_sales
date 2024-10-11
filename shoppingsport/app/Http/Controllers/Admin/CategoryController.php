@@ -8,6 +8,7 @@ use App\Models\Categoris;
 use App\Models\CategoryBrand;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Can;
 
 class CategoryController extends Controller
 {
@@ -59,6 +60,11 @@ class CategoryController extends Controller
         $categories = Categoris::whereNull('parent_id')->get();
         return view('admin.category.add', compact('categories', 'type'));
     }
+    public function store(Request $request){
+        dd($request->all());
+        $this->categoryService->createCategory($request->all());
+        return redirect()->route('admin.category.index', ['type' => 'parent']);
+    }
 
     public function edit(Request $request, $id){
         $type = $request->query('type');
@@ -69,6 +75,11 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('categories', 'type', 'category'));
     }
 
+    public function update(Request $request, $id){
+        $this->categoryService->updateCategory($request->all(), $id);
+        return redirect()->route('admin.category.index', ['type' => 'parent']);
+    }
+
 
     public function addbrand(Request $request){
         // $categorychild = Categoris::where('parent_id', 2)->get();
@@ -76,6 +87,15 @@ class CategoryController extends Controller
         $categories = Categoris::whereNull('parent_id')->get();
         $brand = Brand::get();
         return view('admin.category.addbrandcategory', compact('categories', 'brand', 'type'));
+    }
+
+    public function storebrand(Request $request){
+        // dd($request->all());
+        CategoryBrand::create([
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id
+        ]);
+        return redirect()->route('admin.category.index', ['type' => 'parent']);
     }
 
     public function getBrands($categoryId)

@@ -8,15 +8,15 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <link rel="icon" href="" type="image/x-icon" />
-    <link rel="stylesheet" href="{{ asset('login/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetlogin/fonts/icomoon/style.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('login/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetlogin/css/owl.carousel.min.css') }}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('login/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetlogin/css/bootstrap.min.css') }}">
 
     <!-- Style -->
-    <link rel="stylesheet" href="{{ asset('login/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetlogin/css/style.css') }}">
     <script src="{{ asset('validator/validator.js') }}"></script>
 
     <title>Login</title>
@@ -34,7 +34,7 @@
 
 <body>
     <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('{{ asset('login/images/bg_1.jpg') }}');"></div>
+        <div class="bg" style="background-image: url('{{ asset('assetlogin/images/bg_1.jpg') }}');"></div>
         <div class="contents">
 
             <div class="container">
@@ -151,10 +151,10 @@
 
     </div>
 
-    <script src="{{ asset('login/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('login/js/popper.min.js') }}"></script>
-    <script src="{{ asset('login/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('login/js/main.js') }}"></script>
+    <script src="{{ asset('assetlogin/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assetlogin/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assetlogin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assetlogin/js/main.js') }}"></script>
     <script>
         function showLoginForm(event) {
             event.preventDefault();

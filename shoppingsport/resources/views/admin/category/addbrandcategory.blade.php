@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="">
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.category.store.brand') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12">
@@ -60,7 +60,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="category_child">Chọn danh mục con :</label><br>
-                                            <select class="form-control" id="category_child"  >
+                                            <select class="form-control" id="category_child"  name="category_id">
                                                 <option value="">-- Chọn danh mục con  --</option>
                                             </select>
                                         </div>

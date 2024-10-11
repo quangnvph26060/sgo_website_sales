@@ -51,7 +51,8 @@ class BrandController extends Controller
     }
 
     public function store(Request $request) {
-        $this->brandService->createBrand($request->all());
+        $data = $request->all();
+        $this->brandService->createBrand($data);
         return redirect()->route('admin.brand.index')->with('success', 'Thêm thành công');
     }
 
@@ -60,8 +61,8 @@ class BrandController extends Controller
         return view('admin.brand.edit', compact('brand'));
     }
 
-    public function update($id) {
-        $this->brandService->updateBrand($id, request()->all());
+    public function update($id , Request $request) {
+        $this->brandService->updateBrand($id, $request->all());
         return redirect()->route('admin.brand.index')->with('success', 'Sửa thành công');
     }
 

@@ -32,6 +32,9 @@ class ProductService
             'discount_id' => $data['discount_id'],
             'description_short' => $data['description_short'],
             'description' => $data['description'],
+            'title_seo' => $data['title_seo'],
+            'description_seo' => $data['description_seo'],
+            'keyword_seo' => $data['keyword_seo'],
         ]);
 
         // Lưu hình ảnh
@@ -71,6 +74,9 @@ class ProductService
             'discount_id' => $data['discount_id'],
             'description_short' => $data['description_short'],
             'description' => $data['description'],
+            'title_seo' => $data['title_seo'],
+            'description_seo' => $data['description_seo'],
+            'keyword_seo' => $data['keyword_seo'],
         ]);
 
         // Cập nhật hình ảnh mới

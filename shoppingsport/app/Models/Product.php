@@ -27,6 +27,9 @@ class Product extends Model
         'discount_id',
         'description_short',
         'description',
+        'title_seo',
+         'description_seo',
+          'keyword_seo'
     ];
 
     public function category()
