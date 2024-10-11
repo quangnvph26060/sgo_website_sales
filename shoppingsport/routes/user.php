@@ -72,3 +72,4 @@ Route::name('user.')->group(function () {
         Route::get('logout', 'logout')->name('logout');
     });
 });
+
