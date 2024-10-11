@@ -7,37 +7,32 @@
                 <div class="auth-box">
                     <h1 class="auth-title">Đăng ký</h1>
 
-                    <form action="https://thanhloisport.com/ajax/register" id="form-register" data-form="ajax"
-                        data-reload="true" class="auth-form" id="signup">
+                    <form action="{{ route('user.register') }}" class="auth-form" id="signup">
                         <div class="field-input">
-                            <input type=text class="form-control" placeholder="Họ và tên*" value="" name=name
-                                required>
-                            <p class="err_show null">Họ và tên không được để trống!</p>
+                            <input type=text class="form-control" placeholder="Họ và tên*" name=name>
+                            <small></small>
                         </div>
                         <div class="field-input">
-                            <input type=email class="form-control" placeholder="Email*" value="" name=email
-                                data-type="email" required>
-                            <p class="err_show null">Email không được để trống!</p>
+                            <input type=email class="form-control" placeholder="Email*" name=email data-type="email">
+                            <small></small>
                         </div>
                         <div class="field-input">
-                            <input type=password class="form-control" placeholder="Mật khẩu*" value="" name=password
-                                required>
+                            <input type=password class="form-control" placeholder="Mật khẩu*" name=password>
                             <span class="show-pass">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
-                            <p class="err_show null">Mật khẩu không được để trống!</p>
+                            <small></small>
                         </div>
                         <div class="field-input">
-                            <input type=password class="form-control" placeholder="Nhập lại mật khẩu*" value=""
-                                name=password_confirmation required>
+                            <input type=password class="form-control" placeholder="Nhập lại mật khẩu*" name=re_password>
                             <span class="show-pass">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
-                            <p class="err_show null">Nhập lại mật khẩu không được để trống!</p>
+                            <small></small>
                         </div>
                         <div class="field-check">
                             <label for="accept" class="policy">
-                                <input type=checkbox name=accept id="accept" value="1">
+                                <input type=checkbox name="accept" id="accept" value="1">
                                 Tôi đồng ý với các điều khoản &amp; quy định.
                                 <span class="checkmark"></span>
                             </label>
@@ -66,5 +61,43 @@
                 $(this).find('i').toggleClass('fa-eye fa-eye-slash');
             });
         });
+
+        $('#signup').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function(response) {
+                    if (response.status) {
+                        response.redirect && window.location.href = response.redirect;
+                    } else {
+                        $('.auth-box .auth-form .field-input input').css('border-bottom',
+                            '2px solid #dee2e6').siblings(
+                            'small').text('').removeClass('text-danger');
+
+                        $.each(response.errors, function(key, value) {
+                            $(`[name=${key}]`).css('border-bottom', '2px solid red').siblings(
+                                'small').text(value).addClass('text-danger');
+                        })
+                        response.message && showMessage('error', response.message);
+                    }
+                },
+            })
+        });
     </script>
+@endpush
+
+@push('style')
+    <style>
+        .auth-box .auth-form .field-input {
+            margin-bottom: 20px !important;
+        }
+
+        .auth-box .auth-form .field-input input {
+            margin: 0 !important;
+        }
+    </style>
 @endpush

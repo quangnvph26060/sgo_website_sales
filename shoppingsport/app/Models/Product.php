@@ -12,9 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+
     protected $table = 'sgo_product';
 
     // Các cột có thể gán giá trị hàng loạt
+
     protected $fillable = [
         'name',
         'slug',
@@ -23,6 +26,7 @@ class Product extends Model
         'type_id',
         'color',
         'price_old',
+        'quantity',
         'price_new',
         'discount_id',
         'description_short',
@@ -33,6 +37,7 @@ class Product extends Model
     ];
 
     public function category()
+
     {
         return $this->belongsTo(Categoris::class, 'categori_id');
     }
@@ -46,6 +51,8 @@ class Product extends Model
     {
         return $this->belongsTo(TypeProduct::class, 'type_id');
     }
+
+
 
     public function discount()
     {
@@ -82,4 +89,5 @@ class Product extends Model
     {
         return ProductImage::where('product_id', $this->attributes['id'])->get();
     }
+
 }

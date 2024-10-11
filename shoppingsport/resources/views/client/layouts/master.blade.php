@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://thanhloisport.com/wp-content/uploads/2021/11/cropped-Icon-Logo-thanh-loi-sport.png"
         type=image/x-icon rel="shortcut icon">
@@ -94,7 +95,7 @@
         $(function() {
             const web_datas = $('#web_datas').html();
             const mobile_datas = $('#mobile_datas').html();
-            
+
             function checkScreenSize() {
                 if ($(window).width() <= 575) {
                     $(".short-product__content .categories").addClass("mobile");

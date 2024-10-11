@@ -19,8 +19,37 @@ class User extends Authenticatable
      */
     protected $table = 'users';
     protected $fillable = [
-        'name', 'phone', 'email', 'company_name', 'password', 'status', 'role_id','address', 'google_id', 'token', 'token_expiry', 'is_active', 'avatar'
+        'name',
+        'phone',
+        'email',
+        'company_name',
+        'password',
+        'status',
+        'role_id',
+        'address',
+        'google_id',
+        'token',
+        'token_expiry',
+        'is_active',
+        'avatar',
+        'email_verified_at',
+        'email_verification_expires_at'
     ];
+
+    public function isNotEmailVerified()
+    {
+        return is_null($this->email_verified_at);
+    }
+
+    public function isNullEmailVerificationSentAt()
+    {
+        return is_null($this->email_verification_sent_at);
+    }
+
+    public function isUser()
+    {
+        return $this->role_id == 3;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -39,5 +68,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 }

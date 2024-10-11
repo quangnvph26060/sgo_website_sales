@@ -7,16 +7,17 @@
                 <div class="auth-box">
                     <h1 class="auth-title">Đăng nhập</h1>
 
-                    <form action="https://thanhloisport.com/ajax/login" data-form="ajax" data-reload="true" class="auth-form"
-                        id="login">
+                    <form action="" class="auth-form" id="login">
                         <div class="field-input">
-                            <input type=text placeholder="Email" value="" name=email required>
+                            <input type=text placeholder="Email" value="{{ old('email') }}" name=email>
+                            <small></small>
                         </div>
                         <div class="field-input">
-                            <input type=password placeholder="Mật khẩu" value="" name=password required>
+                            <input type=password placeholder="Mật khẩu" value="" name=password>
                             <span class="show-pass">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
+                            <small></small>
                         </div>
                         <a class="forgot-pass" href="#forgot">Quên mật khẩu</a>
                         <input type=submit class="btn" name=submit value="Đăng nhập">
@@ -40,7 +41,7 @@
             <p class="mb-2">Chúng tôi sẽ gửi đường link lấy lại mật khẩu vào Email của bạn. Vui lòng nhập chính xác Email:
             </p>
             <div class="popup-content">
-                <form action="https://thanhloisport.com/ajax/forgot-password" data-form="ajax"
+                <form action="{{ route('user.forgot-password') }}" data-form="ajax"
                     class="form-forgot form-content" id="forgot">
                     <div class="field-input">
                         <input type=text placeholder="Email" value="" name=email required data-type="email">
@@ -67,5 +68,65 @@
                 $(this).find('i').toggleClass('fa-eye fa-eye-slash');
             });
         });
+
+        $('.forgot-pass').on('click', function() {
+            $('.popup-forgot-password').addClass('active');
+            $('.popup-form.popup-forgot').addClass('active');
+        })
+
+        $('.popup__close').on('click', function() {
+            $('.popup-forgot-password').removeClass('active');
+            $('.popup-form.popup-forgot').removeClass('active');
+        })
+
+        $('#login').on('submit', function(e) {
+            e.preventDefault();
+
+            const data = $(this).serializeArray();
+
+            $.ajax({
+                url: "{{ route('user.login') }}",
+                method: "POST",
+                data: data,
+
+                success: function(response) {
+                    if (!response.status) {
+                        $('.auth-box .auth-form .field-input input').css('border-bottom',
+                            '2px solid #dee2e6').siblings(
+                            'small').text('').removeClass('text-danger');
+
+                        $.each(response.errors, function(key, value) {
+                            $(`[name=${key}]`).css('border-bottom', '2px solid red').siblings(
+                                'small').text(value).addClass(
+                                'text-danger');
+                        })
+
+                        response.message && showMessage(response.type, response.message);
+
+                        $('#login').trigger('reset');
+                    } else {
+
+                        window.location.href = response.redirect;
+                    }
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+        })
     </script>
+@endpush
+
+
+@push('style')
+    <style>
+        .auth-box .auth-form .field-input {
+            margin-bottom: 20px !important;
+        }
+
+        .auth-box .auth-form .field-input input {
+            margin: 0 !important;
+        }
+    </style>
 @endpush

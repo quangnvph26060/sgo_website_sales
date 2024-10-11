@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UserService;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -15,39 +17,44 @@ class AuthController extends Controller
     {
         $this->userService = $userService;
     }
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        try {
-            $credentials = $request->only(['email', 'password']);
 
-            if (Auth::attempt($credentials)) {
-                $user = Auth::user();
+        $credentials = $request->validated();
 
+        $remember = $request->has('remember') ? true : false;
 
-                if ($user->is_active == 1) {
-                    if ($user->role_id == 1 || $user->role_id == 2) {
-                        Log:info(1);
-                        return redirect()->route('admin.index')->with('success', 'Chào mừng trở lại !');
-                    } elseif ($user->role_id == 3) {
-                        // return redirect()->route('page.home');
-                    }
-                }else{
-                    return back()->withErrors(['email' => 'Tài khoản chưa được kích hoạt.']);
-                }
-            } else {
-                return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
+
+            /**
+             *  @var User $user
+             *
+             **/
+
+            $user = auth()->guard('admin')->user();
+
+            // Kiểm tra tài khoản đã xác minh email chưa
+            if ($user->isNotEmailVerified()) {
+                auth()->guard('admin')->logout();
+                return back()->with('error', 'Tài khoản chưa được kích hoạt!');
             }
-        } catch (\Exception $e) {
-            Log::error("Lỗi đăng nhập: " . $e->getMessage());
-            return redirect()->back();
+
+            // Kiểm tra xem tài khoản đăng nhập là có phải người dùng không
+            if ($user->isUser()) {
+                auth()->guard('admin')->logout();
+
+                abort(403);
+            }
+
+            return to_route('admin.index');
+        } else {
+            return back()->with(['error' => 'Email hoặc mật khẩu không đúng.'])->withInput($credentials);
         }
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        return redirect()->route('form_login');
+        Auth::guard('admin')->logout();
+        return to_route('admin.login');
     }
-
-
 }
