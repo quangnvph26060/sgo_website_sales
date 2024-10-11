@@ -62,8 +62,15 @@ Route::middleware(['checkLogin', 'checkRole:1,2'])->prefix('admin')->name('admin
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::post('/fetch', [ProductController::class, 'fetch'])->name('fetch');
         Route::get('/add', [ProductController::class, 'add'])->name('add');
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [ProductController::class, 'update'])->name('edit');
         Route::post('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('images')->name('images.')->group(function (){
+        Route::get('/product', [ProductController::class, 'images'])->name('index');
+        Route::post('/product/fetch', [ProductController::class, 'imagesfetch'])->name('fetch');
     });
 });
 

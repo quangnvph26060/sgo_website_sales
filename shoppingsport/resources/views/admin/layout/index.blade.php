@@ -96,7 +96,7 @@
 
     <!-- Kaiadmin JS -->
     <script src="{{asset("asset/js/kaiadmin.min.js") }}"></script>
-    <script src="{{asset("script_img.js") }}"></script>
+    
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{asset("asset/js/setting-demo.js") }}"></script>
     <script src="{{asset("asset/js/demo.js") }}"></script>

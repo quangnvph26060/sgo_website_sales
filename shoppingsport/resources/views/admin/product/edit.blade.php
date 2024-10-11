@@ -170,16 +170,53 @@
                                         </div>
                                     </div>
 
+                                    {{-- <div class="col-md-12">
+                                        <div class="form-group image-upload-container">
+                                            <label for="image-input" class="form-label">Chọn ảnh:</label>
+                                            <div class="custom-file mb-3">
+                                                <input type="file" class="custom-file-input" id="image-input" multiple
+                                                    accept="image/*">
+                                                <label class="custom-file-label" for="image-input">Chọn nhiều
+                                                    ảnh...</label>
+                                            </div>
+                                            <div class="row" id="image-preview-container"></div>
+                                            <!-- Thêm row để căn ảnh -->
+                                        </div>
+                                    </div> --}}
+
                                     <div class="col-md-12">
                                         <div class="form-group image-upload-container">
                                             <label for="image-input" class="form-label">Chọn ảnh:</label>
                                             <div class="custom-file mb-3">
-                                                <input type="file" class="custom-file-input" id="image-input" multiple accept="image/*">
+                                                <input type="file" class="custom-file-input" id="image-input" name="new_images[]" multiple accept="image/*" onchange="previewNewImages()">
                                                 <label class="custom-file-label" for="image-input">Chọn nhiều ảnh...</label>
                                             </div>
-                                            <div class="row" id="image-preview-container"></div> <!-- Thêm row để căn ảnh -->
+
+                                            <!-- Hiển thị ảnh cũ -->
+                                            <div style="display: flex">
+                                                <div class="row" id="image-preview-container" style="margin: 0px 15px">
+                                                    @foreach ($product->images as $image)
+                                                        <div class="image-preview" data-image="{{ asset($image) }}">
+                                                            <img src="{{ asset($image->image) }}" alt="Image">
+                                                            <button type="button" class="remove-btn" onclick="removeOldImage(this, '{{ $image->id }}')">X</button>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                <!-- Hiển thị ảnh mới được chọn -->
+                                                <div class="row" id="new-image-preview-container">
+                                                    <!-- Preview ảnh mới sẽ hiển thị tại đây -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Input ẩn để lưu trữ danh sách ảnh cũ bị xóa -->
+                                            <input type="hidden" name="removed_images" id="removed-images" value="[]">
                                         </div>
                                     </div>
+
+
+
+
 
                                     <div class="col-md-12">
 
@@ -216,6 +253,8 @@
     </div>
 </div>
 <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
+<script src="{{asset("script_images_edit.js") }}"></script>
+
 <script>
     CKEDITOR.replace('content', {
     toolbar: [

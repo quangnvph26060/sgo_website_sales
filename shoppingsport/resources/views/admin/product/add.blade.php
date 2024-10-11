@@ -107,13 +107,13 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="brand_id">Thương hiệu  :</label><br>
-                                            <select class="form-control" id="brand_id" name="brand_id">
+                                            <select class="form-control" id="brands" name="brand_id">
                                                 <option value="">-- Chọn thương hiệu --</option>
-                                                @forelse($brands as $key => $value)
+                                                {{-- @forelse($brands as $key => $value)
                                                 <option value="{{ $value->id }}"> {{ $value->name }}</option>
                                                 @empty
 
-                                                @endforelse
+                                                @endforelse --}}
                                                 <!-- Thêm các danh mục khác ở đây -->
                                             </select>
                                         </div>
@@ -207,6 +207,8 @@
     </div>
 </div>
 <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{asset("script_img.js") }}"></script>
 <script>
       CKEDITOR.replace('content', {
     toolbar: [
@@ -251,6 +253,44 @@ CKEDITOR.replace('description', {
 });
 </script>
 
+<script>
+    $(document).ready(function() {
+            $(document).on('change', '#category', function() {
+
+                var categoryId = $(this).val();
+
+                if (categoryId ) {
+                    var baseUrl = "{{ route('admin.category.brand.category.child', ['categoryId' => ':categoryId']) }}";
+                    var url = baseUrl.replace(':categoryId', categoryId);
+
+                    $.ajax({
+                        url: url, // Đường dẫn đến route của bạn
+                        type: 'GET',
+                        success: function(response) {
+
+                            $('#brands').empty();
+                            $('#brands').append('<option value="">-- Chọn thương hiệu  --</option>');
+
+
+                            $.each(response.categorybrand, function(key, value) {
+                                $('#brands').append('<option value="' + value.brand.id + '">' + value.brand.name + '</option>');
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Có lỗi xảy ra:', error);
+                        }
+                    });
+                } else {
+
+                    $('#category_child').empty();
+                    $('#category_child').append('<option value="">-- Chọn danh mục con --</option>');
+                    // Nếu không có danh mục nào được chọn, xóa các tùy chọn thương hiệu
+                    $('#brands').empty();
+                    $('#brands').append('<option value="">-- Chọn thương hiệu --</option>');
+                }
+            });
+        });
+</script>
 
 
 @endsection

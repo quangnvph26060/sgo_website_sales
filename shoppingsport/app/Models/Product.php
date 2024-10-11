@@ -53,7 +53,7 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
-    protected $appends = ['category', 'brand', 'type', 'discount'] ;
+    protected $appends = ['category', 'brand', 'type', 'discount', 'images'] ;
 
     public function getCategoryAttribute()
     {
@@ -73,5 +73,10 @@ class Product extends Model
     public function getDiscountAttribute()
     {
         return Discount::where('id', $this->attributes['discount_id'])->first();
+    }
+
+    public function getImagesAttribute()
+    {
+        return ProductImage::where('product_id', $this->attributes['id'])->get();
     }
 }
