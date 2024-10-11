@@ -1,10 +1,10 @@
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
       <!-- Logo Header -->
-      <div class="logo-header" data-background-color="dark">
+      <div class="logo-header" data-background-color="white">
         <a href="{{ route('admin.index') }}" class="logo">
           <img
-            src="asset/img/kaiadmin/logo_light.svg"
+            src="{{ asset('sgovn.png') }}"
             alt="navbar brand"
             class="navbar-brand"
             height="20"
@@ -133,6 +133,24 @@
                             <span class="sub-item">Thêm sản phẩm </span>
                         </a>
                     </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#image">
+                <i class="fas fa-layer-group"></i>
+                <p>Hình ảnh</p>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="image">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="{{ route('admin.images.index') }}">
+                            <span class="sub-item">Danh sách ảnh sản phẩm</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </li>

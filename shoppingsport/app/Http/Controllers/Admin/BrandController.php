@@ -50,6 +50,21 @@ class BrandController extends Controller
         return view('admin.brand.add');
     }
 
+    public function store(Request $request) {
+        $this->brandService->createBrand($request->all());
+        return redirect()->route('admin.brand.index')->with('success', 'Thêm thành công');
+    }
+
+    public function edit($id) {
+        $brand = Brand::find($id);
+        return view('admin.brand.edit', compact('brand'));
+    }
+
+    public function update($id) {
+        $this->brandService->updateBrand($id, request()->all());
+        return redirect()->route('admin.brand.index')->with('success', 'Sửa thành công');
+    }
+
     public function delete($id) {
         $this->brandService->deleteBrand($id);
         return response()->json(['success' => 'Xóa thành công']);

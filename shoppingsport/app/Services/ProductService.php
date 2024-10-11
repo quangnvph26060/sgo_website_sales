@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -22,11 +23,11 @@ class ProductService
         $product = $this->product->create([
             'name' => $data['name'],
             'slug' => Str::slug($data['name'], '-'),
-            'category_id' => $data['category_id'],
+            'categori_id' => $data['category_id'],
             'brand_id' => $data['brand_id'],
             'type_id' => $data['type_id'],
-            'color' => $data['color'],
-            'price_old' => isset($data['discount_id']) ? $data['price_new'] * $data['discount'] : null,
+            // 'color' => $data['color'],
+            'price_old' => $data['price_old'],
             'price_new' => $data['price_new'],
             'discount_id' => $data['discount_id'],
             'description_short' => $data['description_short'],
@@ -34,90 +35,142 @@ class ProductService
         ]);
 
         // Lưu hình ảnh
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $imageName = $product->id . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/products', $imageName); // Lưu vào thư mục public/products
+        if (isset($data['image'])) {
+            foreach ($data['image'] as $image) {
+                $item = now()->timestamp;
+                $imageName = $product->id . '_' . $item . '_' . $image->getClientOriginalName();
+                // Lưu hình ảnh vào thư mục 'public/products/product{id}'
+                $image->storeAs('public/products/product' . $product->id, $imageName);
 
-                // Lưu vào bảng hình ảnh
+                // Lưu vào bảng hình ảnh với đường dẫn chính xác
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'storage/products/' . $imageName,
+                    'image' => 'storage/products/product' . $product->id . '/' . $imageName,
                 ]);
             }
         }
 
+
         return $product;
     }
 
-    public function updateProduct($product, $data)
+    public function updateProduct($data, $id)
     {
+        // dd($data);
+        $product = $this->product->find($id);
         // Cập nhật thông tin sản phẩm
         $product->update([
             'name' => $data['name'],
             'slug' => Str::slug($data['name'], '-'),
-            'category_id' => $data['category_id'],
+            'categori_id' => $data['categori_id'],
             'brand_id' => $data['brand_id'],
             'type_id' => $data['type_id'],
-            'color' => $data['color'],
-            'price_old' => isset($data['discount_id']) ? $data['price_new'] * $data['discount'] : null,
+            // 'color' => $data['color'],
+            'price_old' => $data['price_old'],
             'price_new' => $data['price_new'],
             'discount_id' => $data['discount_id'],
             'description_short' => $data['description_short'],
             'description' => $data['description'],
         ]);
 
-        // Lấy danh sách hình ảnh hiện tại
-        $existingImages = ProductImage::where('product_id', $product->id)->get();
-        $existingImagePaths = $existingImages->pluck('image')->toArray(); // Lấy đường dẫn hình ảnh hiện tại
-
-        // Tạo một mảng để lưu hình ảnh mới
-        $newImagePaths = [];
-
         // Cập nhật hình ảnh mới
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $imageName = $product->id . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/products', $imageName); // Lưu vào thư mục public/products
+        if (isset($data['new_images'])) {
+            foreach ($data['new_images'] as $image) {
+                $item = now()->timestamp;
+                $imageName = $product->id . '_' . $item . '_' . $image->getClientOriginalName();
+                // Lưu hình ảnh vào thư mục 'public/products/product{id}'
+                $image->storeAs('public/products/product' . $product->id, $imageName);
 
-                // Lưu vào bảng hình ảnh
-                $newImagePath = 'storage/products/' . $imageName;
-                // Thêm hình ảnh mới vào mảng
-                $newImagePaths[] = $newImagePath;
+                // Lưu vào bảng hình ảnh với đường dẫn chính xác
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'storage/products/product' . $product->id . '/' . $imageName,
+                ]);
+            }
+        }
 
-                // Nếu hình ảnh chưa tồn tại, thêm vào cơ sở dữ liệu
-                if (!in_array($newImagePath, $existingImagePaths)) {
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'image' => $newImagePath,
-                    ]);
+
+        if (isset($data['removed_images'])) {
+            // Kiểm tra và chuyển đổi nếu 'removed_images' là chuỗi JSON
+            $removedImages = is_string($data['removed_images']) ? json_decode($data['removed_images'], true) : $data['removed_images'];
+
+            if (is_array($removedImages)) {
+                foreach ($removedImages as $item) {
+                    // Tìm hình ảnh theo ID
+                    $product_img = ProductImage::find($item);
+                    if ($product_img) {
+                        $imagePath = $product_img->image;
+
+                        // Chỉ lấy phần đường dẫn mà không có 'storage/'
+                        $relativePath = str_replace('storage/', '', $imagePath);
+
+                        // Kiểm tra tệp tồn tại
+                        if (Storage::disk('public')->exists($relativePath)) {
+                            Storage::disk('public')->delete($relativePath); // Xóa tệp
+                            Log::info("Deleted image: " . $imagePath);
+                        } else {
+                            Log::warning("File does not exist: " . $imagePath);
+                        }
+
+                        // Xóa hình ảnh trong cơ sở dữ liệu
+                        $product_img->delete();
+                    } else {
+                        Log::warning("Product image not found with id: " . $item);
+                    }
                 }
             }
         }
 
-        // Xóa những hình ảnh không còn trong mảng hình ảnh mới
-        foreach ($existingImages as $existingImage) {
-            if (!in_array($existingImage->image, $newImagePaths)) {
-                // Xóa hình ảnh từ storage
-                Storage::delete($existingImage->image);
-                // Xóa hình ảnh trong cơ sở dữ liệu
-                $existingImage->delete();
-            }
-        }
+
 
         return $product;
     }
 
 
-    public function deleteProduct($product)
+    public function deleteProduct($id)
     {
-        $product->delete();
+
         // Xóa hình ảnh liên quan
-        $productImages = ProductImage::where('product_id', $product->id)->get();
+        $productImages = ProductImage::where('product_id', $id)->get();
         foreach ($productImages as $image) {
-            Storage::delete($image->image);
-            $image->delete();
+            if ($image) {
+                $imagePath = $image->image;
+
+                // Chỉ lấy phần đường dẫn mà không có 'storage/'
+                $relativePath = str_replace('storage/', '', $imagePath);
+                // Kiểm tra tệp tồn tại
+                if (Storage::disk('public')->exists($relativePath)) {
+                    Storage::disk('public')->delete($relativePath); // Xóa tệp
+                    Log::info("Deleted image: " . $imagePath);
+                } else {
+                    Log::warning("File does not exist: " . $imagePath);
+                }
+                // Xóa hình ảnh trong cơ sở dữ liệu
+                $image->delete();
+            } else {
+                Log::warning("Product image not found with id: " . $image);
+            }
         }
+
+
+        $product = $this->product->find($id);
+        if ($product) {
+            // Lưu đường dẫn thư mục chứa hình ảnh
+            $productDirectory = 'products/product' . $id; // Không cần 'public/' ở đây
+
+            // Xóa sản phẩm khỏi cơ sở dữ liệu
+            $product->delete();
+
+            // Xóa thư mục chứa hình ảnh
+            if (Storage::disk('public')->exists($productDirectory)) {
+                // Xóa tất cả các tệp bên trong thư mục và xóa cả thư mục
+                Storage::disk('public')->deleteDirectory($productDirectory);
+                Log::info("Deleted directory and its contents: " . $productDirectory);
+            } else {
+                Log::warning("Directory does not exist: " . $productDirectory);
+            }
+        }
+        return $product;
     }
 
     public function getAllProducts($search = null)

@@ -72,22 +72,74 @@ class ProductController extends Controller
         return view('admin.product.add', compact('brands', 'categories', 'discounts', 'types' ));
     }
 
+
     public function edit($id){
+
         $brands = $this->brandService->getBrandAll();
         $categories = $this->categoryService->getCategories();
         $product = $this->productService->findProductById($id);
+        // dd($product);
         $discounts = Discount::get();
         $types = TypeProduct::get();
         return view('admin.product.edit', compact('brands', 'categories', 'discounts', 'types', 'product' ));
     }
 
+    public function update(Request $request, $id){
+        $data = $request->all();
+        $this->productService->updateProduct($data, $id);
+        return redirect()->route('admin.product.index')->with('success', 'Cập nhật thành công!');
+    }
+
     public function store(Request $request){
-        $this->productService->createProduct($request->all);
-        return redirect()->route('admin.product.index', compact('success', 'Thêm thành công!'));
+        $data = $request->all();  // Đảm bảo đây là mảng
+        $this->productService->createProduct($data);
+        // $this->productService->createProduct($request->all);
+        return redirect()->route('admin.product.index')->with('success', 'Thêm thành công!');
     }
 
     public function delete($id) {
         $this->productService->deleteProduct($id);
         return response()->json(['success' => 'Xóa thành công']);
+    }
+
+
+    public function images()
+    {
+        // $product = Product::get();
+        // dd($product[0]->type);
+        return view('admin.image.product');
+    }
+
+    // Fetch dữ liệu cho danh mục
+    public function imagesfetch(Request $request)
+    {
+        $product = Product::query();
+
+        // Tìm kiếm nếu có
+        if ($request->has('search')) {
+            $product->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Sắp xếp nếu có
+        if ($request->has('sort_by')) {
+            // Kiểm tra giá trị của sort_by để xác định cột sắp xếp
+            if (in_array($request->sort_by, ['brand_id', 'category_id', 'type_id'])) {
+                // Sắp xếp theo cột được yêu cầu (brand_id, category_id, type_id)
+                $product->orderBy($request->sort_by, $request->sort_order);
+            } else {
+                // Sắp xếp theo cột khác do người dùng yêu cầu (ví dụ: name, price...)
+                $product->orderBy($request->sort_by, $request->sort_order);
+            }
+        } else {
+            // Mặc định sắp xếp theo id nếu không có yêu cầu sắp xếp
+            $product->orderBy('id', 'asc');
+        }
+
+        // Phân trang
+        $perPage = $request->input('per_page', 10); // 10 items per page
+        $product = $product->paginate($perPage);
+
+        Log::info($product);
+        return response()->json($product); // Trả về dữ liệu JSON
     }
 }

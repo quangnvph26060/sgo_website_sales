@@ -2,10 +2,11 @@
 
 @section('content')
 <style>
-    .sorting{
+    .sorting {
         font-size: 10px !important;
     }
-    .ds td{
+
+    .ds td {
         font-size: 12px !important;
     }
 </style>
@@ -37,7 +38,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
 
-                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.product.add') }}"  >
+                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.product.add') }}">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </a>
@@ -53,8 +54,8 @@
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="add-row_length">
                                         <label>Hiện
-                                            <select id="entries-per-page" style="margin: 0px 10px" name="add-row_length" aria-controls="add-row"
-                                                class="form-control form-control-sm">
+                                            <select id="entries-per-page" style="margin: 0px 10px" name="add-row_length"
+                                                aria-controls="add-row" class="form-control form-control-sm">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
@@ -76,35 +77,27 @@
                                         role="grid" aria-describedby="add-row_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 60px;">ID</th>
-                                                <th class="sorting" data-sort="name" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Tên: activate to sort column ascending" style="width: 150px;">Tên</th>
+                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="ID: activate to sort column descending"
+                                                    style="width: 60px;">ID</th>
 
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Hình ảnh: activate to sort column ascending" style="width: 150px;">Hình ảnh</th>
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Giá gốc: activate to sort column ascending" style="width: 100px;">Giá gốc</th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Tên: activate to sort column ascending"
+                                                    style="width: 140px;">Tên</th>
 
-                                                <th class="sorting" data-sort="brand_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Thương hiệu: activate to sort column ascending" style="width: 100px;">Thương hiệu</th>
-                                                <th class="sorting" data-sort="categori_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Danh mục: activate to sort column ascending" style="width: 150px;">Danh mục</th>
+                                                <th tabindex="0" aria-controls="add-row" rowspan="1"
+                                                    colspan="1" aria-label="Hình ảnh: activate to sort column ascending"
+                                                    style="width: 250px;">Hình ảnh</th>
 
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Action: activate to sort column ascending" style="width: 260px;">Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Tên</th>
-
                                                 <th rowspan="1" colspan="1">Hình ảnh</th>
-                                                <th rowspan="1" colspan="1">Giá gốc</th>
-                                                <th rowspan="1" colspan="1">Thương hiệu</th>
-                                                <th rowspan="1" colspan="1">Danh mục</th>
-                                                <th rowspan="1" colspan="1">Action</th>
                                             </tr>
                                         </tfoot>
 
@@ -153,10 +146,10 @@
         let sortBy = 'id';
         let sortOrder = 'asc';
         let perPage = 10; // Giá trị mặc định
-
+        var baseUrl = "{{ url('/') }}";
         function fetchProducts(page = 1, search = '', per_page = perPage) {
             $.ajax({
-                url: '{{ route("admin.product.fetch") }}',
+                url: '{{ route("admin.images.fetch") }}',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -170,35 +163,25 @@
                     $('#product-list').empty();
                     console.log(data.data);
                     $.each(data.data, function (index, product) {
+                        let imagesHtml = '';
+
+                        // Kiểm tra nếu `product.images` là một mảng
+                        if (Array.isArray(product.images)) {
+                            $.each(product.images, function (i, image) {
+                                imagesHtml += `<img src="${baseUrl}/${image.image}" alt="Product Image" style="width: 50px; height: 50px; margin-right: 10px;" />`;
+                            });
+                        } else {
+                            // Nếu không phải mảng, hiển thị một ảnh đơn
+                            imagesHtml = `<img src="${baseUrl}/${product.images}" alt="Product Image" style="width: 100px; height: 100px;" />`;
+                        }
+
                         $('#product-list').append(`
-                        <tr class = 'ds'>
-                            <td>${product.id}</td>
-                            <td>${product.name}</td>
-
-                            <td></td>
-                            <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
-                            <td>${product.brand.name}</td>
-                            <td>${product.category.name}</td>
-
-                            <td>
-                                <button class="btn btn-warning btn-sm edit" data-id="${product.id}">
-                                    <i class="fas fa-edit"></i> Sửa
-                                </button>
-                                <button class="btn btn-danger btn-sm delete" data-id="${product.id}">
-                                    <i class="fas fa-trash"></i> Xóa
-                                </button>
-                            </td>
-                        </tr>
+                            <tr class='ds'>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${imagesHtml}</td>
+                            </tr>
                         `);
-
-                    });
-                    bindDeleteEvent();
-
-                    $('#product-list').on('click', '.edit', function() {
-                        var productId = $(this).data('id');
-                        var editRoute = "{{ route('admin.product.edit', ':id') }}"; // Route Blade có tham số id
-                        var finalRoute = editRoute.replace(':id', productId); // Thêm type vào query string
-                        window.location.href = finalRoute;
                     });
 
                     updateInfoAndPagination(data, page);
@@ -253,60 +236,6 @@
         }
 
         /// delete
-
-        function bindDeleteEvent() {
-            $('.delete').on('click', function () {
-                let productId = $(this).data('id');
-
-                // Sử dụng SweetAlert2 để hiển thị thông báo xác nhận
-                Swal.fire({
-                    title: 'Bạn có chắc chắn muốn xóa?',
-                    text: "Hành động này không thể hoàn tác!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Xóa',
-                    cancelButtonText: 'Hủy'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `/admin/product/delete/${productId}`,
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    $(`tr[data-id="${productId}"]`).remove(); // Xóa dòng từ bảng
-                                    fetchProducts();
-                                    Swal.fire(
-                                        'Đã xóa!',
-                                        'Sản phẩm đã được xóa thành công.',
-                                        'success'
-                                    );
-                                } else {
-                                    Swal.fire(
-                                        'Lỗi!',
-                                        'Không thể xóa sản phẩm này.',
-                                        'error'
-                                    );
-                                }
-                            },
-                            error: function (xhr) {
-                                console.error(xhr);
-                                Swal.fire(
-                                    'Lỗi!',
-                                    'Có lỗi xảy ra khi xóa.',
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
-            });
-        }
-
 
         fetchProducts();
 
