@@ -26,7 +26,7 @@
                 <li class="nav-item active">
                     <a href="{{ route('admin.index') }}" class="collapsed">
                         <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
+                        <p>Tổng quan</p>
 
                     </a>
 
@@ -35,7 +35,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Components</h4>
+                    <h4 class="text-section">Thành phần</h4>
                 </li>
                 <li class="nav-item">
                     <a  href="{{ route('admin.config.index') }}">

@@ -77,7 +77,7 @@
         <h1>Thông báo kích hoạt đơn hàng</h1>
 
         <div class="summary">
-            <p><strong>Mã đơn hàng:</strong> {{ $order->id }}</p>
+            <p><strong>Mã đơn hàng:</strong> {{ $order->code }}</p>
             <p><strong>Trạng thái :</strong> {{ $active == 1 ? 'Đã kích hoạt đơn hàng' : 'Đơn Hàng đã bị hủy' }}</p>
             <p><strong>Total Amount:</strong> {{ number_format($order->amount) }}đ</p>
         </div>

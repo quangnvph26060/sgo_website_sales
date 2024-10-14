@@ -36,12 +36,12 @@
             </nav> --}}
             <div style="flex: 2; align-items: baseline; display: flex; margin-right: 20px">
                 <marquee id="demoMarquee" scrollamount="7" style="color: red">
-                    <span style="margin-right: 200px">SGO Việt Nam</span>
+                    <span style="margin-right: 200px"></span>
                 </marquee>
             </div>
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
 
-                <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+                {{-- <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                         aria-expanded="false" aria-haspopup="true">
                         <i class="fa fa-search"></i>
@@ -244,7 +244,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="nav-item topbar-user dropdown hidden-caret" style="padding: 0px 20px !important">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
@@ -302,11 +302,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="viewProfileLabel">Thông tịn tài khoản</h5>
+                <h5 class="modal-title" id="viewProfileLabel">Thông tin tài khoản</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data"  action="">
+                <form method="POST" enctype="multipart/form-data"  action="{{ route('admin.user.update') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 add_product">
@@ -340,8 +340,6 @@
                                 </div>
                             </div>
 
-
-
                             <div>
                                 <label for="address" class="form-label">Địa chỉ</label>
                                 <input type="text" class="form-control" name="address"
@@ -349,6 +347,17 @@
                                 <div class="col-lg-9">
                                     <span class="invalid-feedback d-block" style="font-weight: 500"
                                         id="address_error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div>
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" name="password" >
+                                <div class="col-lg-9">
+                                    <span class="invalid-feedback d-block" style="font-weight: 500"
+                                        id="password_error"></span>
                                 </div>
                             </div>
                         </div>
@@ -409,4 +418,27 @@
         font-weight: 500;
     }
 
+
+
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (session('success'))
+<script>
+    $(document).ready(function() {
+            $.notify({
+                icon: 'icon-bell',
+                title: 'Tin tức',
+                message: '{{ session('success') }}',
+            }, {
+                type: 'secondary',
+                placement: {
+                    from: "bottom",
+                    align: "right"
+                },
+                time: 1000,
+            });
+        });
+</script>
+@endif
