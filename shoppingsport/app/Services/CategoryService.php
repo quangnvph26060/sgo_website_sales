@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Categoris;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryService
@@ -47,7 +49,13 @@ class CategoryService
         DB::beginTransaction();
         try {
             Log::info("Creating a new category with name: {$data['name']}");
+            $timestamp = Carbon::now()->format('YmdHis');
+            $logo = $data['logo'];
+            $directoryPath = 'public/category';
+            $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
+            $logoFilePath = 'storage/category/' . $logoFileName;
 
+            Storage::putFileAs($directoryPath, $logo, $logoFileName);
             $category = $this->category->create([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -56,7 +64,7 @@ class CategoryService
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
                 'keyword_seo' => $data['keyword_seo'],
-
+                'logo' => $logoFilePath
             ]);
 
             DB::commit();
@@ -87,7 +95,13 @@ class CategoryService
         try {
             $category = $this->getCategoryById($id);
             Log::info("Updating category with ID: $id");
+            $timestamp = Carbon::now()->format('YmdHis');
+            $logo = $data['logo'];
+            $directoryPath = 'public/category';
+            $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
+            $logoFilePath = 'storage/category/' . $logoFileName;
 
+            Storage::putFileAs($directoryPath, $logo, $logoFileName);
             $category->update([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -96,6 +110,7 @@ class CategoryService
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
                 'keyword_seo' => $data['keyword_seo'],
+                'logo' => $logoFilePath
             ]);
 
             DB::commit();

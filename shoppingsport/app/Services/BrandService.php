@@ -59,6 +59,11 @@ class BrandService
         try {
 
             Log::info("Creating a new Brand with name: {$data['name']}");
+            $existingBrand = $this->brand->where('slug', Str::slug($data['name']))->first();
+
+            if ($existingBrand) {
+                throw new Exception('Thương hiệu đã tồn tại.');
+            }
 
             $brand = $this->brand->create([
                 'name' => $data['name'],
@@ -71,7 +76,7 @@ class BrandService
         } catch (Exception $e) {
             DB::rollBack();
             Log::error("Failed to create Brand: {$e->getMessage()}");
-            throw new Exception('Failed to create Brand');
+            throw new Exception('Thương hiệu đã tồn tại');
         }
     }
 
@@ -90,24 +95,34 @@ class BrandService
     public function updateBrand(int $id, array $data): Brand
     {
         DB::beginTransaction();
-        try {
-            $brand = $this->getBrandById($id);
-            Log::info("Updating product with ID: $id");
+    try {
+        // Lấy thương hiệu hiện tại theo ID
+        $brand = $this->getBrandById($id);
+        Log::info("Updating brand with ID: $id");
 
-                $update = $brand->update([
-                    'name' => $data['name'],
-                    'slug' => Str::slug($data['name']),
-                    'description' => $data['description'],
+        // Kiểm tra xem tên thương hiệu hoặc slug có bị trùng với thương hiệu khác không
+        $existingBrand = $this->brand->where('slug', Str::slug($data['name']))->where('id', '!=', $id)->first();
 
-                ]);
-
-            DB::commit();
-            return $brand;
-        } catch (Exception $e) {
-            DB::rollBack();
-            Log::error("Failed to update brand: {$e->getMessage()}");
-            throw new Exception('Failed to update brand');
+        if ($existingBrand) {
+            throw new Exception('Thương hiệu đã tồn tại.');
         }
+
+        // Cập nhật thông tin thương hiệu
+        $brand->update([
+            'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
+            'description' => $data['description'],
+        ]);
+
+        // Commit transaction nếu thành công
+        DB::commit();
+        return $brand;
+    } catch (Exception $e) {
+        // Rollback transaction nếu có lỗi
+        DB::rollBack();
+        Log::error("Failed to update brand: {$e->getMessage()}");
+        throw new Exception('Thương hiệu đã tồn tại.');
+    }
     }
 
     public function brandByName($name)

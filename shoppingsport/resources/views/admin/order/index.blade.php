@@ -2,11 +2,21 @@
 
 @section('content')
 <style>
-    .sorting{
-        font-size: 10px !important;
+    .status-active {
+        color: green; /* Màu xanh cho 'Đã Active' */
+        font-weight: bold; /* Chữ đậm */
     }
-    .ds td{
-        font-size: 12px !important;
+    .status-inactive {
+        color: red; /* Màu đỏ cho 'Chưa Active' */
+        font-weight: bold;
+    }
+    .status-pending {
+        color: black; /* Màu đen cho 'Chờ xử lý' */
+        font-weight: bold;
+    }
+    .status-unknown {
+        color: gray; /* Màu xám cho 'Không xác định' */
+        font-weight: bold;
     }
 </style>
 <div class="page-inner">
@@ -21,28 +31,20 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Sản phẩm</a>
+                <a href="#">Đơn hàng</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#"> Danh sách sản phẩm</a>
+                <a href="#"> Danh sách đơn hàng</a>
             </li>
         </ul>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center">
 
-                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.product.add') }}"  >
-                            <i class="fa fa-plus"></i>
-                            Thêm mới
-                        </a>
-                    </div>
-                </div>
                 <div class="card-body">
                     <!-- Modal -->
 
@@ -76,38 +78,42 @@
                                         role="grid" aria-describedby="add-row_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 60px;">ID</th>
-                                                <th class="sorting" data-sort="name" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Tên: activate to sort column ascending" style="width: 150px;">Tên</th>
+                                                <th class="sorting" data-sort="id" tabindex="0" aria-controls="add-row"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="id: activate to sort column descending"
+                                                    style="width: 60.016px;">ID</th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 150.484px;">Họ tên </th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 100.484px;">Điện thoại </th>
 
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Hình ảnh: activate to sort column ascending" style="width: 150px;">Hình ảnh</th>
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Giá gốc: activate to sort column ascending" style="width: 100px;">Giá gốc</th>
-
-                                                <th class="sorting" data-sort="brand_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Thương hiệu: activate to sort column ascending" style="width: 100px;">Thương hiệu</th>
-                                                <th class="sorting" data-sort="categori_id" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Danh mục: activate to sort column ascending" style="width: 150px;">Danh mục</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Action: activate to sort column ascending" style="width: 260px;">Action</th>
+                                                <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 100.484px;">Tổng tiền </th>
+                                                    <th class="sorting" data-sort="name" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 150.484px;">Trạng thái </th>
+                                                <th class="sorting" style="width: 250.688px;" tabindex="0"
+                                                    aria-controls="add-row" rowspan="1" colspan="1"
+                                                    aria-label="Action: activate to sort column ascending">Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Tên</th>
-
-                                                <th rowspan="1" colspan="1">Hình ảnh</th>
-                                                <th rowspan="1" colspan="1">Giá gốc</th>
-                                                <th rowspan="1" colspan="1">Thương hiệu</th>
-                                                <th rowspan="1" colspan="1">Danh mục</th>
+                                                <th rowspan="1" colspan="1">Họ tên</th>
+                                                <th rowspan="1" colspan="1">Điện thoại</th>
+                                                <th rowspan="1" colspan="1">Tổng tiền</th>
+                                                <th rowspan="1" colspan="1">Trạng thái</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
                                         </tfoot>
-
                                         <tbody id="product-list">
 
                                         </tbody>
@@ -147,13 +153,13 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @if (session('success'))
 <script>
     $(document).ready(function() {
             $.notify({
                 icon: 'icon-bell',
-                title: 'Sản phẩm',
+                title: 'Đơn hàng',
                 message: '{{ session('success') }}',
             }, {
                 type: 'secondary',
@@ -175,7 +181,7 @@
 
         function fetchProducts(page = 1, search = '', per_page = perPage) {
             $.ajax({
-                url: '{{ route("admin.product.fetch") }}',
+                url: '{{ route("admin.order.fetch") }}',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -186,25 +192,31 @@
                     per_page: per_page // Sử dụng per_page từ tham số
                 },
                 success: function (data) {
-                    $('#product-list').empty();
-                    console.log(data.data);
-                    $.each(data.data, function (index, product) {
-                        $('#product-list').append(`
-                        <tr class = 'ds'>
-                            <td>${product.id}</td>
-                            <td>${product.name}</td>
 
-                            <td></td>
-                            <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
-                            <td>${product.brand.name}</td>
-                            <td>${product.category.name}</td>
+                    $('#product-list').empty();
+                    $.each(data.data, function (index, order) {
+                        $('#product-list').append(`
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.name}</td>
+                            <td>${order.phone}</td>
+                            <td>${order.amount}</td>
+                            <td>
+                                ${order.active === 1 ? '<span class="status-active">Đã Active</span>' :
+                                (order.active === 2 ? '<span class="status-inactive">Không Active</span>' :
+                                (order.active === 0 ? '<span class="status-pending">Chờ xử lý</span>' : '<span class="status-unknown">Không xác định</span>'))}
+                            </td>
+
 
                             <td>
-                                <button class="btn btn-warning btn-sm edit" data-id="${product.id}">
+                                <button class="btn btn-warning btn-sm edit" data-id="${order.id}">
                                     <i class="fas fa-edit"></i> Sửa
                                 </button>
-                                <button class="btn btn-danger btn-sm delete" data-id="${product.id}">
+                                <button class="btn btn-danger btn-sm delete" data-id="${order.id}">
                                     <i class="fas fa-trash"></i> Xóa
+                                </button>
+                                <button class="btn btn-primary btn-sm view" data-id="${order.id}">
+                                    <i class="fas fa-eye"></i> Xem
                                 </button>
                             </td>
                         </tr>
@@ -215,8 +227,15 @@
 
                     $('#product-list').on('click', '.edit', function() {
                         var productId = $(this).data('id');
-                        var editRoute = "{{ route('admin.product.edit', ':id') }}"; // Route Blade có tham số id
-                        var finalRoute = editRoute.replace(':id', productId); // Thêm type vào query string
+                        var editRoute = "{{ route('admin.order.edit', ':id') }}";
+                        var finalRoute = editRoute.replace(':id', productId);
+                        window.location.href = finalRoute;
+                    });
+
+                    $('#product-list').on('click', '.view', function() {
+                        var productId = $(this).data('id');
+                        var editRoute = "{{ route('admin.order.view', ':id') }}";
+                        var finalRoute = editRoute.replace(':id', productId);
                         window.location.href = finalRoute;
                     });
 
@@ -275,7 +294,7 @@
 
         function bindDeleteEvent() {
             $('.delete').on('click', function () {
-                let productId = $(this).data('id');
+                let brandId = $(this).data('id');
 
                 // Sử dụng SweetAlert2 để hiển thị thông báo xác nhận
                 Swal.fire({
@@ -290,24 +309,24 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: `/admin/product/delete/${productId}`,
+                            url: `/admin/order/delete/${brandId}`,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
                             },
                             success: function (response) {
                                 if (response.success) {
-                                    $(`tr[data-id="${productId}"]`).remove(); // Xóa dòng từ bảng
+                                    $(`tr[data-id="${brandId}"]`).remove(); // Xóa dòng từ bảng
                                     fetchProducts();
                                     Swal.fire(
                                         'Đã xóa!',
-                                        'Sản phẩm đã được xóa thành công.',
+                                        'Thương hiệu đã được xóa thành công.',
                                         'success'
                                     );
                                 } else {
                                     Swal.fire(
                                         'Lỗi!',
-                                        'Không thể xóa sản phẩm này.',
+                                        'Không thể xóa thương hiệu này.',
                                         'error'
                                     );
                                 }

@@ -44,6 +44,9 @@
         font-size: 12px;
         padding: 2px 5px;
     }
+    .error{
+        color: red;
+    }
 </style>
 <div class="page-inner">
     <div class="page-header">
@@ -80,21 +83,23 @@
                 <div class="card-body">
                     <div class="">
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST" enctype="multipart/form-data">
+                            <form method="POST" id="saveproduct" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="content">Tên sản phẩm:</label><br>
-                                            <input type="text" class="form-control" id="name" name="name"
+                                            <input type="text" class="form-control" id="nameproduct" name="name"
                                                 value="{{ $product->name }}">
+                                                <p id="error_nameproduct" class="error"></p>
                                         </div>
+
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="category">Danh mục :</label><br>
-                                            <select class="form-control" id="category" name="categori_id">
+                                            <select class="form-control" id="category1" name="categori_id">
                                                 <option value="">-- Chọn danh mục --</option>
                                                 @forelse($categories as $key => $value)
                                                 <option {{ $product->categori_id == $value->id ? 'selected' : '' }}
@@ -104,6 +109,7 @@
                                                 @endforelse
                                                 <!-- Thêm các danh mục khác ở đây -->
                                             </select>
+                                            <p id="error_category1" class="error"></p>
                                         </div>
                                     </div>
 
@@ -143,6 +149,7 @@
                                             <label class="form-label" for="content">Giá nhập :</label><br>
                                             <input type="number" class="form-control" id="price_old" name="price_old"
                                                 value="{{ $product->price_old }}">
+                                                <p id="error_price_old" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -150,6 +157,15 @@
                                             <label class="form-label" for="content">Giá bán :</label><br>
                                             <input type="number" class="form-control" id="price_new" name="price_new"
                                                 value="{{ $product->price_new }}">
+                                                <p id="error_price_new" class="error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="content">Số lượng:</label><br>
+                                            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}">
+                                            <p id="error_quantity" class="error"></p>
                                         </div>
                                     </div>
 
@@ -266,7 +282,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <button  class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -344,7 +360,87 @@ CKEDITOR.replace('description_seo', {
     fontSize_sizes: '11px;12px;13px;14px;15px;16px;18px;20px;22px;24px;26px;28px;30px;32px;34px;36px',
 });
 </script>
+<script>
+    $(document).ready(function() {
+       $("#saveproduct").submit(function(event) {
+           event.preventDefault();
 
+           var nameproduct = $('#nameproduct').val();
+            var category1 = $("#category1").val();
+            var price_old = $('#price_old').val();
+            var price_new = $("#price_new").val();
+            var quantity = $("#quantity").val();
+            var logo = $('#image-input')[0].files;
+            var valid = true;
+
+            if (!nameproduct) {
+                $("#error_nameproduct").html("Nhập tên sản phẩm");
+                $("#nameproduct").focus();
+                valid = false;
+            } else if (!category1) {
+                $("#category1").focus();
+                $("#error_category1").html("Chon loại danh mục");
+                valid = false;
+
+            }else if (!price_old) {
+                $("#price_old").focus();
+                $("#error_price_old").html("Nhập giá nhập");
+                valid = false;
+
+            }else if (!price_new) {
+                $("#price_new").focus();
+                $("#error_price_new").html("Nhập giá bán");
+                valid = false;
+            }else if (!quantity) {
+                    $("#error_quantity").html("Nhập số lượng sản phẩm");
+                    $("#quantity").focus();
+                    valid = false;
+
+            } else if (logo.length == 0) {
+                    $("#error_logo").html("Vui lòng chọn logo");
+                    $("#image-input").focus();
+                    valid = false;
+
+            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
+                    $("#error_logo").html("Vui lòng chọn file hình ảnh hợp lệ");
+                    $("#image-input").focus();
+                    valid = false;
+                }
+
+            if (nameproduct) {
+                $("#error_nameproduct").empty();
+            }
+
+            if (category1) {
+                $("#error_category1").empty();
+            }
+
+            if (price_old) {
+                $("#error_price_old").empty();
+            }
+
+            if (price_new) {
+                $("#error_dprice_new").empty();
+            }
+
+            if (quantity) {
+                $("#error_quantity").empty();
+            }
+
+            if (logo.length !=0) {
+                    $("#error_logo").empty();
+            }
+
+            if (valid) {
+                $(this).unbind('submit').submit();
+
+            }
+
+       });
+
+
+   })
+</script>
 
 
 @endsection
