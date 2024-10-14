@@ -22,7 +22,8 @@ class Order extends Model
         'note',
         'payment_method',
         'amount',
-        'active'
+        'is_active',
+        'status'
     ];
 
     protected $appends = ['province', 'district', 'ward', 'detail'] ;

@@ -128,7 +128,7 @@
                     <div class="col-sm-3 p-md-0">
                         <div class="welcome-text">
                             <p class="mb-0">Mã Đơn Hàng</p>
-                            <h4>{{ $order->id }}</h4>
+                            <h4>{{ $order->code }}</h4>
                             <p class="mb-0">
                                 {{ $order->created_at->format('d-m-Y H:i:s') }}</p>
                         </div>
@@ -136,7 +136,15 @@
                     <div class="col-sm-3 p-md-0">
                         <div class="welcome-text">
                             <p class="mb-0">Tình Trạng Đơn Hàng</p>
-                            <h4>Chưa active</h4>
+                            <h4>@if($order->is_active === 1)
+                                <p>Chấp nhận đơn hàng</p>
+                            @elseif($order->is_active === 2)
+                                <p>Hủy đơn hàng</p>
+                            @elseif($order->is_active === 3)
+                                <p>Chờ duyệt xét</p>
+                            @else
+                                <p>Trạng thái không xác định</p>
+                            @endif</h4>
                         </div>
                     </div>
 
