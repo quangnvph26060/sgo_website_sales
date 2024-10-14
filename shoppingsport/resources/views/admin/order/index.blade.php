@@ -202,9 +202,9 @@
                             <td>${order.phone}</td>
                             <td>${order.amount}</td>
                             <td>
-                                ${order.active === 1 ? '<span class="status-active">Đã Active</span>' :
-                                (order.active === 2 ? '<span class="status-inactive">Không Active</span>' :
-                                (order.active === 0 ? '<span class="status-pending">Chờ xử lý</span>' : '<span class="status-unknown">Không xác định</span>'))}
+                                ${order.is_active === 1 ? '<span class="status-active">Đã Active</span>' :
+                                (order.is_active === 2 ? '<span class="status-inactive">Không Active</span>' :
+                                (order.is_active === 3 ? '<span class="status-pending">Chờ xử lý</span>' : '<span class="status-unknown">Không xác định</span>'))}
                             </td>
 
 

@@ -115,10 +115,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="active" class="form-label">Chọn trạng thái đơn hàng:</label>
-                                        <select name="active" id="active" class="form-control" name="active" required>
+                                        <select name="active" id="active" class="form-control" name="is_active" required>
                                             <option value="">Đang chờ xử lý</option>
-                                            <option {{ $order->active == 1 ? 'selected' : '' }} value="1">Duyệt</option>
-                                            <option {{ $order->active == 2 ? 'selected' : '' }} value="2">Không duyệt</option>
+                                            <option {{ $order->is_active == 1 ? 'selected' : '' }} value="1">Duyệt</option>
+                                            <option {{ $order->is_active == 2 ? 'selected' : '' }} value="2">Không duyệt</option>
 
                                             <!-- Thêm các tùy chọn khác nếu cần -->
                                         </select>
