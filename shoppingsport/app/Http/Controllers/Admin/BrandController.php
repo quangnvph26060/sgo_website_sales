@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Services\BrandService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -17,7 +18,8 @@ class BrandController extends Controller
     //
     public function index()
     {
-        return view('admin.brand.index');
+        $title = 'Thương hiệu';
+        return view('admin.brand.index', compact('title'));
     }
 
     // Fetch dữ liệu cho danh mục
@@ -46,24 +48,43 @@ class BrandController extends Controller
     }
 
     public function add(){
-
-        return view('admin.brand.add');
+        $title = 'Thêm thương hiệu';
+        return view('admin.brand.add', compact('title'));
     }
 
     public function store(Request $request) {
-        $data = $request->all();
-        $this->brandService->createBrand($data);
-        return redirect()->route('admin.brand.index')->with('success', 'Thêm thành công');
+
+        try {
+            // Gọi service để tạo thương hiệu
+            $data = $request->all();
+            $this->brandService->createBrand($data);
+
+            // Nếu thành công, chuyển hướng với thông báo thành công
+            return redirect()->route('admin.brand.index')->with('success', 'Thêm thành công');
+        } catch (Exception $e) {
+            // Nếu có lỗi, chuyển hướng với thông báo lỗi
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
     }
 
     public function edit($id) {
         $brand = Brand::find($id);
-        return view('admin.brand.edit', compact('brand'));
+        $title = 'Sửa thương hiệu';
+        return view('admin.brand.edit', compact('brand', 'title'));
     }
 
     public function update($id , Request $request) {
-        $this->brandService->updateBrand($id, $request->all());
-        return redirect()->route('admin.brand.index')->with('success', 'Sửa thành công');
+
+
+        try {
+            // Gọi service để cập nhật thương hiệu
+            $brand = $this->brandService->updateBrand($id, $request->all());
+            // Nếu thành công, chuyển hướng với thông báo thành công
+            return redirect()->route('admin.brand.index')->with('success', 'Sửa thành công');
+        } catch (Exception $e) {
+            // Nếu có lỗi, chuyển hướng với thông báo lỗi
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
     }
 
     public function delete($id) {

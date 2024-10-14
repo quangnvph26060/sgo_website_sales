@@ -29,10 +29,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h4 class="card-title">Add Row {{ $type }}</h4>
+
                         <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.category.add', ['type' => $type]) }}"  >
                             <i class="fa fa-plus"></i>
-                            Add Row
+                            Thêm danh mục  {{ $type == 'parent' ? 'cha' : 'con' }}
                         </a>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                                                     aria-label="Parent Category: activate to sort column ascending"
                                                     style="width: 250.484px;">Danh mục cha</th>
                                                 @endif
-                                                <th class="sorting" style="width: 120.688px;" tabindex="0"
+                                                <th  style="width: 120.688px;" tabindex="0"
                                                     aria-controls="add-row" rowspan="1" colspan="1"
                                                     aria-label="Action: activate to sort column ascending">Action</th>
                                             </tr>
@@ -137,6 +137,24 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@if (session('success'))
+<script>
+    $(document).ready(function() {
+            $.notify({
+                icon: 'icon-bell',
+                title: 'Danh mục',
+                message: '{{ session('success') }}',
+            }, {
+                type: 'secondary',
+                placement: {
+                    from: "bottom",
+                    align: "right"
+                },
+                time: 1000,
+            });
+        });
+</script>
+@endif
 <script>
     $(document).ready(function () {
 
@@ -165,7 +183,7 @@
                         $('#product-list').append(`
                         <tr>
                             <td>${product.id}</td>
-                            <td>${product.name}</td>
+                            <td><a  class = "category_brand" data-id="${product.id}" >${product.name}</a></td>
                             ${type === 'child' ? `<td>${product.parent.name}</td>` : ''} <!-- Thêm tên danh mục cha nếu type là 'child' -->
                             <td>
                                 <button class="btn btn-warning btn-sm edit" data-id="${product.id}">
@@ -184,6 +202,13 @@
                         var productId = $(this).data('id');
                         var editRoute = "{{ route('admin.category.edit', ':id') }}"; // Route Blade có tham số id
                         var finalRoute = editRoute.replace(':id', productId) + '?type=' + type; // Thêm type vào query string
+                        window.location.href = finalRoute;
+                    });
+
+                    $('#product-list').on('click', '.category_brand', function() {
+                        var productId = $(this).data('id');
+                        var editRoute = "{{ route('admin.category.brand.by.category', ':id') }}";
+                        var finalRoute = editRoute.replace(':id', productId);
                         window.location.href = finalRoute;
                     });
 

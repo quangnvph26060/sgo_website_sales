@@ -12,7 +12,7 @@ class Categoris extends Model
     protected $table = 'sgo_categories';
 
 
-    protected $fillable = ['name', 'description', 'parent_id', 'title_seo', 'description_seo', 'keyword_seo'];
+    protected $fillable = ['name', 'description', 'parent_id', 'title_seo', 'description_seo', 'keyword_seo', 'logo'];
 
     public function brands()
     {
@@ -34,7 +34,7 @@ class Categoris extends Model
     {
         return self::find($this->attributes['parent_id']);
     }
-  
+
     public function parent()
     {
         return $this->belongsTo(Categoris::class, 'parent_id');

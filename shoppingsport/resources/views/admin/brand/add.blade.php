@@ -2,8 +2,12 @@
 
 @section('content')
 <style>
-     .cke_notifications_area{
+    .cke_notifications_area {
         display: none;
+    }
+
+    .error {
+        color: red
     }
 </style>
 <div class="page-inner">
@@ -32,7 +36,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex align-items-center" style="justify-content: center" >
+                    <div class="d-flex align-items-center" style="justify-content: center">
 
                         <h4 class="card-title">Thêm thương hiệu</h4>
 
@@ -40,23 +44,31 @@
                 </div>
                 <div class="card-body">
                     <div class="">
+                        @if ($errors->has('error'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('error') }}
+                        </div>
+                        @endif
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST" action="{{ route('admin.brand.store') }}"  enctype="multipart/form-data">
+                            <form method="POST" id="save_brand" action="{{ route('admin.brand.store') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="content">Tên thương hiệu :</label><br>
-                                            <input type="text" class="form-control" id="name" name="name">
+                                            <input type="text" class="form-control" id="namebrand" name="name">
+                                            <p id="error_namebrand" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Nội dung :</label><br>
-                                            <textarea required name="description" class="form-control" id="content" rows="10"
+                                            <textarea name="description" class="form-control" id="description" rows="10"
                                                 cols="80"></textarea><br><br>
+                                            <p id="error_description" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="display: none">
@@ -79,8 +91,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Nội dung SEO :</label><br>
-                                            <textarea required name="description_seo" class="form-control" id="description_seo" rows="10"
-                                                cols="80"></textarea><br><br>
+                                            <textarea name="description_seo" class="form-control" id="description_seo"
+                                                rows="10" cols="80"></textarea><br><br>
                                         </div>
                                     </div>
 
@@ -88,7 +100,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <button class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -101,7 +113,7 @@
 </div>
 <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
 <script>
-      CKEDITOR.replace('content', {
+    CKEDITOR.replace('description', {
     toolbar: [
         { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
         { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
@@ -144,6 +156,43 @@ CKEDITOR.replace('description_seo', {
 });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $("#save_brand").submit(function(event) {
+            event.preventDefault();
+
+            var namebrand = $('#namebrand').val();
+            var description = $("#description").val();
+
+            var valid = true;
+
+            if (!namebrand) {
+                $("#error_namebrand").html("Nhập thông tin tiêu đề bài viết");
+                $("#namebrand").focus();
+                valid = false;
+            } else if (!description) {
+                $("#description").focus();
+                $("#error_description").html("Nhập thông tin nội dung bài viết");
+                valid = false;
+
+            }
+
+            if (namebrand) {
+                $("#error_namebrand").empty();
+            }
+
+            if (description) {
+                $("#error_description").empty();
+            }
+
+            if (valid) {
+                $(this).unbind('submit').submit();
+
+            }
+
+        });
+    })
+</script>
 
 
 @endsection

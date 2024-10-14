@@ -1,9 +1,10 @@
 <div class="main-header">
     <div class="main-header-logo">
         <!-- Logo Header -->
-        <div class="logo-header" data-background-color="dark">
+        <div class="logo-header" data-background-color="white">
             <a href="{{ route('admin.index') }}" class="logo">
-                <img src="{{ asset('sgovn.png') }}" alt="navbar brand" class="navbar-brand" height="20" />
+                <img src="{{ asset('sgovn.png') }}" alt="navbar brand" style="width: 100px;
+                height: auto" class="navbar-brand" height="20" />
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -35,8 +36,7 @@
             </nav> --}}
             <div style="flex: 2; align-items: baseline; display: flex; margin-right: 20px">
                 <marquee id="demoMarquee" scrollamount="7" style="color: red">
-                    <span style="margin-right: 300px">Sửa hàng SPORT</span>
-                    <span>Sửa hàng SPORT</span>
+                    <span style="margin-right: 200px">SGO Việt Nam</span>
                 </marquee>
             </div>
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -46,13 +46,7 @@
                         aria-expanded="false" aria-haspopup="true">
                         <i class="fa fa-search"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-search animated fadeIn">
-                        <form class="navbar-left navbar-form nav-search">
-                            <div class="input-group">
-                                <input type="text" placeholder="Search ..." class="form-control" />
-                            </div>
-                        </form>
-                    </ul>
+
                 </li>
                 <li class="nav-item topbar-icon dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"

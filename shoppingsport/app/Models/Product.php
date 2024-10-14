@@ -32,8 +32,8 @@ class Product extends Model
         'description_short',
         'description',
         'title_seo',
-         'description_seo',
-          'keyword_seo'
+        'description_seo',
+        'keyword_seo'
     ];
 
     public function category()
