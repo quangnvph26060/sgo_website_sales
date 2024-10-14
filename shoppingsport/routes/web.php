@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\HomeController;
 
@@ -132,6 +133,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('{id}', [NewsController::class, 'update'])->name('update');
             Route::post('delete/{id}', [NewsController::class, 'destroy'])->name('delete');
         });
+
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::post('', [UserController::class, 'updateuser'])->name('update');
+        });
+
+
     });
 
 
