@@ -242,6 +242,15 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.introduction.index') }}">
+                        <i class="fas fa-newspaper"></i>
+                        <p>Giới thiệu công ty</p>
+
+                    </a>
+
+                </li>
+
 
             </ul>
         </div>
