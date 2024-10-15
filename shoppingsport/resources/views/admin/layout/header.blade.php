@@ -424,7 +424,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-@if (session('success'))
+{{-- @if (session('success'))
 <script>
     $(document).ready(function() {
             $.notify({
@@ -441,4 +441,4 @@
             });
         });
 </script>
-@endif
+@endif --}}
