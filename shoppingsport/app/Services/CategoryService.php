@@ -96,12 +96,14 @@ class CategoryService
             $category = $this->getCategoryById($id);
             Log::info("Updating category with ID: $id");
             $timestamp = Carbon::now()->format('YmdHis');
-            $logo = $data['logo'];
-            $directoryPath = 'public/category';
-            $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/category/' . $logoFileName;
+            if(isset($data['logo'])){
+                $logo = $data['logo'];
+                $directoryPath = 'public/category';
+                $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
+                $logoFilePath = 'storage/category/' . $logoFileName;
+                Storage::putFileAs($directoryPath, $logo, $logoFileName);
+            }
 
-            Storage::putFileAs($directoryPath, $logo, $logoFileName);
             $category->update([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -110,7 +112,7 @@ class CategoryService
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
                 'keyword_seo' => $data['keyword_seo'],
-                'logo' => $logoFilePath
+                 'logo' => $logoFilePath ?? ''
             ]);
 
             DB::commit();

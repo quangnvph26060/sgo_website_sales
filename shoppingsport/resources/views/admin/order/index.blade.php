@@ -197,7 +197,7 @@
                     $.each(data.data, function (index, order) {
                         $('#product-list').append(`
                         <tr>
-                            <td>${order.id}</td>
+                            <td>${order.code}</td>
                             <td>${order.name}</td>
                             <td>${order.phone}</td>
                             <td>${order.amount}</td>

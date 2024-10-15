@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function fetch(Request $request)
     {
         $order = Order::query();
-        $orders = $order->orderBy('active', 'asc') // Đặt active ở dưới cùng
+        $orders = $order->orderBy('is_active', 'asc') // Đặt active ở dưới cùng
         ->orderBy('created_at', 'desc') ;
         // Tìm kiếm nếu có
         if ($request->has('search')) {

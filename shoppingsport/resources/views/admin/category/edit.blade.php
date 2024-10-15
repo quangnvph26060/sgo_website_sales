@@ -5,6 +5,9 @@
     .cke_notifications_area {
         display: none;
     }
+    .error{
+        color:red;
+    }
 </style>
 <div class="page-inner">
     <div class="page-header">
@@ -84,7 +87,7 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Nội dung :</label><br>
-                                            <textarea required name="description" class="form-control"
+                                            <textarea  name="description" class="form-control"
                                                 id="descriptioncategory" rows="10"
                                                 cols="80">{{ $category->description }}</textarea>
                                             <p id="error_description" class="error"></p>
@@ -96,7 +99,7 @@
                                         <div class="custom-file">
                                             <input id="logo"
                                                 class="custom-file-input @error('logo') is-invalid @enderror"
-                                                type="file" name="logo" accept="image/*" required>
+                                                type="file" name="logo" accept="image/*" >
                                             <label class="custom-file-label" for="logo">Chọn logo</label>
                                         </div>
                                         @error('logo')
@@ -226,7 +229,6 @@ CKEDITOR.replace('description_seo', {
                 var namecategory = $('#namecategory').val();
                 var descriptioncategory = $("#descriptioncategory").val();
                 // alert(descriptioncategory)
-                var logo = $('#logo')[0].files;
                 var valid = true;
 
                 if (!parent_id || parent_id == null ) {
@@ -244,15 +246,6 @@ CKEDITOR.replace('description_seo', {
                     $("#error_description").html("Nhập nội dung danh mục");
                     valid = false;
 
-                }else if (logo.length == 0) {
-                    $("#error_logo").html("Vui lòng chọn logo");
-                    $("#logo").focus();
-                    valid = false;
-
-                }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
-                    $("#error_logo").html("Vui lòng chọn file hình ảnh hợp lệ");
-                    $("#logo").focus();
-                    valid = false;
                 }
 
                 if (parent_id) {
@@ -266,9 +259,7 @@ CKEDITOR.replace('description_seo', {
                 if (descriptioncategory) {
                     $("#error_description").empty();
                 }
-                if (logo.length !=0) {
-                    $("#error_logo").empty();
-                }
+
 
                 if (valid) {
                      $(this).unbind('submit').submit();
@@ -280,7 +271,7 @@ CKEDITOR.replace('description_seo', {
                 var namecategory = $('#namecategory').val();
                 var descriptioncategory = $("#descriptioncategory").val();
                 // alert(descriptioncategory)
-                var logo = $('#logo')[0].files;
+
                 var valid = true;
 
                 if (!namecategory) {
@@ -294,15 +285,6 @@ CKEDITOR.replace('description_seo', {
                     $("#error_description").html("Nhập nội dung danh mục");
                     valid = false;
 
-                }else if (logo.length == 0) {
-                    $("#error_logo").html("Vui lòng chọn logo");
-                    $("#logo").focus();
-                    valid = false;
-
-                }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
-                    $("#error_logo").html("Vui lòng chọn file hình ảnh hợp lệ");
-                    $("#logo").focus();
-                    valid = false;
                 }
 
 
@@ -313,9 +295,7 @@ CKEDITOR.replace('description_seo', {
                 if (descriptioncategory) {
                     $("#error_description").empty();
                 }
-                if (logo.length !=0) {
-                    $("#error_logo").empty();
-                }
+
 
                 if (valid) {
                      $(this).unbind('submit').submit();
