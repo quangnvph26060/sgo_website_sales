@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\CustomerReviewController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\IntroductionController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -136,6 +137,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('user')->name('user.')->group(function () {
             Route::post('', [UserController::class, 'updateuser'])->name('update');
+        });
+
+        Route::prefix('introduction')->name('introduction.')->group(function () {
+            Route::get('', [IntroductionController::class, 'index'])->name('index');
+            Route::post('', [IntroductionController::class, 'update'])->name('update');
         });
 
 
