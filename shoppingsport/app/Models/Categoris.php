@@ -12,7 +12,7 @@ class Categoris extends Model
     protected $table = 'sgo_categories';
 
 
-    protected $fillable = ['name', 'description', 'parent_id', 'title_seo', 'description_seo', 'keyword_seo', 'logo'];
+    protected $fillable = ['name', 'description', 'slug', 'parent_id', 'title_seo', 'description_seo', 'keyword_seo', 'logo'];
 
     public function brands()
     {

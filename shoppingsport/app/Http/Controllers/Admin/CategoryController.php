@@ -81,7 +81,7 @@ class CategoryController extends Controller
 
     public function edit(Request $request, $id)
     {
-         $title = 'Sửa danh mục';
+        $title = 'Sửa danh mục';
         $type = $request->query('type');
         $categories = Categoris::whereNull('parent_id')->get();
         $category = $this->categoryService->getCategoryById($id);
@@ -94,16 +94,19 @@ class CategoryController extends Controller
     {
         $category = Categoris::find($id);
 
-        if (!$category) {
-            // Nếu danh mục không tồn tại, trả về thông báo lỗi
-            return redirect()->back()->withErrors(['error' => 'Danh mục không tồn tại.'])->withInput();
-        }
+        // if (!$category) {
+        //     // Nếu danh mục không tồn tại, trả về thông báo lỗi
+        //     return redirect()->back()->withErrors(['error' => 'Danh mục không tồn tại.'])->withInput();
+        // }
 
         // Kiểm tra xem có danh mục nào khác có cùng tên hoặc slug không
         $existingCategory = Categoris::where('id', '!=', $id)
-            ->where('name', $request->name)
-            ->orWhere('slug', Str::slug($request->name))
+            ->where(function ($query) use ($request) {
+                $query->where('name', $request->name)
+                    ->orWhere('slug', Str::slug($request->name));
+            })
             ->first();
+
 
         if ($existingCategory) {
             // Nếu danh mục đã tồn tại, trả về thông báo lỗi và dừng quá trình
@@ -152,14 +155,16 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function brandbycategory($id){
+    public function brandbycategory($id)
+    {
         $category = Categoris::find($id);
         $brand = CategoryBrand::where('category_id', $id)->get();
         // dd($brand);
         return view('admin.category.brandbycategory', compact('category', 'brand'));
     }
 
-    public function deletebrandbycategory($id){
+    public function deletebrandbycategory($id)
+    {
         CategoryBrand::find($id)->delete();
         return redirect()->back()->with('success', 'Xóa thành công');
     }
