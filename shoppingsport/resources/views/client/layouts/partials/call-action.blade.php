@@ -1,7 +1,7 @@
 <div class="call-action flex flex-center web right type-icon">
     <div class="call-action__facebook backtop_item flex">
         <a aria-label="Nhắn tin qua Facebook" class="icon-facebook flex flex-center-around icon" target="_blank"
-            href="https://www.facebook.com/thethaothanhloi">
+            href="{{$config->facebook_url}}">
             <span class="backtop_item__icon icon_backtop flex flex-center backtop_item__content">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path
@@ -14,7 +14,7 @@
     </div>
     <div class="call-action__zalo backtop_item flex">
         <a aria-label="Nhắn tin qua Zalo" class="icon-zalo flex flex-center-around icon" target="_blank"
-            href="https://zalo.me/0862525296">
+            href="https://zalo.me/{{$config->phzalo_phonenumberone}}">
             <span class="backtop_item__icon icon_backtop flex flex-center backtop_item__content">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40px" height="40px">
                     <path fill="#2962ff"
@@ -39,15 +39,15 @@
         </a>
     </div>
     <div class="call-action__phone backtop_item flex">
-        <a aria-label="0862.525.296 (Gọi ngay)" class="icon-phone flex flex-center-around icon" target="_top"
-            href="tel:0862525296">
+        <a aria-label="{{$config->phzalo_phonenumberone}} (Gọi ngay)" class="icon-phone flex flex-center-around icon" target="_top"
+            href="tel:{{$config->phzalo_phonenumberone}}">
             <span class="backtop_item__icon icon_backtop flex flex-center backtop_item__content">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
                     <path
                         d="M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z" />
                 </svg>
             </span>
-            <span class="backtop_item__text fw-600">0862.525.296 (Gọi ngay)</span>
+            <span class="backtop_item__text fw-600">{{$config->phzalo_phonenumberone}} (Gọi ngay)</span>
         </a>
     </div>
     <div class="call-action__messenger backtop_item flex">

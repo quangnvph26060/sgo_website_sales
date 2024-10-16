@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>@yield('title',  $config->title )</title>
+    <meta name="description" content="@yield('description',  $config->description )">
+    <meta name="keywords" content="@yield('keywords',  $config->keywords )">
+
+
+    <meta property="og:title"
+        content="{{ $config->title_seo ?? 'THÀNH LỢI SPORT - PHÂN PHỐI THIẾT BỊ VÀ DỤNG CỤ THỂ THAO CHÍNH HÃNG' }}">
+    <meta property="og:description"
+        content="{{ $config->description_seo ?? 'THÀNH LỢI SPORT - PHÂN PHỐI THIẾT BỊ VÀ DỤNG CỤ THỂ THAO CHÍNH HÃNG' }}">
+    {{-- <meta property="og:image" content="https://www.example.com/hinh-anh.jpg"> --}}
+    <meta property="og:url" content="{{ $config->website ?? 'https://thanhloisport.com' }}">
+    <meta name="robots" content="index, follow">
+
     <link href="https://thanhloisport.com/wp-content/uploads/2021/11/cropped-Icon-Logo-thanh-loi-sport.png"
         type=image/x-icon rel="shortcut icon">
-
-    <title>
-        THÀNH LỢI SPORT - PHÂN PHỐI THIẾT BỊ VÀ DỤNG CỤ THỂ THAO CHÍNH HÃNG
-    </title>
 
     @include('client.layouts.partials.style')
 </head>
@@ -24,9 +33,7 @@
             @include('client.layouts.partials.header-middle')
 
             @if (request()->routeIs('user.home-page'))
-
-            @include("client.layouts.partials.header-bottom")
-
+                @include('client.layouts.partials.header-bottom')
             @endif
 
 

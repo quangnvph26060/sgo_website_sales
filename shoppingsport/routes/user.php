@@ -38,7 +38,8 @@ Route::name('user.')->group(function () {
 
     Route::controller(AffiliateController::class)->group(function () {
 
-        Route::get('gioi-thieu', 'introduce')->name('introduce');
+        Route::get('gioi-thieu/{slug?}', 'introduce')->name('introduce');
+        Route::get('tin-tuc', 'news')->name('list-news');
     });
 
 
@@ -97,6 +98,5 @@ Route::name('user.')->group(function () {
 
     Route::controller(ListProductController::class)->group(function () {
         Route::get('{slug}', 'index')->name('list');
-        // Route::post('danh-sach', 'filterProducts')->name('filter');
     });
 });
