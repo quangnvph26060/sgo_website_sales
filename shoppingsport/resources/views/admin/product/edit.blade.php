@@ -396,16 +396,7 @@ CKEDITOR.replace('description_seo', {
                     $("#quantity").focus();
                     valid = false;
 
-            } else if (logo.length == 0) {
-                    $("#error_logo").html("Vui lòng chọn logo");
-                    $("#image-input").focus();
-                    valid = false;
-
-            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
-                    $("#error_logo").html("Vui lòng chọn file hình ảnh hợp lệ");
-                    $("#image-input").focus();
-                    valid = false;
-                }
+            }
 
             if (nameproduct) {
                 $("#error_nameproduct").empty();
@@ -427,9 +418,7 @@ CKEDITOR.replace('description_seo', {
                 $("#error_quantity").empty();
             }
 
-            if (logo.length !=0) {
-                    $("#error_logo").empty();
-            }
+
 
             if (valid) {
                 $(this).unbind('submit').submit();
