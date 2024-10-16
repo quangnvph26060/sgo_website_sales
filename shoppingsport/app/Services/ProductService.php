@@ -19,6 +19,12 @@ class ProductService
 
     public function createProduct($data)
     {
+        $existingProduct = $this->product->where('name', $data['name'])->exists();
+
+        if ($existingProduct) {
+            // Nếu sản phẩm đã tồn tại, trả về lỗi để hiển thị trong Blade
+            return ['error' => 'Sản phẩm đã tồn tại.'];
+        }
         // Lưu sản phẩm
         $product = $this->product->create([
             'name' => $data['name'],
@@ -26,7 +32,7 @@ class ProductService
             'categori_id' => $data['category_id'],
             'brand_id' => $data['brand_id'],
             'type_id' => $data['type_id'],
-            // 'color' => $data['color'],
+            'quantity' => $data['quantity'],
             'price_old' => $data['price_old'],
             'price_new' => $data['price_new'],
             'discount_id' => $data['discount_id'],
@@ -68,7 +74,7 @@ class ProductService
             'categori_id' => $data['categori_id'],
             'brand_id' => $data['brand_id'],
             'type_id' => $data['type_id'],
-            // 'color' => $data['color'],
+             'quantity' => $data['quantity'],
             'price_old' => $data['price_old'],
             'price_new' => $data['price_new'],
             'discount_id' => $data['discount_id'],

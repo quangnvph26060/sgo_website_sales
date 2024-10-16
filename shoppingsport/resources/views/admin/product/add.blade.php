@@ -2,9 +2,10 @@
 
 @section('content')
 <style>
-     .cke_notifications_area{
+    .cke_notifications_area {
         display: none;
     }
+
     .image-upload-container {
         margin: 20px 0px;
     }
@@ -43,6 +44,10 @@
         font-size: 12px;
         padding: 2px 5px;
     }
+
+    .error {
+        color: red;
+    }
 </style>
 <div class="page-inner">
     <div class="page-header">
@@ -70,7 +75,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex align-items-center" style="justify-content: center" >
+                    <div class="d-flex align-items-center" style="justify-content: center">
 
                         <h4 class="card-title">Thêm sản phẩm</h4>
 
@@ -78,21 +83,27 @@
                 </div>
                 <div class="card-body">
                     <div class="">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            {{ $errors->first() }}
+                        </div>
+                        @endif
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST"  enctype="multipart/form-data">
+                            <form method="POST" id="saveproduct" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="content">Tên sản phẩm:</label><br>
-                                            <input type="text" class="form-control" id="name" name="name">
+                                            <input type="text" class="form-control" id="nameproduct" name="name">
+                                            <p id="error_nameproduct" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="category">Danh mục  :</label><br>
-                                            <select class="form-control" id="category" name="category">
+                                            <label class="form-label" for="category">Danh mục :</label><br>
+                                            <select class="form-control" id="category1" name="category">
                                                 <option value="">-- Chọn danh mục --</option>
                                                 @forelse($categories as $key => $value)
                                                 <option value="{{ $value->id }}"> {{ $value->name }}</option>
@@ -101,12 +112,13 @@
                                                 @endforelse
                                                 <!-- Thêm các danh mục khác ở đây -->
                                             </select>
+                                            <p id="error_category1" class="error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="brand_id">Thương hiệu  :</label><br>
+                                            <label class="form-label" for="brand_id">Thương hiệu :</label><br>
                                             <select class="form-control" id="brands" name="brand_id">
                                                 <option value="">-- Chọn thương hiệu --</option>
                                                 {{-- @forelse($brands as $key => $value)
@@ -120,7 +132,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="type_id">Loại kích cỡ  :</label><br>
+                                            <label class="form-label" for="type_id">Loại kích cỡ :</label><br>
                                             <select class="form-control" id="type_id" name="type_id">
                                                 <option value="">-- Chọn loại kích cỡ --</option>
                                                 @forelse($types as $key => $value)
@@ -137,12 +149,22 @@
                                         <div class="form-group">
                                             <label class="form-label" for="content">Giá nhập :</label><br>
                                             <input type="number" class="form-control" id="price_old" name="price_old">
+                                            <p id="error_price_old" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="content">Giá bán :</label><br>
-                                            <input type="number" class="form-control" id="price_old" name="price_old">
+                                            <input type="number" class="form-control" id="price_new" name="price_new">
+                                            <p id="error_price_new" class="error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="content">Số lượng:</label><br>
+                                            <input type="number" class="form-control" id="quantity" name="quantity">
+                                            <p id="error_quantity" class="error"></p>
                                         </div>
                                     </div>
 
@@ -152,7 +174,8 @@
                                             <select class="form-control" id="discount_id" name="discount_id">
                                                 <option value="">-- Chọn khuyễn mãi --</option>
                                                 @forelse($discounts as $key => $value)
-                                                <option value="{{ $value->id }}"> {{ $value->name . " - ". number_format($value->value) }}%</option>
+                                                <option value="{{ $value->id }}"> {{ $value->name . " - ".
+                                                    number_format($value->value) }}%</option>
                                                 @empty
 
                                                 @endforelse
@@ -165,11 +188,15 @@
                                         <div class="form-group image-upload-container">
                                             <label for="image-input" class="form-label">Chọn ảnh:</label>
                                             <div class="custom-file mb-3">
-                                                <input type="file" class="custom-file-input" id="image-input" name="image[]" multiple accept="image/*">
-                                                <label class="custom-file-label" for="image-input">Chọn nhiều ảnh...</label>
+                                                <input type="file" class="custom-file-input" id="image-input"
+                                                    name="image[]" multiple accept="image/*">
+                                                <label class="custom-file-label" for="image-input">Chọn nhiều
+                                                    ảnh...</label>
                                             </div>
-                                            <div class="row" id="image-preview-container"></div> <!-- Thêm row để căn ảnh -->
+                                            <div class="row" id="image-preview-container"></div>
+                                            <!-- Thêm row để căn ảnh -->
                                         </div>
+                                        <p id="error_logo" class="error"></p>
                                     </div>
 
 
@@ -177,8 +204,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Đặc điểm nổi bật:</label><br>
-                                            <textarea required name="description_short" class="form-control" id="content" rows="10"
-                                                cols="80"></textarea><br><br>
+                                            <textarea required name="description_short" class="form-control"
+                                                id="content" rows="10" cols="80"></textarea><br><br>
                                         </div>
                                     </div>
 
@@ -186,8 +213,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Mô tả chi tiết :</label><br>
-                                            <textarea required name="description" class="form-control" id="description" rows="10"
-                                                cols="80"></textarea><br><br>
+                                            <textarea required name="description" class="form-control" id="description"
+                                                rows="10" cols="80"></textarea><br><br>
                                         </div>
                                     </div>
 
@@ -211,8 +238,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Nội dung SEO :</label><br>
-                                            <textarea required name="description_seo" class="form-control" id="description_seo" rows="10"
-                                                cols="80"></textarea><br><br>
+                                            <textarea required name="description_seo" class="form-control"
+                                                id="description_seo" rows="10" cols="80"></textarea><br><br>
                                         </div>
                                     </div>
 
@@ -220,7 +247,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <button class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -233,9 +260,9 @@
 </div>
 <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{asset("script_img.js") }}"></script>
+<script src="{{asset(" script_img.js") }}"></script>
 <script>
-      CKEDITOR.replace('content', {
+    CKEDITOR.replace('content', {
     toolbar: [
         { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
         { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
@@ -337,6 +364,86 @@ CKEDITOR.replace('description_seo', {
             });
         });
 </script>
+<script>
+    $(document).ready(function() {
+        $("#saveproduct").submit(function(event) {
+            event.preventDefault();
 
+            var nameproduct = $('#nameproduct').val();
+            var category1 = $("#category1").val();
+            var price_old = $('#price_old').val();
+            var price_new = $("#price_new").val();
+            var quantity = $("#quantity").val();
+            var logo = $('#image-input')[0].files;
+            var valid = true;
+
+            if (!nameproduct) {
+                $("#error_nameproduct").html("Nhập tên sản phẩm");
+                $("#nameproduct").focus();
+                valid = false;
+            } else if (!category1) {
+                $("#category1").focus();
+                $("#error_category1").html("Chon loại danh mục");
+                valid = false;
+
+            }else if (!price_old) {
+                $("#price_old").focus();
+                $("#error_price_old").html("Nhập giá nhập");
+                valid = false;
+
+            }else if (!price_new) {
+                $("#price_new").focus();
+                $("#error_price_new").html("Nhập giá bán");
+                valid = false;
+            }else if (!quantity) {
+                    $("#error_quantity").html("Nhập số lượng sản phẩm");
+                    $("#quantity").focus();
+                    valid = false;
+
+            } else if (logo.length == 0) {
+                    $("#error_logo").html("Vui lòng chọn logo");
+                    $("#image-input").focus();
+                    valid = false;
+
+            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
+                    $("#error_logo").html("Vui lòng chọn file hình ảnh hợp lệ");
+                    $("#image-input").focus();
+                    valid = false;
+                }
+
+            if (nameproduct) {
+                $("#error_nameproduct").empty();
+            }
+
+            if (category1) {
+                $("#error_category1").empty();
+            }
+
+            if (price_old) {
+                $("#error_price_old").empty();
+            }
+
+            if (price_new) {
+                $("#error_dprice_new").empty();
+            }
+
+            if (quantity) {
+                $("#error_quantity").empty();
+            }
+
+            if (logo.length !=0) {
+                    $("#error_logo").empty();
+            }
+
+            if (valid) {
+                $(this).unbind('submit').submit();
+
+            }
+
+        });
+
+
+    })
+</script>
 
 @endsection

@@ -2,20 +2,21 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>{{ isset($title) ? $title : "Document" }}</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
     <link
       rel="icon"
-      href="asset/img/kaiadmin/favicon.ico"
+      href="{{ asset('sgovn.png') }}"
       type="image/x-icon"
     />
 
     <!-- Fonts and icons -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset("asset/js/plugin/webfont/webfont.min.js") }} "></script>
+    <script src="{{ asset("validator/validator.js") }} "></script>
 
     <script>
       WebFont.load({
@@ -96,7 +97,7 @@
 
     <!-- Kaiadmin JS -->
     <script src="{{asset("asset/js/kaiadmin.min.js") }}"></script>
-    
+
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{asset("asset/js/setting-demo.js") }}"></script>
     <script src="{{asset("asset/js/demo.js") }}"></script>

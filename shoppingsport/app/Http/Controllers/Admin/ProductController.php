@@ -27,7 +27,8 @@ class ProductController extends Controller
     {
         // $product = Product::get();
         // dd($product[0]->type);
-        return view('admin.product.index');
+        $title = 'Danh sách sản phẩm';
+        return view('admin.product.index', compact('title'));
     }
 
     // Fetch dữ liệu cho danh mục
@@ -64,24 +65,25 @@ class ProductController extends Controller
     }
 
     public function add(){
+        $title = 'Thêm sản phẩm';
         $brands = $this->brandService->getBrandAll();
         $categories = $this->categoryService->getCategories();
         // dd($categories);
         $discounts = Discount::get();
         $types = TypeProduct::get();
-        return view('admin.product.add', compact('brands', 'categories', 'discounts', 'types' ));
+        return view('admin.product.add', compact('brands', 'categories', 'discounts', 'types', 'title' ));
     }
 
 
     public function edit($id){
-
+        $title = 'Sửa sản phẩm';
         $brands = $this->brandService->getBrandAll();
         $categories = $this->categoryService->getCategories();
         $product = $this->productService->findProductById($id);
         // dd($product);
         $discounts = Discount::get();
         $types = TypeProduct::get();
-        return view('admin.product.edit', compact('brands', 'categories', 'discounts', 'types', 'product' ));
+        return view('admin.product.edit', compact('brands', 'categories', 'discounts', 'types', 'product', 'title' ));
     }
 
     public function update(Request $request, $id){
@@ -92,7 +94,11 @@ class ProductController extends Controller
 
     public function store(Request $request){
         $data = $request->all();  // Đảm bảo đây là mảng
-        $this->productService->createProduct($data);
+        $result = $this->productService->createProduct($data);
+        if (isset($result['error'])) {
+            // Nếu có lỗi, trả về thông báo
+            return back()->withErrors(['error' => $result['error']])->withInput();
+        }
         // $this->productService->createProduct($request->all);
         return redirect()->route('admin.product.index')->with('success', 'Thêm thành công!');
     }
@@ -105,9 +111,8 @@ class ProductController extends Controller
 
     public function images()
     {
-        // $product = Product::get();
-        // dd($product[0]->type);
-        return view('admin.image.product');
+        $title = 'Ảnh sản phẩm';
+        return view('admin.image.product', compact('title'));
     }
 
     // Fetch dữ liệu cho danh mục
