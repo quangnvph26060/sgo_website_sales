@@ -2,7 +2,7 @@
     <div class="container">
         <div class="footer-bottom__wrap w-100 flex-center-between">
             <div class="left">
-                <p class="copyright">Copyright 2023 © THÀNH LỢI SPORT</p>
+                <p class="copyright">{{$config->footer}}</p>
             </div>
             <div class="right flex-center-right">
                 <img src="https://thanhloisport.com/assets/ecommerce/images/credit-cards.png" alt="credit-cards"

@@ -19,7 +19,7 @@
                                                         <p class="description"></p>
                                                     </div>
                                                 </div>
-                                                <img src="https://thanhloisport.com/uploads/2023/07/slide1.jpg.webp"
+                                                <img src="{{showImageStorage($config->slider1)}}"
                                                     alt="slide1" width="930px" height="520px" />
                                             </div>
                                         </div>
@@ -32,7 +32,7 @@
                                                     </div>
                                                 </div>
                                                 <img loading="lazy"
-                                                    src="https://thanhloisport.com/uploads/2023/07/slide2.jpg.webp"
+                                                    src="{{showImageStorage($config->slider2)}}"
                                                     alt="slide2" width="930px" height="520px" />
                                             </div>
                                         </div>
@@ -45,7 +45,7 @@
                                                     </div>
                                                 </div>
                                                 <img loading="lazy"
-                                                    src="https://thanhloisport.com/uploads/2023/07/slide3.jpg.webp"
+                                                    src="{{showImageStorage($config->slider3)}}"
                                                     alt="slide3" width="930px" height="520px" />
                                             </div>
                                         </div>
@@ -149,178 +149,23 @@
                         </div>
                         <div class="short-product__content w-100">
                             <div class="categories web">
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/ghe-massage">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/ghe-massage.jpg.webp"
-                                                alt="ghe-massage" title="Ghế MASSAGE" width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Ghế MASSAGE</h3>
-                                            <span class="counter">12 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/dung-cu-bong-chuyen">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2024/06/qua-bong-chuyn-da-thang-long-dg-200-5.jpg.webp"
-                                                alt="qua-bong-chuyn-da-thang-long-dg-200-5" title="Dụng cụ bóng chuyền"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Dụng cụ bóng chuyền</h3>
-                                            <span class="counter">548 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/dung-cu-bong-da">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/wp-content/uploads/2022/03/BONG-DA-UCV-3.127-SO-5-3.jpg.webp"
-                                                alt="BONG-DA-UCV-3" title="Dụng cụ bóng đá" width="165px"
-                                                height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Dụng cụ bóng đá</h3>
-                                            <span class="counter">446 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/dung-cu-cau-long">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/dung-cu-cau-long.jpg.webp"
-                                                alt="dung-cu-cau-long" title="Dụng cụ cầu lông" width="165px"
-                                                height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Dụng cụ cầu lông</h3>
-                                            <span class="counter">199 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/dung-cu-vo-thuat">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2024/06/dung-cu-vo-thuat-thanh-loi-sport.jpg.webp"
-                                                alt="dung-cu-vo-thuat-thanh-loi-sport" title="Dụng cụ võ thuật"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Dụng cụ võ thuật</h3>
-                                            <span class="counter">66 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner"
-                                        href="https://thanhloisport.com/dung-cu-the-thao-ngoai-troi">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/wp-content/uploads/2022/03/Xa-kep-ngoai-troi-HQ-623.jpg.webp"
-                                                alt="Xa-kep-ngoai-troi-HQ-623" title="Dụng cụ thể thao ngoài trời"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">
-                                                Dụng cụ thể thao ngoài trời
-                                            </h3>
-                                            <span class="counter">10 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/dung-cu-bong-ban">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2024/06/dung-cu-bong-ban-thanh-loi-sport.jpg.webp"
-                                                alt="dung-cu-bong-ban-thanh-loi-sport" title="Dụng cụ bóng bàn"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Dụng cụ bóng bàn</h3>
-                                            <span class="counter">58 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/gian-ta-tap-the-hinh-gym">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2024/06/gian-ta-the-hinh-gym-thanh-loi-sport.jpg.webp"
-                                                alt="gian-ta-the-hinh-gym-thanh-loi-sport"
-                                                title="Giàn tạ tập thể hình GYM" width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">
-                                                Giàn tạ tập thể hình GYM
-                                            </h3>
-                                            <span class="counter">7 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/giay-bong-chuyen">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/wp-content/uploads/2022/12/giay-bong-chuyen-beyono-thunder-xanh-duong-1.jpg.webp"
-                                                alt="giay-bong-chuyen-beyono-thunder-xanh-duong-1"
-                                                title="Giày bóng chuyền" width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Giày bóng chuyền</h3>
-                                            <span class="counter">106 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/giay-bong-da">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/wp-content/uploads/2022/09/giay-bong-da-05.jpg.webp"
-                                                alt="giay-bong-da-05" title="Giày bóng đá" width="165px"
-                                                height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Giày bóng đá</h3>
-                                            <span class="counter">105 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/quan-ao-bong-chuyen">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2024/03/bo-quan-ao-bong-chuyen-beyono-root-cam.jpg.webp"
-                                                alt="bo-quan-ao-bong-chuyen-beyono-root-cam" title="Quần áo bóng chuyền"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Quần áo bóng chuyền</h3>
-                                            <span class="counter">365 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="category-item">
-                                    <a class="category-inner" href="https://thanhloisport.com/quan-ao-bong-da">
-                                        <div class="entry-media">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/wp-content/uploads/2023/03/quan-ao-bong-da-wika-blueming-navy-2.jpg.webp"
-                                                alt="quan-ao-bong-da-wika-blueming-navy-2" title="Quần áo bóng đá"
-                                                width="165px" height="165px" />
-                                        </div>
-                                        <div class="entry-content text-center">
-                                            <h3 class="category-name">Quần áo bóng đá</h3>
-                                            <span class="counter">145 Sản phẩm</span>
-                                        </div>
-                                    </a>
-                                </div>
+
+                                @foreach ($productCategories->take(10) as $item)
+                                    <div class="category-item">
+                                        <a class="category-inner" href="{{ route('user.list', $item->slug) }}">
+                                            <div class="entry-media">
+                                                <img loading="lazy"
+                                                    src="{{ showImageStorage($item->logo) }}"
+                                                    alt="ghe-massage" title="Ghế MASSAGE" width="165px"
+                                                    height="165px" />
+                                            </div>
+                                            <div class="entry-content text-center">
+                                                <h3 class="category-name">{{ $item->name }}</h3>
+                                                <span class="counter">{{ $item->products_count }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </section>
@@ -386,8 +231,7 @@
                                                     <div class="special-img mb-15">
                                                         <a href="{{ route('user.details-page', $new->slug) }}"
                                                             aria-label="{{ $new->title }}" class="img_link">
-                                                            <img loading="lazy"
-                                                                src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/ghe-tap-bung-03.jpg.webp"
+                                                            <img loading="lazy" src="{{ showImageStorage($new->logo) }}"
                                                                 alt="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?"
                                                                 title="TIN TỨC &amp; SỰ KIỆN" width="280px"
                                                                 height="170px" />
@@ -433,252 +277,68 @@
                         </div>
                         <div class="customer-reviews__slide s-wrap" id="customer-reviews__slide">
                             <div class="slides s-content">
-                                <div class="item">
-                                    <div class="item-wrap flex-center-left">
-                                        <div class="item-wrap__thumnail">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/anh-1-280x280.jpeg.webp"
-                                                alt="anh-1-280x280" width="80px" height="80px" />
-                                        </div>
-                                        <div class="item-wrap__content">
-                                            <p class="star flex-center-left">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                            </p>
-                                            <div class="name">Hoàng Tú</div>
-                                            <div class="position">Hà Nội</div>
-                                            <div class="description">
-                                                Thương hiệu uy tín và đáng tin cậy, THÀNH LỢI
-                                                SPORT sẽ là sự lựa chọn đầu tiên của gia đình tôi
-                                                trong việc nâng cao chất lượng cuộc sống, chăm sóc
-                                                sức khỏe trong tương lai.
+
+
+                                @foreach ($evaluates as $item)
+                                    <div class="item">
+                                        <div class="item-wrap flex-center-left">
+                                            <div class="item-wrap__thumnail">
+                                                <img loading="lazy" src="{{ showImageStorage($item->avatar) }}"
+                                                    alt="anh-1-280x280" width="80px" height="80px" />
+                                            </div>
+                                            <div class="item-wrap__content">
+                                                <p class="star flex-center-left">
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                                        width="20px" height="20px" fill="#F7B500"
+                                                        style="margin-left: 1px; width: 15px">
+                                                        <polygon
+                                                            points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
+                                                        </polygon>
+                                                    </svg>
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                                        width="20px" height="20px" fill="#F7B500"
+                                                        style="margin-left: 1px; width: 15px">
+                                                        <polygon
+                                                            points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
+                                                        </polygon>
+                                                    </svg>
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                                        width="20px" height="20px" fill="#F7B500"
+                                                        style="margin-left: 1px; width: 15px">
+                                                        <polygon
+                                                            points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
+                                                        </polygon>
+                                                    </svg>
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                                        width="20px" height="20px" fill="#F7B500"
+                                                        style="margin-left: 1px; width: 15px">
+                                                        <polygon
+                                                            points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
+                                                        </polygon>
+                                                    </svg>
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                                        width="20px" height="20px" fill="#F7B500"
+                                                        style="margin-left: 1px; width: 15px">
+                                                        <polygon
+                                                            points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
+                                                        </polygon>
+                                                    </svg>
+                                                </p>
+                                                <div class="name">{{ $item->name }}</div>
+                                                <div class="position">{{ $item->address }}</div>
+                                                <div class="description">
+                                                    {{ $item->content }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <div class="item-wrap flex-center-left">
-                                        <div class="item-wrap__thumnail">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/anh-5-280x280.jpg.webp"
-                                                alt="anh-5-280x280" width="80px" height="80px" />
-                                        </div>
-                                        <div class="item-wrap__content">
-                                            <p class="star flex-center-left">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                            </p>
-                                            <div class="name">Minh Châu</div>
-                                            <div class="position">Hồ Chí Minh</div>
-                                            <div class="description">
-                                                Thương hiệu uy tín và đáng tin cậy, THÀNH LỢI
-                                                SPORT sẽ là sự lựa chọn đầu tiên của gia đình tôi
-                                                trong việc nâng cao chất lượng cuộc sống, chăm sóc
-                                                sức khỏe trong tương lai.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="item-wrap flex-center-left">
-                                        <div class="item-wrap__thumnail">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/anh-3-280x280.jpg.webp"
-                                                alt="anh-3-280x280" width="80px" height="80px" />
-                                        </div>
-                                        <div class="item-wrap__content">
-                                            <p class="star flex-center-left">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                            </p>
-                                            <div class="name">Lê Hải</div>
-                                            <div class="position">Đà Nẵng</div>
-                                            <div class="description">
-                                                Tôi dùng máy chạy đã 3 năm, điều khiến tôi tin
-                                                tưởng THÀNH LỢI SPORT là sự tận tâm, uy tín và
-                                                trách nhiệm với khách hàng mọi lúc mọi nơi. Bạn có
-                                                thể gọi cho hãng bất cứ lúc nào để được giải đáp
-                                                mọi thắc mắc
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="item-wrap flex-center-left">
-                                        <div class="item-wrap__thumnail">
-                                            <img loading="lazy"
-                                                src="https://thanhloisport.com/uploads/2023/07/anh-4-280x280.jpg.webp"
-                                                alt="anh-4-280x280" width="80px" height="80px" />
-                                        </div>
-                                        <div class="item-wrap__content">
-                                            <p class="star flex-center-left">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
-                                                    width="20px" height="20px" fill="#F7B500"
-                                                    style="margin-left: 1px; width: 15px">
-                                                    <polygon
-                                                        points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-                                                    </polygon>
-                                                </svg>
-                                            </p>
-                                            <div class="name">Trần Hà</div>
-                                            <div class="position">Hà Nội</div>
-                                            <div class="description">
-                                                Được người thân giới thiệu sản phẩm THÀNH LỢI
-                                                SPORT chất lượng, thương hiệu uy tín, bảo hành
-                                                nhanh chóng nên tôi quyết định mua ghế massage
-                                                toàn thân ở đây để chăm sóc sức khỏe cho cả gia
-                                                đình
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </section>
@@ -693,50 +353,13 @@
                         </div>
                         <div class="partner-slide s-wrap" id="partner__slide">
                             <div class="slides s-content">
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-adidas.jpg.webp"
-                                        alt="logo-adidas" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-mizuno.jpg.webp"
-                                        alt="logo-mizuno" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy" src="https://thanhloisport.com/uploads/2023/07/logo-nike.jpg.webp"
-                                        alt="logo-nike" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-li-ning.jpg.webp"
-                                        alt="logo-li-ning" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/zocker-3549.jpg.webp"
-                                        alt="zocker-3549" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-asics.jpg.webp"
-                                        alt="logo-asics" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-puma-2-1.jpg.webp"
-                                        alt="logo-puma-2-1" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/logo-vinasport-thanh-loi-sport.jpg.webp"
-                                        alt="logo-vinasport-thanh-loi-sport" width="150px" height="100px" />
-                                </div>
-                                <div class="item" data-href="/">
-                                    <img loading="lazy"
-                                        src="https://thanhloisport.com/uploads/2023/07/zasami-2314.jpg.webp"
-                                        alt="zasami-2314" width="150px" height="100px" />
-                                </div>
+
+                                @foreach ($partners as $partner)
+                                    <div class="item" data-href="/">
+                                        <img loading="lazy" src="{{ showImageStorage($partner->logo) }}"
+                                            alt="logo-adidas" width="150px" height="100px" />
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </section>
