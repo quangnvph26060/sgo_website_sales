@@ -42,6 +42,7 @@ class Product extends Model
         return $this->belongsTo(Categoris::class, 'categori_id');
     }
 
+
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id');
@@ -58,12 +59,16 @@ class Product extends Model
     {
         return $this->belongsTo(Discount::class, 'discount_id');
     }
+
+    public function discountValue(){
+        return $this->belongsTo(Discount::class, 'discount_id');
+    }
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
-    protected $appends = ['category', 'brand', 'type', 'discount', 'images'] ;
+    protected $appends = ['category', 'brand', 'type', 'discount', 'images'];
 
     public function getCategoryAttribute()
     {
@@ -89,5 +94,4 @@ class Product extends Model
     {
         return ProductImage::where('product_id', $this->attributes['id'])->get();
     }
-
 }

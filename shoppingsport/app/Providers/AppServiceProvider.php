@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Categoris;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+       View::composer('*', function($view){
+           $view->with('categories', Categoris::with('children')->whereNull('parent_id')->get());
+       });
     }
 }

@@ -203,14 +203,15 @@ class AuthController extends Controller
             ]);
         }
 
-        if ($resetToken->created_at->addMinutes(30) < now()) {
+        $createdAt = \Carbon\Carbon::parse($resetToken->created_at);
+        if ($createdAt->addMinutes(30) < now()) {
             return response()->json([
                 'status' => false,
                 'type' => 'error',
                 'message' => 'Token đã hết hạn! Vui lòng yêu cầu lại.'
             ]);
         }
-        
+
         // Lấy thông tin người dùng
         $user = User::where('email', $resetToken->email)->first();
 

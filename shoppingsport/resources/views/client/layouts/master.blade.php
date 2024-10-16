@@ -73,7 +73,7 @@
     <div class="notice-cart">
         <div class="notice-cart__message" role="alert">
             <p><span class="name"></span>&nbspđã được thêm vào giỏ hàng của bạn.</p>
-            <a href="https://thanhloisport.com/cart" class="button">Xem giỏ hàng</a>
+            <a href="{{ route('user.cart') }}" class="button">Xem giỏ hàng</a>
             <div class="close">
                 <svg width="14" viewBox="0 0 18 17" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14.4497 3.16142L3.81641 13.8379" stroke="#fff" stroke-width="2" stroke-linecap="square">

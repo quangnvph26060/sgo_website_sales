@@ -1,10 +1,15 @@
 <?php
 
+use App\Models\Order;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\CheckOutController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\WishlistController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\AffiliateController;
+use App\Http\Controllers\Client\ListProductController;
+use App\Http\Controllers\Client\ProductDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,13 +31,31 @@ Route::name('user.')->group(function () {
         return view('client.pages.cart-page');
     })->name('cart-page');
 
-    Route::get('details', function () {
-        return view('client.pages.detail');
-    })->name('details');
+    Route::controller(ProductDetailController::class)->group(function () {
+        Route::get('details/{slug}', 'show')->name('details-page');
+        Route::post('ajax/load-variant', 'loadVariant')->name('load-variant');
+    });
 
-    Route::get('danh-sach', function () {
-        return view('client.pages.list');
-    })->name('list');
+    Route::controller(AffiliateController::class)->group(function () {
+
+        Route::get('gioi-thieu', 'introduce')->name('introduce');
+    });
+
+
+
+
+    Route::controller(CheckOutController::class)->group(function () {
+        Route::get('checkout', 'index')->name('checkout');
+
+        Route::post('checkout', 'postCheckout');
+
+        Route::get('order-success/{orderCode}', function ($code) {
+            $order = Order::where('code', $code)->first();
+            return view('client.pages.order-success', compact('order'));
+        })->name('order-success');
+
+        Route::post('ajax/address-suggest', 'addressSuggest')->name('address-suggest');
+    });
 
     Route::controller(CartController::class)->group(function () {
 
@@ -52,9 +75,9 @@ Route::name('user.')->group(function () {
     Route::controller(AuthController::class)->group(function () {
 
         Route::middleware('guest')->group(function () {
-            Route::get('login1', 'login')->name('login');
+            Route::get('login', 'login')->name('login');
 
-            Route::post('login1', 'authenticate');
+            Route::post('login', 'authenticate');
 
             Route::get('register', 'register')->name('register');
 
@@ -71,5 +94,9 @@ Route::name('user.')->group(function () {
 
         Route::get('logout', 'logout')->name('logout');
     });
-});
 
+    Route::controller(ListProductController::class)->group(function () {
+        Route::get('{slug}', 'index')->name('list');
+        // Route::post('danh-sach', 'filterProducts')->name('filter');
+    });
+});

@@ -47,42 +47,30 @@
                             <div class="top-gallery__wrap">
                                 <div class="swiper-container gallery-top">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/600x400?text=Image+1" alt="Image 1" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/600x400?text=Image+2" alt="Image 2" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/600x400?text=Image+3" alt="Image 3" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/600x400?text=Image+4" alt="Image 4" />
-                                        </div>
+
+                                        @foreach ($product->images as $item)
+                                            <div class="swiper-slide">
+                                                <img src="{{ $item->image }}" alt="{{ $item->image }}" />
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 
                                 <div class="swiper-container gallery-thumbs" style="margin-top: 5px">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/100x80?text=Thumb+1" alt="Thumbnail 1" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/100x80?text=Thumb+2" alt="Thumbnail 2" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/100x80?text=Thumb+3" alt="Thumbnail 3" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://via.placeholder.com/100x80?text=Thumb+4" alt="Thumbnail 4" />
-                                        </div>
+
+                                        @foreach ($product->images as $item)
+                                            <div class="swiper-slide">
+                                                <img src="{{ $item->image }}" alt="{{ $item->image }}" />
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-lg-5 top-information">
                             <div class="top-information__wrap">
-                                <h1 class="title">Giày bóng chuyền Beyono Sky - Xanh Lá</h1>
+                                <h1 class="title">{{ $product->name }}</h1>
                                 <div class="meta flex-inline-center-left">
                                     <div class="meta-vote flex-center-left">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59"
@@ -113,9 +101,9 @@
                                                 points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
                                             </polygon>
                                         </svg>
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width=20px
-                                            height=20px fill="#F7B500" style="margin-left: 1px; width: 15px;">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59"
+                                            x="0px" y="0px" xml:space="preserve" width=20px height=20px fill="#F7B500"
+                                            style="margin-left: 1px; width: 15px;">
                                             <polygon
                                                 points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
                                             </polygon>
@@ -133,8 +121,12 @@
                                     </div>
                                 </div>
                                 <div class="price flex-center-left">
-                                    <p class="price-old"><del>900,000đ</del></p>
-                                    <p class="price-current"><ins>760,000đ</ins></p>
+                                    @if (!is_null($product->discount_id) && ! is_null($product->discountValue))
+                                        <p class="price-old">
+                                            <del>{{ showPrice($product->price_old) }}</del>
+                                        </p>
+                                    @endif
+                                    <p class="price-current"><ins>{{ caculateDiscount($product->price_old, $product->discount->value ?? null) }}</ins></p>
                                     <div class="short-product short_code" id="time-flash-sale" style="display:  none">
                                         <div class="short-product__title flex-center-between"
                                             style="padding-bottom: 0; margin-bottom: 0; border-bottom: 0;">
@@ -148,42 +140,28 @@
                                                             title="Phút">00</span></div>
                                                     <div class="data"><span class="seconds countdown"
                                                             title="Giây">41</span></div>
-                                                </div><!-- countdown-data -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="variant" data-product_id="1459">
-                                    <div class="variant-list size" data-id="215">
-                                        <label>Size:</label>
-                                        <div class="variant-list__item">
-                                            <p class="attribute-value__item size active" data-name="37" data-id="929">
-                                                37
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="38" data-id="930">
-                                                38
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="39" data-id="931">
-                                                39
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="40" data-id="932">
-                                                40
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="41" data-id="933">
-                                                41
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="42" data-id="934">
-                                                42
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="43" data-id="935">
-                                                43
-                                            </p>
-                                            <p class="attribute-value__item size " data-name="44" data-id="936">
-                                                44
-                                            </p>
+                                @if (!is_null($product->type))
+                                    <div class="variant" data-product_id="{{ $product->id }}">
+                                        <div class="variant-list size" data-id="215">
+                                            <label>Size:</label>
+                                            <div class="variant-list__item">
+
+                                                @foreach ($product->type->size as $s)
+                                                    <p class="attribute-value__item size {{ $loop->first ? 'active' : '' }}"
+                                                        data-name="{{ $s->size }}" data-id="{{ $s->id }}">
+                                                        {{ $s->size }}
+                                                    </p>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
+
                                 <ul class="description">
                                     <li>Thương hiệu: BEYONO </li>
                                     <li>Giới tính: Unisex</li>
@@ -199,13 +177,14 @@
                                             autocomplete="off">
                                         <div class="cart-quantity__button plus"></div>
                                     </div>
-                                    <input type=hidden name=variant_id value="4505">
-                                    <p class="btn btn-primary only-add btn-add__cart " data-id="1459"
+                                    <input type=hidden name=variant_id
+                                        value="{{ optional($product->type->size->first())->id ?? 0 }}">
+                                    <p class="btn btn-primary only-add btn-add__cart " data-id="{{ $product->id }}"
                                         data-require="Vui lòng chọn phân loại hàng" title="Thêm giỏ hàng"
                                         data-none="Hết hàng">Thêm giỏ hàng</p>
                                     <p class="btn btn-primary quick-button btn-add__cart " style="display: flex"
-                                        data-id="1459" data-require="Vui lòng chọn phân loại hàng" title="Mua ngay"
-                                        data-location="quick" data-none="Hết hàng">Mua ngay</p>
+                                        data-id="{{ $product->id }}" data-require="Vui lòng chọn phân loại hàng"
+                                        title="Mua ngay" data-location="quick" data-none="Hết hàng">Mua ngay</p>
                                 </div>
 
                                 <p class="item-btn open-form__data btn-primary btn-advistory btn mb-15"
@@ -305,7 +284,7 @@
                                     <p class="wishlist-text">Bạn có thích sản phẩm này không? Thêm vào mục yêu thích ngay
                                         bây giờ và theo dõi sản phẩm.</p>
                                     <p class="wishlist-icon flex-inline-center product-buttons__wishlist"
-                                        data-type="add"data-id="1459">
+                                        data-type="add"data-id="{{ $product->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width=20 height=20>
                                             <path
                                                 style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal"
@@ -825,6 +804,11 @@
 @push('script')
     <script>
         $(document).ready(function() {
+
+
+            $('.attribute-value__item').click(function() {
+                $('input[name="variant_id"]').val($(this).data('id'));
+            });
 
             $('.middle-tab__nav .item').click(function() {
                 // Lấy id của nội dung tab tương ứng

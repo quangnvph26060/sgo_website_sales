@@ -72,7 +72,7 @@
                 data: form.serialize(),
                 success: function(response) {
                     if (response.status) {
-                        response.redirect && window.location.href = response.redirect;
+                        showMessage('success', response.message)
                     } else {
                         $('.auth-box .auth-form .field-input input').css('border-bottom',
                             '2px solid #dee2e6').siblings(

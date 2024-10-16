@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Size;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -13,7 +14,17 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         if ($request->ajax()) {
-            $product = Product::find($request->productId);
+            $request->validate([
+                // 'productId' => 'required|integer',
+                'variantId' => 'required|integer',
+                'quantity' => 'required|integer|min:1',
+            ]);
+
+            $product = Product::with('discountValue')->find($request->productId);
+
+            if (!$product) {
+                return response()->json(['message' => 'Product not found.'], 404);
+            }
 
             $result = $this->checkStock($product, $request);
 
@@ -21,8 +32,18 @@ class CartController extends Controller
                 return response()->json($result);
             }
 
-            $cartItem = Cart::instance('shopping')->search(function ($cartItem) use ($product) {
-                return $cartItem->id === $product->id;
+            $productName = $product->name;
+
+            if ($request->productId > 0) {
+                $size = Size::find($request->variantId);
+                if ($size) {
+                    $productName .= ' - ' . $size->size;
+                }
+            }
+
+            $cartItem = Cart::instance('shopping')->search(function ($cartItem) use ($product, $size) {
+                return $cartItem->id === $product->id &&
+                    (isset($cartItem->options['size']) ? $cartItem->options['size'] === $size->size : false);
             })->first();
 
             $qty = $cartItem ? $cartItem->qty + $request->quantity : $request->quantity;
@@ -30,28 +51,41 @@ class CartController extends Controller
             if (!$cartItem) {
                 Cart::instance('shopping')->add([
                     'id' => $product->id,
-                    'name' => $product->name,
+                    'name' => $productName,
                     'qty' => $qty,
-                    'price' => $product->price_new,
+                    'price' => $this->caculatePrice($product->price_old, $product->discountValue->value ?? null),
                     'weight' => 0,
                     'options' => [
                         'image' => $product->image,
-                        'slug' => $product->slug
+                        'slug' => $product->slug,
+                        'variantId' => $request->variantId,
+                        'size' => $size ? $size->value : null,
                     ]
                 ]);
             } else {
-                // Cập nhật số lượng nếu sản phẩm đã có
+                // Update existing cart item
                 Cart::instance('shopping')->update($cartItem->rowId, $qty);
             }
 
             return response()->json([
                 'count' => Cart::instance('shopping')->count(),
                 'message' => "Thêm giỏ hàng thành công.",
-                'name' => $product->name,
+                'name' => $productName,
                 'price' => showPrice($product->price_new),
                 'type' => "success"
             ]);
         }
+
+        return response()->json(['message' => 'Invalid request.'], 400);
+    }
+
+    function caculatePrice($price, $discount)
+    {
+        if (is_null($discount)) {
+            return $price;
+        }
+
+        return $price - ($price * $discount / 100);
     }
 
 

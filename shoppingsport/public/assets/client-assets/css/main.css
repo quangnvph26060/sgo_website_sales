@@ -33,7 +33,7 @@ body,
 html {
     overflow-x: hidden;
 }
- .d-none {
+.d-none {
     display: none !important;
 }
 
@@ -330,6 +330,46 @@ html {
     .sidebar {
         margin-top: 1.5rem;
     }
+
+    .breadcrumb {
+        margin-top: 100px;
+    }
+
+    .cart {
+        margin: 1.75rem 0 !important;
+    }
+
+    .cart-wrap.flex-left{
+        display: block !important;
+    }
+
+    .cart-wrap__sidebar{
+        width: 100% !important;
+        margin-top: 1.5rem !important;
+        margin-left: 0 !important;
+        max-width: 100% !important;
+
+    }
+
+    th.product-list__price, td.product-list__price, th.product-list__quantity, td.product-list__quantity, th.product-list__subtotal, td.product-list__subtotal {
+        display: none !important;
+    }
+
+    th.product-list__thumnail::before {
+        content: 'Sản phẩm';
+    }
+    .product-list__description{
+        display: block !important;
+    }
+
+    .btn.btn-primary.btn-add__cart.d-none{
+        display: block !important;
+    }
+
+    div.content-bottom{
+        display: none !important;
+    }
+
 }
 .container {
     display: flex;
@@ -8363,17 +8403,16 @@ button:hover {
     width: 100%;
 }
 
-.avatar{
+.avatar {
     width: 50px;
     height: 50px;
-
 }
 
-.mb-3{
+.mb-3 {
     margin-bottom: 10px !important;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
     color: var(--color_menu) !important;
     border-color: var(--color_menu) !important;
 }
@@ -8588,4 +8627,29 @@ button:hover {
     .comments-add__preview .image {
         flex: 0 0 80px;
     }
+}
+
+.product-categories__data .widget .filter-box__list p.active:after {
+    align-items: center;
+    border-radius: 6px;
+    color: #fff;
+    content: "✔";
+    display: flex;
+    font-size: 0.75rem;
+    justify-content: flex-start;
+    left: 6px;
+    line-height: 1;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 0 0;
+}
+
+.product-categories__data .widget .filter-box__list p.active:before,
+.product-categories__data .widget .filter-box__list p.active:hover:before {
+    background: var(--color_main);
+    border-color: var(--color_main);
+}
+
+.post_single {
+    padding-top: 30px;
 }
