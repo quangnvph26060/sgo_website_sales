@@ -17,4 +17,9 @@ class Brand extends Model
     {
         return $this->belongsToMany(Categoris::class, 'sgo_category_brand', 'brand_id', 'category_id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

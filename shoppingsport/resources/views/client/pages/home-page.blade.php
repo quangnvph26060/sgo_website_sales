@@ -331,7 +331,7 @@
                         </a>
                     </section>
 
-                    @foreach ($categories as $item)
+                    @foreach ($productCategories as $item)
                         @if ($item->products_count > 0)
                             <section class="short-product short_code" style="">
                                 <div class="short-product__title flex-center-between w-100">
@@ -361,9 +361,6 @@
                         @endif
                     @endforeach
 
-
-
-
                     <section class="short_code flex post-list-short" style="">
                         <div class="short_code__content width_100">
                             <div class="short-product short_code">
@@ -381,122 +378,38 @@
                                 </div>
                                 <div class="home-special">
                                     <div class="home-special__content flex mt-20 mobile">
-                                        <div class="special">
-                                            <div class="special-img mb-15">
-                                                <a href="https://thanhloisport.com/ghe-tap-bung-ghe-gap-bung-la-gi-gia-bao-nhieu-mua-o-dau"
-                                                    aria-label="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?"
-                                                    class="img_link">
-                                                    <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/ghe-tap-bung-03.jpg.webp"
-                                                        alt="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?"
-                                                        title="TIN TỨC &amp; SỰ KIỆN" width="280px" height="170px" />
-                                                </a>
-                                                <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
-                                                    class="category text-up fs-10 white fw-600">Tin tức</a>
-                                            </div>
-                                            <div class="special-content">
-                                                <span class="date text-up color_desc">27/12/2022</span>
-                                                <a href="https://thanhloisport.com/ghe-tap-bung-ghe-gap-bung-la-gi-gia-bao-nhieu-mua-o-dau"
-                                                    aria-label="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?">
-                                                    <h3 class="title_box color_head fs-18">
-                                                        Ghế tập bụng, ghế gập bụng là gì? Giá bao
-                                                        nhiêu? Mua ở đâu?
-                                                    </h3>
-                                                </a>
-                                                <p class="fs-14 color_desc lh-22 mt-15">
-                                                    Ghế tập bụng (ghế gập bụng) là thiết bị rất hữu
-                                                    ích đối với các bạn đang tập luyện giảm mỡ bụng.
-                                                    ...
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="special">
-                                            <div class="special-img mb-15">
-                                                <a href="https://thanhloisport.com/ta-tay-ta-don-la-gi-cac-loai-ta-tap-the-hinh"
-                                                    aria-label="Tạ tay tạ đơn là gì? Các loại tạ tập thể hình? Nên mua tạ tập ở đâu?"
-                                                    class="img_link">
-                                                    <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/tay-tay-ta-don-01.jpeg.webp"
-                                                        alt="Tạ tay tạ đơn là gì? Các loại tạ tập thể hình? Nên mua tạ tập ở đâu?"
-                                                        title="TIN TỨC &amp; SỰ KIỆN" width="280px" height="170px" />
-                                                </a>
-                                                <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
-                                                    class="category text-up fs-10 white fw-600">Tin tức</a>
-                                            </div>
-                                            <div class="special-content">
-                                                <span class="date text-up color_desc">27/12/2022</span>
-                                                <a href="https://thanhloisport.com/ta-tay-ta-don-la-gi-cac-loai-ta-tap-the-hinh"
-                                                    aria-label="Tạ tay tạ đơn là gì? Các loại tạ tập thể hình? Nên mua tạ tập ở đâu?">
-                                                    <h3 class="title_box color_head fs-18">
-                                                        Tạ tay tạ đơn là gì? Các loại tạ tập thể hình?
-                                                        Nên mua tạ tập ở đâu?
-                                                    </h3>
-                                                </a>
-                                                <p class="fs-14 color_desc lh-22 mt-15">
-                                                    Hiện nay tạ tay tạ đơn là những dụng cụ luyện
-                                                    tập thể hình phổ biến được rất nhiều lựa chọn
-                                                    đặc biệt ...
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="special">
-                                            <div class="special-img mb-15">
-                                                <a href="https://thanhloisport.com/cuoc-vot-cau-long-la-gi"
-                                                    aria-label="Cước vợt cầu lông là gì? Nên đặt mua cước cầu lông ở đâu?"
-                                                    class="img_link">
-                                                    <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/cuoc-vot-cau-long-03.jpeg.webp"
-                                                        alt="Cước vợt cầu lông là gì? Nên đặt mua cước cầu lông ở đâu?"
-                                                        title="TIN TỨC &amp; SỰ KIỆN" width="280px" height="170px" />
-                                                </a>
-                                                <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
-                                                    class="category text-up fs-10 white fw-600">Tin tức</a>
-                                            </div>
-                                            <div class="special-content">
-                                                <span class="date text-up color_desc">27/12/2022</span>
-                                                <a href="https://thanhloisport.com/cuoc-vot-cau-long-la-gi"
-                                                    aria-label="Cước vợt cầu lông là gì? Nên đặt mua cước cầu lông ở đâu?">
-                                                    <h3 class="title_box color_head fs-18">
-                                                        Cước vợt cầu lông là gì? Nên đặt mua cước cầu
-                                                        lông ở đâu?
-                                                    </h3>
-                                                </a>
-                                                <p class="fs-14 color_desc lh-22 mt-15">
-                                                    Cước vợt cầu lông là một phụ kiện không thể
-                                                    thiếu đối với những người chơi cầu lông. Có rất
-                                                    nhiều ...
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="special">
-                                            <div class="special-img mb-15">
-                                                <a href="https://thanhloisport.com/luoi-cau-long-la-gi-gia-bao-nhieu"
-                                                    aria-label="Lưới cầu lông là gì? giá bao nhiêu? Mua lưới chơi cầu lông ở đâu?"
-                                                    class="img_link">
-                                                    <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/luoi-cau-long-01.jpg.webp"
-                                                        alt="Lưới cầu lông là gì? giá bao nhiêu? Mua lưới chơi cầu lông ở đâu?"
-                                                        title="TIN TỨC &amp; SỰ KIỆN" width="280px" height="170px" />
-                                                </a>
-                                                <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
-                                                    class="category text-up fs-10 white fw-600">Tin tức</a>
-                                            </div>
-                                            <div class="special-content">
-                                                <span class="date text-up color_desc">27/12/2022</span>
-                                                <a href="https://thanhloisport.com/luoi-cau-long-la-gi-gia-bao-nhieu"
-                                                    aria-label="Lưới cầu lông là gì? giá bao nhiêu? Mua lưới chơi cầu lông ở đâu?">
-                                                    <h3 class="title_box color_head fs-18">
-                                                        Lưới cầu lông là gì? giá bao nhiêu? Mua lưới
-                                                        chơi cầu lông ở đâu?
-                                                    </h3>
-                                                </a>
-                                                <p class="fs-14 color_desc lh-22 mt-15">
-                                                    Lưới cầu lông cần đảm bảo các tiêu chuẩn của bộ
-                                                    môn cầu lông để người chơi có thể tập luyện, thi
-                                                    đấu ...
-                                                </p>
-                                            </div>
-                                        </div>
+
+
+                                        @if ($news->isNotEmpty())
+                                            @foreach ($news as $new)
+                                                <div class="special">
+                                                    <div class="special-img mb-15">
+                                                        <a href="{{ route('user.details-page', $new->slug) }}"
+                                                            aria-label="{{ $new->title }}" class="img_link">
+                                                            <img loading="lazy"
+                                                                src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/ghe-tap-bung-03.jpg.webp"
+                                                                alt="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?"
+                                                                title="TIN TỨC &amp; SỰ KIỆN" width="280px"
+                                                                height="170px" />
+                                                        </a>
+                                                        <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
+                                                            class="category text-up fs-10 white fw-600">Tin tức</a>
+                                                    </div>
+                                                    <div class="special-content">
+                                                        <span class="date text-up color_desc">27/12/2022</span>
+                                                        <a href="https://thanhloisport.com/ghe-tap-bung-ghe-gap-bung-la-gi-gia-bao-nhieu-mua-o-dau"
+                                                            aria-label="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?">
+                                                            <h3 class="title_box color_head fs-18">
+                                                                {{ $new->title }}
+                                                            </h3>
+                                                        </a>
+                                                        <p class="fs-14 color_desc lh-22 mt-15">
+                                                            {!! \Str::words(strip_tags($new->content), 45, '...') !!}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

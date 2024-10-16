@@ -12,8 +12,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\HomeController;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Các route yêu cầu đã đăng nhập mới truy cập được
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-      
+
         Route::prefix('category')->name('category.')->group(function (){
             Route::get('/', [CategoryController::class, 'index'])->name('index');
             Route::post('/fetch/{type}', [CategoryController::class, 'fetch'])->name('fetch');
@@ -85,6 +84,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-  
+
 
 });

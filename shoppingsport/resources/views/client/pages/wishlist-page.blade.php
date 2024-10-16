@@ -54,15 +54,7 @@
                                                                 overflow="visible" fill="#000000" class="color000 svgShape">
                                                             </path>
                                                         </svg></p>
-                                                    <p class="product-buttons__compare"
-                                                        onclick="addCompare('814', 'Máy chạy bộ điện Impulse PT400', 'https://thanhloisport.com/thumbnails/products/medium/wp-content/uploads/2022/07/may-chay-bo-co-lon-Impulse-PT400-300-1.jpg', '64,500,000đ', '37')">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
-                                                            viewBox="0 0 24 24" width=20 height=20>
-                                                            <path
-                                                                d="M4.5,9.44946V16A2.50294,2.50294,0,0,0,7,18.5H9.793L7.64648,20.64648a.5.5,0,1,0,.707.707l3-3a.49983.49983,0,0,0,0-.707l-3-3a.5.5,0,0,0-.707.707L9.793,17.5H7A1.50164,1.50164,0,0,1,5.5,16V9.44946a3.5,3.5,0,1,0-1,0ZM5,3.5A2.5,2.5,0,1,1,2.5,6,2.50294,2.50294,0,0,1,5,3.5ZM19.5,14.55054V8A2.50294,2.50294,0,0,0,17,5.5H14.207l2.14649-2.14648a.5.5,0,0,0-.707-.707l-3,3a.49983.49983,0,0,0,0,.707l3,3a.5.5,0,0,0,.707-.707L14.207,6.5H17A1.50164,1.50164,0,0,1,18.5,8v6.55054a3.5,3.5,0,1,0,1,0ZM19,20.5A2.5,2.5,0,1,1,21.5,18,2.50294,2.50294,0,0,1,19,20.5Z"
-                                                                fill="#000000" class="color000 svgShape"></path>
-                                                        </svg>
-                                                    </p>
+                                                    
                                                     <a class="product-buttons__quickview"
                                                         href="https://thanhloisport.com/chay-bo-dien-impulse-pt400.html"
                                                         aria-label="Máy chạy bộ điện Impulse PT400">
