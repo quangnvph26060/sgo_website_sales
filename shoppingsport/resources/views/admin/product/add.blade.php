@@ -89,7 +89,7 @@
                         </div>
                         @endif
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST" id="saveproduct" enctype="multipart/form-data">
+                            <form method="POST" id="saveproduct" enctype="multipart/form-data" action="{{ route('admin.product.store') }}">
                                 @csrf
                                 <div class="row">
 
@@ -103,7 +103,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="category">Danh mục :</label><br>
-                                            <select class="form-control" id="category1" name="category">
+                                            <select class="form-control" id="category1" name="category_id">
                                                 <option value="">-- Chọn danh mục --</option>
                                                 @forelse($categories as $key => $value)
                                                 <option value="{{ $value->id }}"> {{ $value->name }}</option>
