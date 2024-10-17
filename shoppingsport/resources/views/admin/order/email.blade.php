@@ -82,10 +82,10 @@
             <p><strong>Total Amount:</strong> {{ number_format($order->amount) }}đ</p>
         </div>
 
-        @if($active != 1)
-        <div class="summaryreason">
-            <p><strong>Lý do :</strong> {{ $reason }} </p>
-        </div>
+        @if ($active != 1)
+            <div class="summaryreason">
+                <p><strong>Lý do :</strong> {{ $reason }} </p>
+            </div>
         @endif
 
         <h2>Mặt hàng đã đặt</h2>
@@ -101,15 +101,23 @@
             </thead>
             <tbody>
                 <!-- Duyệt qua danh sách các mặt hàng -->
-                @foreach($order->detail as $item)
-                <tr>
-                    <td>{{ $item->product->name }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>{{ number_format($item->product->price_new) }}</td>
-                    <td>{{ number_format($item->product->discount->value)}}%</td>
-                    <td>{{ number_format($item->product->price_new * $item->quantity *
-                        $item->product->discount->value/100 ) }} đ </td>
-                </tr>
+                @foreach ($order->detail as $item)
+                    <tr>
+                        <td>{{ $item->product->name }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>{{ showPrice($item->price) }}</td>
+                        <td>
+                            @if (!is_null($item->product->discount_id) && !is_null($item->product->discountValue))
+                                {{ number_format($item->product->discount->value) }}
+                            @else
+                                0
+                            @endif
+                            %
+                        </td>
+                        <td>
+                            {{ showPrice($item->price * $item->quantity) }}
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

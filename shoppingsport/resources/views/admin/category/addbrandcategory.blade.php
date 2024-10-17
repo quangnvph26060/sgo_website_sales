@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="category">Chọn danh mục cha :</label><br>
                                             <select class="form-control" id="category1" {{ $type=='parent'
-                                                ? 'name="category_id"' : '' }}>
+                                                ? 'name=category_id' : '' }}>
                                                 <option value="">-- Chọn danh mục --</option>
                                                 @forelse($categories as $key => $value)
                                                 <option value="{{ $value->id }}">{{ $value->name }}</option>

@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 
 
-@section('title', $product->title_seo)
+@section('title', $product->title_seo ?? $product->name)
 
 @section('description', $product->description_seo)
 
@@ -174,11 +174,7 @@
                             @endif
 
                             <ul class="description">
-                                <li>Thương hiệu: BEYONO </li>
-                                <li>Giới tính: Unisex</li>
-                                <li>Nơi sản xuất: Việt Nam</li>
-                                <li>Chất liệu da: PU cao cấp kháng nước</li>
-                                <li>kích thước: 37-44.</li>
+                                {!! $product->description_short !!}
                             </ul>
                             <div class="cart flex-center-left">
                                 <div class="cart-quantity" style="">

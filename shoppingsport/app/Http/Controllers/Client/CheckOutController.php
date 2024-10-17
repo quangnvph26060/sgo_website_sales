@@ -64,6 +64,7 @@ class CheckOutController extends Controller
                 $order->products()->attach($orderItem);
 
                 $order->amount = $amount;
+
                 $order->save();
 
                 Cart::instance('shopping')->destroy();
