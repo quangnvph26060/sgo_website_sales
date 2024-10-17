@@ -47,6 +47,7 @@
                             </thead>
                             <tbody>
                                 @foreach (Cart::instance('shopping')->content() as $item)
+                                {{-- @dd($item) --}}
                                     <tr class="product-list__item ">
                                         <td class="product-list__remove">
                                             <p class="remove action-cart" data-type="remove" data-id="{{ $item->rowId }}">x

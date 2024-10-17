@@ -49,11 +49,11 @@ class ListProductController extends Controller
 
                 $query->where(function ($q) use ($minPrice, $maxPrice) {
                     $q->whereHas('discountValue', function ($discountQuery) use ($minPrice, $maxPrice) {
-                        $discountQuery->whereRaw('(sgo_product.price_old - (sgo_product.price_old * sgo_discounts.value / 100)) between ? and ?', [$minPrice, $maxPrice]);
+                        $discountQuery->whereRaw('(sgo_product.price_new - (sgo_product.price_new * sgo_discounts.value / 100)) between ? and ?', [$minPrice, $maxPrice]);
                     })
                         ->orWhere(function ($q2) use ($minPrice, $maxPrice) {
                             $q2->whereNull('discount_id')
-                                ->whereBetween('price_old', [$minPrice, $maxPrice]);
+                                ->whereBetween('price_new', [$minPrice, $maxPrice]);
                         });
                 });
             }

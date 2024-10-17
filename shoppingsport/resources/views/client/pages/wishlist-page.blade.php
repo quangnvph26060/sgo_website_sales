@@ -54,9 +54,9 @@
                                                                 overflow="visible" fill="#000000" class="color000 svgShape">
                                                             </path>
                                                         </svg></p>
-                                                    
+
                                                     <a class="product-buttons__quickview"
-                                                        href="https://thanhloisport.com/chay-bo-dien-impulse-pt400.html"
+                                                        href="{{ route('user.details-page', $item->slug) }}"
                                                         aria-label="Máy chạy bộ điện Impulse PT400">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
                                                             id="eye" width=20>

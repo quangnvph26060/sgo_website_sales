@@ -160,7 +160,7 @@
                                 </span>
                                 <span>Bộ lọc</span>
                             </div>
-                            <div class="sort str">
+                            {{-- <div class="sort str">
                                 <p class="sort-title">Sắp xếp: <span class="sort-title__value sort">Mới nhất</span></p>
                                 <ul class="sort-list">
                                     <li class="sort-list__item orderby_lasted active"
@@ -172,7 +172,7 @@
                                     <li class="sort-list__item orderby_price_high"
                                         onclick="loadUrl('orderby', 'price_high')">Giá cao xuống thấp</li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -200,7 +200,7 @@
                                                             overflow="visible" fill="#000000" class="color000 svgShape">
                                                         </path>
                                                     </svg></p>
-                                                
+
                                                 <a class="product-buttons__quickview"
                                                     href="{{ route('user.details-page', $item->slug) }}"
                                                     aria-label="{{ $item->name }}">
@@ -214,8 +214,8 @@
                                                 </a>
                                             </div>
                                             <a class="image-link"
-                                                href="qua-bong-chuyen-da-thang-long-dragon-master-dg-7700.html"
-                                                aria-label="Quả bóng chuyền da Thăng long Dragon Master DG 7700">
+                                                href="{{ route('user.details-page', $item->slug) }}"
+                                                aria-label="{{ $item->name }}">
                                                 <img loading="lazy" src="{{ showImageStorage($item->image) }}"
                                                     alt="{{ $item->name }}" title="{{ $item->name }}" width=224px
                                                     height=224px>
@@ -224,8 +224,8 @@
                                         <div class="content">
                                             <div class="content-top">
                                                 <h3 class="content-top__title">
-                                                    <a href="qua-bong-chuyen-da-thang-long-dragon-master-dg-7700.html"
-                                                        aria-label="Quả bóng chuyền da Thăng long Dragon Master DG 7700">{{ $item->name }}</a>
+                                                    <a href="{{ route('user.details-page', $item->slug) }}"
+                                                        aria-label="{{ $item->name }}">{{ $item->name }}</a>
                                                 </h3>
                                                 <div class="content-top__vote flex-center-left">
                                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -272,11 +272,11 @@
                                                 </div>
                                                 <div class="content-top__price flex-center-left">
                                                     @if (!is_null($item->discount_id) && !is_null($item->discountValue))
-                                                        <p class="price-old"><del>{{ showPrice($item->price_old) }}</del>
+                                                        <p class="price-old"><del>{{ showPrice($item->price_new) }}</del>
                                                         </p>
                                                     @endif
                                                     <p class="price">
-                                                        <ins>{{ caculateDiscount($item->price_old, $item->discount->value ?? null) }}</ins>
+                                                        <ins>{{ caculateDiscount($item->price_new, $item->discount->value ?? null) }}</ins>
                                                     </p>
                                                 </div>
                                                 <div class="content-top__stock in-stock">

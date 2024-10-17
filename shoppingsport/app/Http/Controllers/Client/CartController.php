@@ -20,7 +20,7 @@ class CartController extends Controller
                 'quantity' => 'required|integer|min:1',
             ]);
 
-            $product = Product::with('discountValue')->find($request->productId);
+            $product = Product::with('discountValue', 'images')->find($request->productId);
 
             if (!$product) {
                 return response()->json(['message' => 'Product not found.'], 404);
@@ -53,10 +53,10 @@ class CartController extends Controller
                     'id' => $product->id,
                     'name' => $productName,
                     'qty' => $qty,
-                    'price' => $this->caculatePrice($product->price_old, $product->discountValue->value ?? null),
+                    'price' => $this->caculatePrice($product->price_new, $product->discountValue->value ?? null),
                     'weight' => 0,
                     'options' => [
-                        'image' => $product->image,
+                        'image' => $product->images->first()->image,
                         'slug' => $product->slug,
                         'variantId' => $request->variantId,
                         'size' => $size ? $size->value : null,

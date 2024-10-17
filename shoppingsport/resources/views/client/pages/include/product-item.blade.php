@@ -29,7 +29,7 @@
                 </p>
 
                 <a class="product-buttons__quickview" href="{{ route('user.details-page', $product->slug) }}"
-                    aria-label="Ghế massage Oreni OR-520 Plus">
+                    aria-label="{{ $product->name }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" id="eye" width="20">
                         <path
                             d="M25 39c13.036 0 23.352-12.833 23.784-13.379l.491-.621-.491-.621C48.352 23.833 38.036 11 25 11S1.648 23.833 1.216 24.379L.725 25l.491.621C1.648 26.167 11.964 39 25 39zm0-26c10.494 0 19.47 9.46 21.69 12C44.473 27.542 35.509 37 25 37 14.506 37 5.53 27.54 3.31 25 5.527 22.458 14.491 13 25 13z" />
@@ -39,17 +39,17 @@
                 </a>
             </div>
             <a class="image-link" href="{{ route('user.details-page', $product->slug) }}"
-                aria-label="Ghế massage Oreni OR-520 Plus">
+                aria-label="{{ $product->name }}">
                 <img loading="lazy"
-                    src="{{showImageStorage($product->images[0] ?? null) }}"
-                    alt="oreni-or-520-plus-1" title="Ghế massage Oreni OR-520 Plus" width="224px" height="224px" />
+                    src="{{showImageStorage($product->images[0]->image ?? null) }}"
+                    alt="oreni-or-520-plus-1" title="{{ $product->name }}" width="224px" height="224px" />
             </a>
         </div>
         <div class="content">
             <div class="content-top">
                 <h3 class="content-top__title">
                     <a href="{{ route('user.details-page', $product->slug) }}"
-                        aria-label="Ghế massage Oreni OR-520 Plus">{{ $product->name }}</a>
+                        aria-label="{{ $product->name }}">{{ $product->name }}</a>
                 </h3>
                 <div class="content-top__vote flex-center-left">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px"
@@ -91,11 +91,11 @@
                 </div>
                 <div class="content-top__price flex-center-left">
                     @if (!is_null($product->discount_id) && !is_null($product->discountValue))
-                        <p class="price-old"><del>{{ showPrice($product->price_old) }}</del></p>
+                        <p class="price-old"><del>{{ showPrice($product->price_new) }}</del></p>
                     @endif
 
                     <p class="price">
-                        <ins>{{ caculateDiscount($product->price_old, $product->discountValue->value ?? null) }}</ins>
+                        <ins>{{ caculateDiscount($product->price_new, $product->discountValue->value ?? null) }}</ins>
                     </p>
                 </div>
                 <div class="content-top__stock in-stock">
