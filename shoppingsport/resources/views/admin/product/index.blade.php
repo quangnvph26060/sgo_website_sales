@@ -196,7 +196,7 @@
 
                             <td></td>
                             <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
-                            <td>${product.brand.name}</td>
+                             <td>${product.brand ? product.brand.name : 'N/A'}</td>
                             <td>${product.category.name}</td>
 
                             <td>

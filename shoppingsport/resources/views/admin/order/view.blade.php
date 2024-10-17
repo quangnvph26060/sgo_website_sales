@@ -177,9 +177,18 @@
                                                 <td>{{ $detail->product_id }}</td>
                                                 <td>{{ $detail->product->name }}</td>
                                                 <td>{{ $detail->quantity }}</td>
-                                                <td>{{ number_format($detail->product->price_new) }} </td>
-                                                <td>{{ number_format($detail->product->discount->value) }} %</td>
-                                                <td>{{ number_format($detail->product->price_new * $detail->quantity * $detail->product->discount->value-$detail->product->price_new * $detail->quantity * $detail->product->discount->value/100  ) }} </td>
+                                                <td>{{ showPrice($detail->price) }} </td>
+                                                <td>
+                                                    @if (!is_null($detail->product->discount_id) && !is_null($detail->product->discountValue))
+                                                        {{ number_format($detail->product->discount->value) }}
+                                                    @else
+                                                        0
+                                                    @endif
+                                                    %
+                                                </td>
+                                                <td>
+                                                    {{ showPrice($detail->price * $detail->quantity) }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

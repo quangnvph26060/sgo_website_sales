@@ -65,7 +65,7 @@ class OrderController extends Controller
     public function active(Request $request){
         $id = $request->id;
         $order = Order::find($id);
-        $active = $request->is_active;
+        $active = $request->active;
         // dd($active);
         $order->update(['is_active' => $active]);
         $reason = $request->reason;

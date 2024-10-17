@@ -213,7 +213,7 @@
                                                 <div class="row" id="image-preview-container" style="margin: 0px 15px">
                                                     @foreach ($product->images as $image)
                                                         <div class="image-preview" data-image="{{ asset($image) }}">
-                                                            <img src="{{ asset($image->image) }}" alt="Image">
+                                                            <img src="{{ showImageStorage($image->image) }}" alt="Image">
                                                             <button type="button" class="remove-btn" onclick="removeOldImage(this, '{{ $image->id }}')">X</button>
                                                         </div>
                                                     @endforeach

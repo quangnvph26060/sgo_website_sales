@@ -146,7 +146,7 @@
         let sortBy = 'id';
         let sortOrder = 'asc';
         let perPage = 10; // Giá trị mặc định
-        var baseUrl = "{{ url('/') }}";
+        var baseUrl = "{{ url('/storage/') }}";
         function fetchProducts(page = 1, search = '', per_page = perPage) {
             $.ajax({
                 url: '{{ route("admin.images.fetch") }}',

@@ -200,7 +200,7 @@
                             <td>${order.code}</td>
                             <td>${order.name}</td>
                             <td>${order.phone}</td>
-                            <td>${order.amount}</td>
+                            <td>${formatPrice(order.amount)}</td>
                             <td>
                                 ${order.is_active === 1 ? '<span class="status-active">Đã Active</span>' :
                                 (order.is_active === 2 ? '<span class="status-inactive">Không Active</span>' :
@@ -248,6 +248,9 @@
             });
         }
 
+        function formatPrice(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " VND";
+}
         function updateInfoAndPagination(data, currentPage) {
             const start = (currentPage - 1) * perPage + 1;
             const end = Math.min(currentPage * perPage, data.total); // Đảm bảo không vượt quá tổng số bản ghi
