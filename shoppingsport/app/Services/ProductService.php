@@ -54,7 +54,7 @@ class ProductService
                 // Lưu vào bảng hình ảnh với đường dẫn chính xác
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'storage/products/product' . $product->id . '/' . $imageName,
+                    'image' => 'products/product' . $product->id . '/' . $imageName,
                 ]);
             }
         }
@@ -96,7 +96,7 @@ class ProductService
                 // Lưu vào bảng hình ảnh với đường dẫn chính xác
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => 'storage/products/product' . $product->id . '/' . $imageName,
+                    'image' => 'products/product' . $product->id . '/' . $imageName,
                 ]);
             }
         }

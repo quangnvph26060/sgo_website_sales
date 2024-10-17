@@ -82,11 +82,11 @@
                         </div>
                         <div class="content-top__price flex-center-left">
                             @if (!is_null($item->discount_id) && !is_null($item->discountValue))
-                                <p class="price-old"><del>{{ showPrice($item->price_old) }}</del>
+                                <p class="price-old"><del>{{ showPrice($item->price_new) }}</del>
                                 </p>
                             @endif
                             <p class="price">
-                                <ins>{{ caculateDiscount($item->price_old, $item->discount->value ?? null) }}</ins>
+                                <ins>{{ caculateDiscount($item->price_new, $item->discount->value ?? null) }}</ins>
                             </p>
                         </div>
                         <div class="content-top__stock in-stock">

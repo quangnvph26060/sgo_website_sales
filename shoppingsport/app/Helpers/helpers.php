@@ -13,6 +13,7 @@ if (!function_exists('showImageStorage')) {
     function showImageStorage($image)
     {
         if ($image && Storage::exists($image)) {
+
             return Storage::url($image);
         }
 

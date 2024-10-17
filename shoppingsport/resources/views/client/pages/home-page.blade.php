@@ -240,9 +240,9 @@
                                                             class="category text-up fs-10 white fw-600">Tin tức</a>
                                                     </div>
                                                     <div class="special-content">
-                                                        <span class="date text-up color_desc">27/12/2022</span>
-                                                        <a href="https://thanhloisport.com/ghe-tap-bung-ghe-gap-bung-la-gi-gia-bao-nhieu-mua-o-dau"
-                                                            aria-label="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?">
+                                                        <span class="date text-up color_desc">{{\Carbon\Carbon::parse($new->created_at)->format('d/m/Y')}}</span>
+                                                        <a href="{{ route('user.introduce', $new->slug) }}"
+                                                            aria-label="{{ $new->title }}" class="title">
                                                             <h3 class="title_box color_head fs-18">
                                                                 {{ $new->title }}
                                                             </h3>
