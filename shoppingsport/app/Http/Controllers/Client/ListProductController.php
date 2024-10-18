@@ -101,4 +101,20 @@ class ListProductController extends Controller
             'html' => view('client.pages.include.product-response-item', compact('products'))->render(),
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        $products = Product::query()->with('discountValue', 'images');
+
+        if (! empty($query)) {
+            $products->where('name', 'LIKE', '%' . $query . '%');
+        }
+
+        $products = $products->paginate(20);
+
+        // Thực hiện logic tìm kiếm sản phẩm dựa trên $query
+        return view('client.pages.search', compact('products'));
+    }
 }

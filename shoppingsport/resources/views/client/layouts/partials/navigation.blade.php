@@ -43,7 +43,7 @@
                         GIỚI THIỆU
                     </a>
                 </li>
-                <li class="menu_level1 flex-center-between">
+                {{-- <li class="menu_level1 flex-center-between">
                     <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                         href="/chinh-sach-van-chuyen-thanh-loi-sport" target="_self">
                         VẬN CHUYỂN
@@ -54,19 +54,19 @@
                         href="/chinh-sach-thanh-toan-thanh-loi-sport" target="_self">
                         THANH TOÁN
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu_level1 flex-center-between">
                     <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                         href="/tin-tuc" target="_self">
                         TIN TỨC
                     </a>
                 </li>
-                <li class="menu_level1 flex-center-between">
+                {{-- <li class="menu_level1 flex-center-between">
                     <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                         href="/lien-he" target="_self">
                         LIÊN HỆ
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <p class="navigation-title flex-center-left">Ngành hàng</p>

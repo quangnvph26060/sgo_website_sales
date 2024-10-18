@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class ConfigController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         $title = 'Thông tin cửa hàng';
         $config = Config::first();
         return view('admin.config.index', compact('config', 'title'));
@@ -48,47 +49,46 @@ class ConfigController extends Controller
         if ($request->hasFile('banner')) {
             $banner = $request->file('banner');
             $bannerFileName = 'banner_' . $banner->getClientOriginalName();
-            $bannerFilePath = 'storage/new/' . $bannerFileName;
 
-            Storage::putFileAs('public/new', $banner, $bannerFileName);
-            $data['banner'] = $bannerFilePath;
+            // Sử dụng putFile để lưu và lấy đường dẫn
+            $path = $banner->storeAs('new', $bannerFileName);
+
+            $data['banner'] = $path; // Đường dẫn đến tệp đã lưu
         }
 
         if ($request->hasFile('slider1')) {
             $slider1 = $request->file('slider1');
             $slider1FileName = 'slider1_' . $slider1->getClientOriginalName();
-            $slider1FilePath = 'storage/new/' . $slider1FileName;
 
-            Storage::putFileAs('public/new', $slider1, $slider1FileName);
+            $slider1FilePath = $slider1->storeAs('new', $slider1FileName);
+
             $data['slider1'] = $slider1FilePath;
         }
 
         if ($request->hasFile('slider2')) {
             $slider2 = $request->file('slider2');
             $slider2FileName = 'slider2_' . $slider2->getClientOriginalName();
-            $slider2FilePath = 'storage/new/' . $slider2FileName;
+            $slider2FilePath = $slider2->storeAs('new', $slider2FileName);
 
-            Storage::putFileAs('public/new', $slider2, $slider2FileName);
+
             $data['slider2'] = $slider2FilePath;
         }
 
         if ($request->hasFile('slider3')) {
             $slider3 = $request->file('slider3');
             $slider3FileName = 'slider3_' . $slider3->getClientOriginalName();
-            $slider3FilePath = 'storage/new/' . $slider3FileName;
+            $slider3FilePath = $slider3->storeAs('new', $slider3FileName);
 
-            Storage::putFileAs('public/new', $slider3, $slider3FileName);
             $data['slider3'] = $slider3FilePath;
         }
 
-        if($config){
+        if ($config) {
             $config->update($data);
-        }else{
+        } else {
             Config::create($data);
         }
 
 
-         return redirect()->route('admin.config.index')->with('success', 'Cập nhật thông tin thành công');
-
+        return redirect()->route('admin.config.index')->with('success', 'Cập nhật thông tin thành công');
     }
 }

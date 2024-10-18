@@ -97,6 +97,7 @@ Route::name('user.')->group(function () {
     });
 
     Route::controller(ListProductController::class)->group(function () {
+        Route::get('tim-kiem', 'search')->name('search');
         Route::get('{slug}', 'index')->name('list');
     });
 });

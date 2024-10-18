@@ -74,3 +74,5 @@ if (!function_exists('caculateDiscount')) {
         return number_format($discountedPrice, 0, ',', '.') . 'đ';
     }
 }
+
+

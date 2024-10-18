@@ -33,36 +33,14 @@
                             <p>Ngành hàng</p>
                         </div>
                         <ul class="filter-box__list">
-                            <li class="item flex-center-between ">
-                                <a href="giay-bong-chuyen.html" aria-label="Giày bóng chuyền">
-                                    Giày bóng chuyền
-                                </a>
-                            </li>
-                            <li class="item flex-center-between ">
-                                <a href="luoi-bong-chuyen.html" aria-label="Lưới bóng chuyền">
-                                    Lưới bóng chuyền
-                                </a>
-                            </li>
-                            <li class="item flex-center-between ">
-                                <a href="phu-kien-bong-chuyen.html" aria-label="Phụ kiện bóng chuyền">
-                                    Phụ kiện bóng chuyền
-                                </a>
-                            </li>
-                            <li class="item flex-center-between ">
-                                <a href="qua-bong-chuyen.html" aria-label="Quả bóng chuyền da">
-                                    Quả bóng chuyền da
-                                </a>
-                            </li>
-                            <li class="item flex-center-between ">
-                                <a href="qua-bong-chuyen-hoi.html" aria-label="Quả bóng chuyền hơi">
-                                    Quả bóng chuyền hơi
-                                </a>
-                            </li>
-                            <li class="item flex-center-between ">
-                                <a href="quan-ao-bong-chuyen.html" aria-label="Quần áo bóng chuyền">
-                                    Quần áo bóng chuyền
-                                </a>
-                            </li>
+
+                            @foreach ($categories as $item)
+                                <li class="item flex-center-between ">
+                                    <a href="{{ route('user.list', $item->slug) }}" aria-label="Giày bóng chuyền">
+                                        {{ $item->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </nav>
                     <div class="filter-box price">
@@ -123,18 +101,6 @@
                                         onclick="loadUrl('orderby', 'price_high')">Giá cao xuống thấp</li>
                                 </ul>
                             </div>
-                            <div class="sort paginate">
-                                <ul class="sort-list">
-                                    <li class="sort-list__item perpage_16 active" onclick="loadUrl('perpage', 16)">16 Sản
-                                        phẩm</li>
-                                    <li class="sort-list__item perpage_32" onclick="loadUrl('perpage', 32)">32 Sản phẩm
-                                    </li>
-                                    <li class="sort-list__item perpage_48" onclick="loadUrl('perpage', 48)">48 Sản phẩm
-                                    </li>
-                                    <li class="sort-list__item perpage_64" onclick="loadUrl('perpage', 64)">64 Sản phẩm
-                                    </li>
-                                </ul>
-                            </div>
                             <p class="icon grid active" title="Hiển thị dạng lưới">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width=14>
                                     <path
@@ -160,19 +126,6 @@
                                 </span>
                                 <span>Bộ lọc</span>
                             </div>
-                            {{-- <div class="sort str">
-                                <p class="sort-title">Sắp xếp: <span class="sort-title__value sort">Mới nhất</span></p>
-                                <ul class="sort-list">
-                                    <li class="sort-list__item orderby_lasted active"
-                                        onclick="loadUrl('orderby', 'lasted')">Mới nhất</li>
-                                    <li class="sort-list__item orderby_olded" onclick="loadUrl('orderby', 'olded')">Cũ
-                                        nhất</li>
-                                    <li class="sort-list__item orderby_price_low"
-                                        onclick="loadUrl('orderby', 'price_low')">Giá thấp đến cao</li>
-                                    <li class="sort-list__item orderby_price_high"
-                                        onclick="loadUrl('orderby', 'price_high')">Giá cao xuống thấp</li>
-                                </ul>
-                            </div> --}}
                         </div>
                     </div>
 
@@ -213,10 +166,9 @@
                                                     </svg>
                                                 </a>
                                             </div>
-                                            <a class="image-link"
-                                                href="{{ route('user.details-page', $item->slug) }}"
+                                            <a class="image-link" href="{{ route('user.details-page', $item->slug) }}"
                                                 aria-label="{{ $item->name }}">
-                                                <img loading="lazy" src="{{ showImageStorage($item->image) }}"
+                                                <img loading="lazy" src="{{ showImageStorage($item->images[0]->image ?? null) }}"
                                                     alt="{{ $item->name }}" title="{{ $item->name }}" width=224px
                                                     height=224px>
                                             </a>
@@ -291,10 +243,7 @@
                                             <div class="content-bottom">
                                                 <div class="content-bottom__wrap">
                                                     <ul class="desciption">
-                                                        <li>◈ Thương hiệu: Dragon Master</li>
-                                                        <li>◈ Tiêu chuẩn: Tập luyện và Thi đấu</li>
-                                                        <li>◈ Màu sắc: Vàng - Xanh - Trắng</li>
-                                                        <li>◈ Quà tặng: Kim bơm + Lưới đựng bóng</li>
+                                                       
                                                     </ul>
                                                     <p class="btn btn-primary btn-add__cart"
                                                         data-id="{{ $item->id }}" data-variant_id="0">Thêm giỏ hàng
@@ -311,7 +260,7 @@
                     <div class="pagination">
                         {{ $products->links('vendor.custom') }}
                     </div>
-                    <div class="ck ck-reset ck-editor ck-rounded-corners" role="application" dir="ltr">
+                    {{-- <div class="ck ck-reset ck-editor ck-rounded-corners" role="application" dir="ltr">
                         <div class="ck-content">
                             <p>Bán dụng cụ bóng chuyền dùng cho tập luyện & thi đấu gồm quả bóng, trụ lưới và phụ kiện bảo
                                 hộ. Mua dụng cụ bóng chuyền giá rẻ ở THÀNH LỢI SPORT !</p>
@@ -430,7 +379,7 @@
                             <p><span>
                                     Liên hệ:&nbsp;</span><a href="">https://thanhloisport.com/lien-he</a></p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

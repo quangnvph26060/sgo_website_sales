@@ -103,10 +103,7 @@
                     <div class="content-bottom">
                         <div class="content-bottom__wrap">
                             <ul class="desciption">
-                                <li>◈ Thương hiệu: Dragon Master</li>
-                                <li>◈ Tiêu chuẩn: Tập luyện và Thi đấu</li>
-                                <li>◈ Màu sắc: Vàng - Xanh - Trắng</li>
-                                <li>◈ Quà tặng: Kim bơm + Lưới đựng bóng</li>
+                             {!! $item->description_short !!}
                             </ul>
                             <p class="btn btn-primary btn-add__cart" data-id="{{ $item->id }}" data-variant_id="0">
                                 Thêm giỏ hàng

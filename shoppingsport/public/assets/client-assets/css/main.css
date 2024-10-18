@@ -8653,3 +8653,56 @@ button:hover {
 .post_single {
     padding-top: 30px;
 }
+
+.search-banner {
+    background-color: #000c16;
+    padding: 60px 0 80px;
+    position: relative;
+}
+
+.search-banner .form-search {
+    background: var(--color_main);
+    bottom: -30px;
+    box-shadow: 0 0 40px rgba(4, 4, 4, .4);
+    left: calc(50% - 310px);
+    max-width: 620px;
+    padding-left: 15px;
+    position: absolute;
+    width: 100%;
+}
+
+.search-lists {
+    padding: 80px 80px 30px;
+}
+
+.search-banner .form-search form {
+    align-items: center;
+}
+
+.search-banner .form-search input {
+    background: none;
+    border: none;
+    color: #fff;
+    height: 60px;
+    width: calc(100% - 110px);
+}
+
+.search-banner .form-search button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    position: relative;
+    text-align: center;
+    width: 80px;
+}
+
+.search-banner .form-search button:after {
+    background: #fff;
+    content: "";
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 20px;
+    width: 1px;
+}

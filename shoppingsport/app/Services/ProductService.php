@@ -49,7 +49,7 @@ class ProductService
                 $item = now()->timestamp;
                 $imageName = $product->id . '_' . $item . '_' . $image->getClientOriginalName();
                 // Lưu hình ảnh vào thư mục 'public/products/product{id}'
-                $image->storeAs('public/products/product' . $product->id, $imageName);
+                $image->storeAs('products/product' . $product->id, $imageName);
 
                 // Lưu vào bảng hình ảnh với đường dẫn chính xác
                 ProductImage::create([
@@ -91,7 +91,7 @@ class ProductService
                 $item = now()->timestamp;
                 $imageName = $product->id . '_' . $item . '_' . $image->getClientOriginalName();
                 // Lưu hình ảnh vào thư mục 'public/products/product{id}'
-                $image->storeAs('public/products/product' . $product->id, $imageName);
+                $image->storeAs('products/product' . $product->id, $imageName);
 
                 // Lưu vào bảng hình ảnh với đường dẫn chính xác
                 ProductImage::create([
