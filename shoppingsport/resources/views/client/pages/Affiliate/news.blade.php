@@ -38,10 +38,10 @@
                                                 </div>
                                             </div>
                                             <div class="post_standing__img">
-                                                <a href="https://thanhloisport.com/tat-the-thao-la-gi-nen-mua-tat-choi-the-thao-nhu-nao-o-dau"
+                                                <a href="{{ route('user.introduce', $item->slug) }}"
                                                     aria-label="Tất thể thao là gì? Nên mua tất chơi thể thao như nào? Ở đâu?">
                                                     <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/posts/large/wp-content/uploads/2022/11/tat-the-thao-04.jpg.webp"
+                                                        src="{{showImageStorage($item->logo)}}"
                                                         alt="Tất thể thao là gì? Nên mua tất chơi thể thao như nào? Ở đâu?"
                                                         width="350px" height="250px">
                                                 </a>

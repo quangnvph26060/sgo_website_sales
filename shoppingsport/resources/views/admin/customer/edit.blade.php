@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="form-group">
                                     <img id="profileImagelogo" style="width:100px; height:auto"
-                                    src="{{ isset($reviews->avatar) && !empty($reviews->avatar) ? asset($reviews->avatar) : asset('images/avatar2.jpg') }}"
+                                    src="{{ showImageStorage($reviews->avatar) }}"
                                         alt="image logo" class="logo">
                                 </div>
                             </div>

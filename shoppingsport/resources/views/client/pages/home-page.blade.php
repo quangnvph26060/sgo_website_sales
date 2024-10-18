@@ -19,8 +19,8 @@
                                                         <p class="description"></p>
                                                     </div>
                                                 </div>
-                                                <img src="{{showImageStorage($config->slider1)}}"
-                                                    alt="slide1" width="930px" height="520px" />
+                                                <img src="{{ showImageStorage($config->slider1) }}" alt="slide1"
+                                                    width="930px" height="520px" />
                                             </div>
                                         </div>
                                         <div class="item">
@@ -31,8 +31,7 @@
                                                         <p class="description"></p>
                                                     </div>
                                                 </div>
-                                                <img loading="lazy"
-                                                    src="{{showImageStorage($config->slider2)}}"
+                                                <img loading="lazy" src="{{ showImageStorage($config->slider2) }}"
                                                     alt="slide2" width="930px" height="520px" />
                                             </div>
                                         </div>
@@ -44,8 +43,7 @@
                                                         <p class="description"></p>
                                                     </div>
                                                 </div>
-                                                <img loading="lazy"
-                                                    src="{{showImageStorage($config->slider3)}}"
+                                                <img loading="lazy" src="{{ showImageStorage($config->slider3) }}"
                                                     alt="slide3" width="930px" height="520px" />
                                             </div>
                                         </div>
@@ -56,82 +54,32 @@
                     </section>
                     <section class="short_code w-100" style="">
                         <div class="banner-list web flex-center-between w-100">
-                            <div class="banner-list__item">
-                                <div class="wrap">
-                                    <div class="thumnail">
-                                        <img loading="lazy"
-                                            src="https://thanhloisport.com/uploads/2023/07/ghe-tap-ta-4.png.webp"
-                                            alt="ghe-tap-ta-4" width="400px" height="235px" />
-                                    </div>
-                                    <div class="content">
-                                        <div class="content-wrap">
-                                            <p class="content-wrap__badge">
-                                                <span class="badge">CHẤT LƯỢNG CAO</span>
-                                            </p>
-                                            <p class="content-wrap__title">GHẾ TẬP TẠ</p>
-                                            <a class="content-wrap__link flex-inline-center-left"
-                                                href="https://thanhloisport.com/ghe-tap-ta" aria-label="XEM THÊM">XEM THÊM
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12"
-                                                    fill="#fff">
-                                                    <path
-                                                        d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z">
-                                                    </path>
-                                                </svg></a>
+
+                            @foreach ($productCategories->take(3) as $item)
+                                <div class="banner-list__item">
+                                    <div class="wrap">
+                                        <div class="thumnail">
+                                            <img loading="lazy"
+                                                src="{{ showImageStorage($item->logo) }}"
+                                                alt="ghe-tap-ta-4" width="400px" height="235px" />
+                                        </div>
+                                        <div class="content">
+                                            <div class="content-wrap">
+                                                <p class="content-wrap__title">{{ $item->name }}</p>
+                                                <a class="content-wrap__link flex-inline-center-left"
+                                                    href="{{ route('user.list', $item->slug) }}" aria-label="XEM THÊM">XEM
+                                                    THÊM
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                        height="12" fill="#fff">
+                                                        <path
+                                                            d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z">
+                                                        </path>
+                                                    </svg></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="banner-list__item">
-                                <div class="wrap">
-                                    <div class="thumnail">
-                                        <img loading="lazy"
-                                            src="https://thanhloisport.com/uploads/2023/07/gian-ta-da-nang-hq-808p-1.png.webp"
-                                            alt="gian-ta-da-nang-hq-808p-1" width="400px" height="235px" />
-                                    </div>
-                                    <div class="content">
-                                        <div class="content-wrap">
-                                            <p class="content-wrap__badge">
-                                                <span class="badge">CHUẨN PHÒNG GYM</span>
-                                            </p>
-                                            <p class="content-wrap__title">GIÀN TẠ ĐA NĂNG</p>
-                                            <a class="content-wrap__link flex-inline-center-left"
-                                                href="https://thanhloisport.com/dung-cu-tap-gym" aria-label="XEM THÊM">XEM
-                                                THÊM
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12"
-                                                    fill="#fff">
-                                                    <path
-                                                        d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z">
-                                                    </path>
-                                                </svg></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="banner-list__item">
-                                <div class="wrap">
-                                    <div class="thumnail">
-                                        <img loading="lazy"
-                                            src="https://thanhloisport.com/uploads/2023/07/ghemassage.png.webp"
-                                            alt="ghemassage" width="400px" height="235px" />
-                                    </div>
-                                    <div class="content">
-                                        <div class="content-wrap">
-                                            <p class="content-wrap__badge">
-                                                <span class="badge">CHUẨN QUỐC TẾ</span>
-                                            </p>
-                                            <p class="content-wrap__title">GHẾ MASSAGE</p>
-                                            <a class="content-wrap__link flex-inline-center-left" href="/ghe-massage"
-                                                aria-label="XEM THÊM">XEM THÊM
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                    height="12" fill="#fff">
-                                                    <path
-                                                        d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z">
-                                                    </path>
-                                                </svg></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </section>
                     <section class="short-product short_code" style="">
@@ -139,13 +87,13 @@
                             <div class="left flex-inline-center-left">
                                 <p>DANH MỤC SẢN PHẨM</p>
                             </div>
-                            <a class="btn-link" href="https://thanhloisport.com/san-pham">
+                            {{-- <a class="btn-link" href="https://thanhloisport.com/san-pham">
                                 xem tất cả
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12">
                                     <path
                                         d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z" />
                                 </svg>
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="short-product__content w-100">
                             <div class="categories web">
@@ -154,10 +102,8 @@
                                     <div class="category-item">
                                         <a class="category-inner" href="{{ route('user.list', $item->slug) }}">
                                             <div class="entry-media">
-                                                <img loading="lazy"
-                                                    src="{{ showImageStorage($item->logo) }}"
-                                                    alt="ghe-massage" title="Ghế MASSAGE" width="165px"
-                                                    height="165px" />
+                                                <img loading="lazy" src="{{ showImageStorage($item->logo) }}"
+                                                    alt="ghe-massage" title="Ghế MASSAGE" width="165px" height="165px" />
                                             </div>
                                             <div class="entry-content text-center">
                                                 <h3 class="category-name">{{ $item->name }}</h3>
@@ -170,9 +116,9 @@
                         </div>
                     </section>
                     <section class="short_code image-ads text-center" style="">
-                        <a href="/dung-cu-tap-gym/ghe-tap-ta" aria-label="home ads">
-                            <img loading="lazy" src="https://thanhloisport.com/uploads/2023/07/hero.jpg.webp"
-                                alt="hero" width="1200px" height="250px" />
+                        <a href="#" aria-label="home ads">
+                            <img loading="lazy" src="{{ showImageStorage($config->banner) }}" alt="hero" width="1200px"
+                                height="250px" />
                         </a>
                     </section>
 
@@ -183,7 +129,7 @@
                                     <div class="left flex-inline-center-left">
                                         <p class="child-title">{{ $item->name }}</p>
                                     </div>
-                                    <a class="btn-link" href="https://thanhloisport.com/ghe-massage">
+                                    <a class="btn-link" href="{{ route('user.list', $item->slug) }}">
                                         xem tất cả
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12">
                                             <path
@@ -213,7 +159,7 @@
                                     <div class="left flex-inline-center-left">
                                         <p class="child-title">TIN TỨC &amp; SỰ KIỆN</p>
                                     </div>
-                                    <a class="btn-link" href="https://thanhloisport.com/tin-tuc">
+                                    <a class="btn-link" href="{{ route('user.list-news') }}">
                                         xem tất cả
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12">
                                             <path
@@ -240,7 +186,8 @@
                                                             class="category text-up fs-10 white fw-600">Tin tức</a>
                                                     </div>
                                                     <div class="special-content">
-                                                        <span class="date text-up color_desc">{{\Carbon\Carbon::parse($new->created_at)->format('d/m/Y')}}</span>
+                                                        <span
+                                                            class="date text-up color_desc">{{ \Carbon\Carbon::parse($new->created_at)->format('d/m/Y') }}</span>
                                                         <a href="{{ route('user.introduce', $new->slug) }}"
                                                             aria-label="{{ $new->title }}" class="title">
                                                             <h3 class="title_box color_head fs-18">

@@ -14,10 +14,9 @@ class CustomerReviewService
         // Kiểm tra xem có file avatar không
         if (isset($data['avatar'])) {
             $logo = $data['avatar'];
-            $directoryPath = 'public/avatar-customer';
+            $directoryPath = 'avatar-customer';
             $logoFileName = 'image_' . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/avatar-customer/' . $logoFileName;
-            Storage::putFileAs('public/avatar-customer', $logo, $logoFileName);
+            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
             $data['avatar'] = $logoFilePath;
 
         }
@@ -45,8 +44,7 @@ class CustomerReviewService
             if (isset($data['avatar'])) {
                 $logo = $data['avatar'];
                 $logoFileName = 'image_' . $logo->getClientOriginalName();
-                $logoFilePath = 'storage/avatar-customer/' . $logoFileName;
-                Storage::putFileAs('public/avatar-customer', $logo, $logoFileName);
+                $logoFilePath = $logo->storeAs('avatar', $logoFileName);
                 $data['avatar'] = $logoFilePath;
             }
             $review->update($data);

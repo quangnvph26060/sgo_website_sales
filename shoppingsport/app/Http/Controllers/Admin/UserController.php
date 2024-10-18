@@ -23,14 +23,13 @@ class UserController extends Controller
         }
         if ($request->hasFile('avatar')) {
             $logo = $request->file('avatar');
-            $directoryPath = 'public/avataruser';
 
             // Tạo tên file với định dạng image_ + tên file gốc
             $logoFileName = 'image_' . time() . '_' . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/avataruser/' . $logoFileName;
+            
+            $logoFilePath = $logo->storeAs('avatar', $logoFileName);
 
-            // Lưu file vào thư mục đã chỉ định
-            $logo->storeAs($directoryPath, $logoFileName); // Sử dụng storeAs để lưu file với tên cụ thể
+ // Sử dụng storeAs để lưu file với tên cụ thể
             $data['avatar'] = $logoFilePath;
         }
         $user = User::find($user_id);

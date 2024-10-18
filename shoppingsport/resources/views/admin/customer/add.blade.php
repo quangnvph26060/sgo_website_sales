@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="form-group">
                                         <img id="profileImagelogo" style="width:100px; height:auto"
-                                            src="{{ asset('images/avatar2.jpg') }}"
+                                            src="{{ showImageStorage('') }}"
                                             alt="image logo" class="logo">
                                     </div>
                                 </div>
