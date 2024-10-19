@@ -331,6 +331,9 @@ html {
         margin-top: 1.5rem;
     }
 
+    #search_mobile {
+        display: block !important;
+    }
     .column-4{
         flex: 0 0 100%;
         max-width: 100%;

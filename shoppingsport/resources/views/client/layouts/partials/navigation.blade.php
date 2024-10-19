@@ -1,7 +1,7 @@
 <div class="navigation">
     <div class="navigation-wrap">
         <div class="navigation-top flex-center-between">
-            <a href="https://thanhloisport.com" class="navigation-top__logo" aria-label="logo">
+            <a href="/" class="navigation-top__logo" aria-label="logo">
                 <img loading="lazy" src="https://thanhloisport.com/uploads/2023/09/logo-thanh-loi-sport-800x800.png.webp"
                     alt="logo" width="160px" height="40px" />
             </a>
