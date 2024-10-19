@@ -17,7 +17,20 @@ class ConfigController extends Controller
         $config = Config::first();
         return view('admin.config.index', compact('config', 'title'));
     }
+    protected function saveFile($request, $fileName, $dataKey)
+    {
+        if ($request->hasFile($fileName)) {
+            $file = $request->file($fileName);
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileNameToStore = $dataKey . '_' . time() . '.' . $fileExtension;
 
+            $filePath = $file->storeAs('public/new', $fileNameToStore);
+
+            return $filePath;
+        }
+
+        return null;
+    }
     public function update(Request $request)
     {
         // Tìm bản ghi WebsiteSetting duy nhất
@@ -44,44 +57,11 @@ class ConfigController extends Controller
         ];
 
         // Lưu trữ logo
-
-        // Tương tự cho các trường slider và banner
-        if ($request->hasFile('banner')) {
-            $banner = $request->file('banner');
-            $bannerFileName = 'banner_' . $banner->getClientOriginalName();
-
-            // Sử dụng putFile để lưu và lấy đường dẫn
-            $path = $banner->storeAs('new', $bannerFileName);
-
-            $data['banner'] = $path; // Đường dẫn đến tệp đã lưu
-        }
-
-        if ($request->hasFile('slider1')) {
-            $slider1 = $request->file('slider1');
-            $slider1FileName = 'slider1_' . $slider1->getClientOriginalName();
-
-            $slider1FilePath = $slider1->storeAs('new', $slider1FileName);
-
-            $data['slider1'] = $slider1FilePath;
-        }
-
-        if ($request->hasFile('slider2')) {
-            $slider2 = $request->file('slider2');
-            $slider2FileName = 'slider2_' . $slider2->getClientOriginalName();
-            $slider2FilePath = $slider2->storeAs('new', $slider2FileName);
-
-
-            $data['slider2'] = $slider2FilePath;
-        }
-
-        if ($request->hasFile('slider3')) {
-            $slider3 = $request->file('slider3');
-            $slider3FileName = 'slider3_' . $slider3->getClientOriginalName();
-            $slider3FilePath = $slider3->storeAs('new', $slider3FileName);
-
-            $data['slider3'] = $slider3FilePath;
-        }
-
+        $data['banner'] = $this->saveFile($request, 'banner', 'banner');
+        $data['slider1'] = $this->saveFile($request, 'slider1', 'slider1');
+        $data['slider2'] = $this->saveFile($request, 'slider2', 'slider2');
+        $data['slider3'] = $this->saveFile($request, 'slider3', 'slider3');
+       
         if ($config) {
             $config->update($data);
         } else {
