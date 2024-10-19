@@ -32,7 +32,7 @@
                     </div>
                     <a class="image-link" href="{{ route('user.details-page', ['slug' => $item->slug]) }}"
                         aria-label="{{ $item->name }}">
-                        <img loading="lazy" src="{{ showImageStorage($item->image) }}" alt="{{ $item->name }}"
+                        <img loading="lazy" src="{{ showImageStorage($item->images[0]->image ?? null) }}" alt="{{ $item->name }}"
                             title="{{ $item->name }}" width=224px height=224px>
                     </a>
                 </div>

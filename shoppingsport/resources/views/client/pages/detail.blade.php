@@ -11,42 +11,23 @@
 @endsection
 
 @section('content')
-<div class="breadcrumb w-100">
-    <div class="container">
-        <ul itemscope itemtype="https://schema.org/BreadcrumbList">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="index.html" style="display: inline;">
-                    <span itemprop="name">
-                        Trang chủ
-                    </span>
-                    <meta itemprop="position" content="1">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="dung-cu-bong-chuyen.html" style="display: inline;">
-                    <span itemprop="name">
-                        Dụng cụ bóng chuyền
-                    </span>
-                    <meta itemprop="position" content="2">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="giay-bong-chuyen.html" style="display: inline;">
-                    <span itemprop="name">
-                        Giày bóng chuyền
-                    </span>
-                    <meta itemprop="position" content="3">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">
-                    Giày bóng chuyền Beyono Sky - Xanh Lá
-                </span>
-                <meta itemprop="position" content="4">
-            </li>
-        </ul>
-    </div>
-</div>
+
+@include('client.components.breadcrumb', [
+    'items' => [
+        [
+            'name' => 'Trang chủ',
+            'link' => route('user.home-page'),
+        ],
+        [
+            'name' => 'Sản phẩm',
+            'link' => route('user.list-product'),
+        ],
+        [
+            'name' => $product->name, // Tên sản phẩm
+        ],
+    ],
+])
+
 <div class="product-single">
     <div class="container">
         <div class="product-single__wrap w-100">
@@ -59,7 +40,8 @@
 
                                     @foreach ($product->images as $item)
                                         <div class="swiper-slide">
-                                            <img src="{{  showImageStorage($item->image) }}" alt="{{ showImageStorage($item->image) }}" />
+                                            <img src="{{ showImageStorage($item->image) }}"
+                                                alt="{{ showImageStorage($item->image) }}" />
                                         </div>
                                     @endforeach
                                 </div>
@@ -70,7 +52,8 @@
 
                                     @foreach ($product->images as $item)
                                         <div class="swiper-slide">
-                                            <img src="{{ showImageStorage($item->image)}}" alt="{{ showImageStorage($item->image) }}" />
+                                            <img src="{{ showImageStorage($item->image) }}"
+                                                alt="{{ showImageStorage($item->image) }}" />
                                         </div>
                                     @endforeach
                                 </div>
@@ -184,9 +167,7 @@
                                         autocomplete="off">
                                     <div class="cart-quantity__button plus"></div>
                                 </div>
-                                <input type=hidden name=variant_id
-                                {{-- {{ optional($product->type->size->first())->id  ?? null }} --}}
-                                    value="0">
+                                <input type=hidden name=variant_id {{-- {{ optional($product->type->size->first())->id  ?? null }} --}} value="0">
                                 <p class="btn btn-primary only-add btn-add__cart " data-id="{{ $product->id }}"
                                     data-require="Vui lòng chọn phân loại hàng" title="Thêm giỏ hàng"
                                     data-none="Hết hàng">Thêm giỏ hàng</p>

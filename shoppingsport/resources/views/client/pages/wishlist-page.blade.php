@@ -1,50 +1,33 @@
 @extends('client.layouts.master')
 
 @section('content')
-    <div class="breadcrumb w-100">
-        <div class="container">
-            <ul itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="https://thanhloisport.com" style="display: inline;">
-                        <span itemprop="name">
-                            Trang chủ
-                        </span>
-                        <meta itemprop="position" content="1">
-                    </a>
-                </li>
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">
-                        Sản phẩm yêu thích
-                    </span>
-                    <meta itemprop="position" content="2">
-                </li>
-            </ul>
-        </div>
-    </div>
+    @include('client.components.breadcrumb', [
+        'title' => 'Yêu thích',
+        'items' => [
+            [
+                'name' => 'Trang chủ',
+                'link' => route('user.home-page'),
+            ],
+            [
+                'name' => 'Yêu thích',
+            ],
+        ],
+    ])
+
     <div class="product-categories">
         <div class="container">
-
-            {{-- <div class="product-categories">
-                <div class="container">
-                    <div class="alert-none" style="margin-top: 1rem;">
-                        <p>Bạn chưa có sản phẩm yêu thích nào</p>
-                        <a href="index.html">Tiếp tục mua hàng</a>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="product-categories__data w-100">
-                <div class="datas w-100 pd-35">
-                    <div id="listdata" class="w-100">
-                        <div class="product flex-left column-5">
-
-
-                            @if (Cart::instance('wishlist')->count() > 0)
+            @if (Cart::instance('wishlist')->count() > 0)
+                <div class="product-categories__data w-100">
+                    <div class="datas w-100 pd-35">
+                        <div id="listdata" class="w-100">
+                            <div class="product flex-left column-5">
                                 @foreach (Cart::instance('wishlist')->content() as $item)
                                     <div class="product-item custom-hover">
                                         <div class="product-item__wrap">
                                             <div class="image">
                                                 <div class="product-buttons">
-                                                    <p class="product-buttons__wishlist" data-id="814" data-type="remove">
+                                                    <p class="product-buttons__wishlist" data-id="{{ $item->id }}"
+                                                        data-type="remove">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width=20
                                                             height=20>
                                                             <path
@@ -53,10 +36,11 @@
                                                                 color="#000" font-family="sans-serif" font-weight="400"
                                                                 overflow="visible" fill="#000000" class="color000 svgShape">
                                                             </path>
-                                                        </svg></p>
+                                                        </svg>
+                                                    </p>
 
                                                     <a class="product-buttons__quickview"
-                                                        href="{{ route('user.details-page', $item->slug) }}"
+                                                        href="{{ route('user.details-page', $item->options->slug) }}"
                                                         aria-label="Máy chạy bộ điện Impulse PT400">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
                                                             id="eye" width=20>
@@ -139,14 +123,15 @@
                                                 </div>
                                                 <div class="content-bottom">
                                                     <div class="content-bottom__wrap">
-                                                        <ul class="desciption">
+                                                        {{-- <ul class="desciption">
                                                             <li>Hãng: Impulse</li>
                                                             <li>Mã sản phẩm: Impulse PT 300H</li>
                                                             <li>Bảo hành:2 năm</li>
                                                             <li>Tình trạng: Còn hàng</li>
-                                                        </ul>
-                                                        <p class="btn btn-primary btn-add__cart" data-id="814"
-                                                            data-variant_id="2812">Thêm giỏ hàng</p>
+                                                        </ul> --}}
+                                                        <p class="btn btn-primary btn-add__cart"
+                                                            data-id="{{ $item->id }}" data-variant_id="0">Thêm giỏ
+                                                            hàng</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,14 +139,23 @@
                                         <div class="product-content-fade"></div>
                                     </div>
                                 @endforeach
-                            @endif
+                            </div>
+                        </div>
+                        <div class="pagination">
+
                         </div>
                     </div>
-                    <div class="pagination">
-
+                </div>
+            @else
+                <div class="product-categories">
+                    <div class="container">
+                        <div class="alert-none" style="margin-top: 1rem;">
+                            <p>Bạn chưa có sản phẩm yêu thích nào</p>
+                            <a href="/">Tiếp tục mua hàng</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection

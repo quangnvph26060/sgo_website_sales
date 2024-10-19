@@ -16,9 +16,9 @@
             </span>
         </div>
         <div class="search form-search flex-inline-center w-100" id="search_mobile">
-            <form method="GET" class="search-form w-100" action="https://thanhloisport.com/tim-kiem">
+            <form method="GET" class="search-form w-100" action="{{ route('user.search') }}">
                 <input type="text" class="form-control w-100" aria-label="search" name="search" autocomplete="off"
-                    placeholder="Tìm kiếm sản phẩm..." required="" value="">
+                    placeholder="Tìm kiếm sản phẩm..."  value="{{ request()->search ?? '' }}">
                 <button class="btn btn-search" type="submit" aria-label="btn search" name="btn_search">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18">
                         <path
@@ -78,7 +78,7 @@
                 @foreach ($categories as $category)
                     @if ($category->children->isNotEmpty())
                         <li class="menu_level1 flex-center-between menu_parent">
-                            <a href="https://thanhloisport.com/dung-cu-bong-chuyen" aria-label="Dụng cụ bóng chuyền">
+                            <a href="{{ route('user.list', $category->slug) }}" aria-label="{{ $category->name }}">
                                 {{ $category->name }}
                             </a>
                             <span class="icon-down"></span>
@@ -86,8 +86,7 @@
 
                                 @foreach ($category->children as $item)
                                     <li class="submenu-item flex-center-between">
-                                        <a href="https://thanhloisport.com/giay-bong-chuyen"
-                                            aria-label="Giày bóng chuyền">
+                                        <a href="{{ route('user.list', $item->slug) }}" aria-label="{{ $item->name }}">
                                             {{ $item->name }}
                                         </a>
                                     </li>
@@ -96,7 +95,7 @@
                         </li>
                     @else
                         <li class="menu_level1 flex-center-between">
-                            <a href="https://thanhloisport.com/ghe-massage" aria-label="Ghế MASSAGE">
+                            <a href="{{ route('user.list', $category->slug) }}" aria-label="{{ $category->name }}">
                                 {{ $category->name }}
                             </a>
                         </li>
@@ -106,13 +105,13 @@
         </nav>
         <p class="navigation-title flex-center-left">Hotline</p>
         <p class="navigation-text">
-            <a href="tel:0862.52.52.96">0862.52.52.96</a>
+            <a href="tel:{{ $config->constant_hotline}}">{{ $config->constant_hotline}}</a>
         </p>
         <p class="navigation-title flex-center-left">Email</p>
         <p class="navigation-text">
-            <a href="mailto:thethaothanhloi@gmail.com"
-                aria-label="thethaothanhloi@gmail.com">thethaothanhloi@gmail.com</a>
+            <a href="mailto:{{ $config->email }}"
+                aria-label="{{ $config->email }}">{{ $config->email }}</a>
         </p>
-        <p class="navigation-copyright">Copyright 2023 © THÀNH LỢI SPORT</p>
+        <p class="navigation-copyright">{{ $config->footer }}</p>
     </div>
 </div>
