@@ -25,7 +25,7 @@
         </div>
         <div class="container">
             <div class="search-lists w-100">
-                <input type="hidden" name="current_url" value="https://thanhloisport.com/tim-kiem" class="current_url">
+                <input type="hidden" name="current_url" value="{{ request()->fullUrl() }}" class="current_url">
                 <div class="content w-100">
                     <div id="listdata" class="w-100">
                         <div class="product flex-left column-5">
