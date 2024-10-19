@@ -8423,6 +8423,9 @@ button:hover {
     color: var(--color_menu) !important;
     border-color: var(--color_menu) !important;
 }
+.search-box{
+    display: none !important;
+}
 @media only screen and (max-width: 576px) {
     .navigation-wrap .search-form {
         position: relative;
@@ -8435,6 +8438,7 @@ button:hover {
     }
 
     .search-box {
+        display: flex !important;
         align-items: center;
         background: #fff;
         bottom: 0;
