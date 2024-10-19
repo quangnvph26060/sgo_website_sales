@@ -339,37 +339,40 @@ html {
         margin: 1.75rem 0 !important;
     }
 
-    .cart-wrap.flex-left{
+    .cart-wrap.flex-left {
         display: block !important;
     }
 
-    .cart-wrap__sidebar{
+    .cart-wrap__sidebar {
         width: 100% !important;
         margin-top: 1.5rem !important;
         margin-left: 0 !important;
         max-width: 100% !important;
-
     }
 
-    th.product-list__price, td.product-list__price, th.product-list__quantity, td.product-list__quantity, th.product-list__subtotal, td.product-list__subtotal {
+    th.product-list__price,
+    td.product-list__price,
+    th.product-list__quantity,
+    td.product-list__quantity,
+    th.product-list__subtotal,
+    td.product-list__subtotal {
         display: none !important;
     }
 
     th.product-list__thumnail::before {
-        content: 'Sản phẩm';
+        content: "Sản phẩm";
     }
-    .product-list__description{
+    .product-list__description {
         display: block !important;
     }
 
-    .btn.btn-primary.btn-add__cart.d-none{
+    .btn.btn-primary.btn-add__cart.d-none {
         display: block !important;
     }
 
-    div.content-bottom{
+    div.content-bottom {
         display: none !important;
     }
-
 }
 .container {
     display: flex;
@@ -8421,6 +8424,39 @@ button:hover {
         position: relative;
     }
 
+    .search-box.active {
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .search-box {
+        align-items: center;
+        background: #fff;
+        bottom: 0;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        left: -100vw;
+        opacity: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: 0.5s;
+        -webkit-transition: 0.5s;
+        -khtml-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        visibility: hidden;
+        width: 100vw;
+        z-index: 9999;
+    }
+
+    body {
+        margin-top: 100px;
+    }
+
     .navigation-wrap .search-form input {
         background-color: #fff;
         border: 1px solid #ced4da;
@@ -8627,6 +8663,72 @@ button:hover {
     .comments-add__preview .image {
         flex: 0 0 80px;
     }
+
+    .search-box__wrap {
+        width: 100%;
+    }
+    .search-box__wrap .close {
+        align-items: center;
+        background-color: #f1f3f5;
+        border-radius: 6px;
+        color: var(--color_body);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 0.875rem;
+        height: 2.125rem;
+        justify-content: center;
+        position: absolute;
+        right: 1.25rem;
+        top: 1.25rem;
+        transition: all 0.2s cubic-bezier(0.28, 0.12, 0.22, 1);
+        width: 2.125rem;
+    }
+    .search-box__wrap form {
+        position: relative;
+    }
+    .search-box__wrap form input {
+        align-items: center;
+        border: 1px solid #ced4da;
+        border-radius: 12px;
+        box-shadow: 0 1px 2px 0 rgba(33, 37, 41, 0.09);
+        color: var(--color_body);
+        display: inline-flex;
+        height: 42px;
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem;
+        width: 100%;
+    }
+    .search-box__wrap form button {
+        background-color: transparent;
+        border: 0;
+        font-size: 1.25rem;
+        height: 42px;
+        padding: 0 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .search-banner .form-search {
+        background: var(--color_main);
+        bottom: -30px;
+        box-shadow: 0 0 40px rgba(4, 4, 4, 0.4);
+        left: 15px !important;
+        max-width: calc(100% - 30px) !important;
+        padding-left: 15px !important;
+        position: absolute;
+        right: 15px !important;
+        width: 100%;
+    }
+
+    .search-lists {
+        padding: 0 !important;
+        padding-top: 50px !important;
+    }
+    /* .product.flex-left.column-5 {
+        align-items: flex-start;
+        margin-left: -5px;
+        margin-right: -5px;
+    } */
 }
 
 .product-categories__data .widget .filter-box__list p.active:after {
@@ -8663,13 +8765,14 @@ button:hover {
 .search-banner .form-search {
     background: var(--color_main);
     bottom: -30px;
-    box-shadow: 0 0 40px rgba(4, 4, 4, .4);
+    box-shadow: 0 0 40px rgba(4, 4, 4, 0.4);
     left: calc(50% - 310px);
     max-width: 620px;
     padding-left: 15px;
     position: absolute;
     width: 100%;
 }
+
 
 .search-lists {
     padding: 80px 80px 30px;

@@ -2,25 +2,55 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Categoris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
 
 class ListProductController extends Controller
 {
-    public function index(Request $request, $slug)
+    public function index(Request $request, $slug = null)
     {
-        $category = Categoris::where('slug', $slug)->first();
-        $brands = Brand::query()->withCount('products')->get();
+        // Nếu không có slug, lấy tất cả sản phẩm
+        if (!$slug) {
+            $breadcrumbItems = [
+                [
+                    'name' => 'Trang chủ',
+                    'link' => route('user.home-page'),
+                ],
+                [
+                    'name' => 'Sản phẩm',
+                ],
+            ];
+            $query = Product::with('discountValue', 'brand');
+        } else {
+            $category = Categoris::where('slug', $slug)->first();
 
-        if (!$category) {
-            abort(404);
+            $breadcrumbItems = [
+                [
+                    'name' => 'Trang chủ',
+                    'link' => route('user.home-page'),
+                ],
+                [
+                    'name' => 'Sản phẩm',
+                    'link' => route('user.list-product'),
+                ],
+                [
+                    'name' => $category->name,
+                ],
+            ];
+
+            if (!$category) {
+                abort(404);
+            }
+
+            // Khởi tạo truy vấn cho sản phẩm theo danh mục
+            $query = Product::with('discountValue', 'brand')->where('categori_id', $category->id);
         }
 
-        // Khởi tạo truy vấn cho sản phẩm
-        $query = Product::with('discountValue', 'brand')->where('categori_id', $category->id);
+        $brands = Brand::query()->withCount('products')->get();
 
         // Lọc sản phẩm nếu có tham số 'onsale'
         if ($request->has('onsale') && $request->onsale === 'on-sale') {
@@ -59,27 +89,20 @@ class ListProductController extends Controller
             }
         }
 
-
-
-
-
-
         // Thực thi truy vấn và lấy kết quả
         $products = $query->paginate(10);
-
-        // dd($products);
 
         $paginator = $products;
 
         if ($request->ajax()) {
             return response()->json([
-                'html' => view('client.pages.include.product-response-item', compact('products', 'category'))->render(),
+                'html' => view('client.pages.include.product-response-item', compact('products'))->render(),
                 'pagination' => view('vendor.custom', compact('paginator'))->render(),
                 'total' => $products->total(),
             ]);
         }
 
-        return view('client.pages.list', compact('products', 'category', 'brands'));
+        return view('client.pages.list', compact('products', 'brands' , 'breadcrumbItems'));
     }
 
     public function filterProducts(Request $request)
@@ -109,7 +132,7 @@ class ListProductController extends Controller
         $products = Product::query()->with('discountValue', 'images');
 
         if (! empty($query)) {
-            $products->where('name', 'LIKE', '%' . $query . '%');
+            $products->where(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($query) . '%');
         }
 
         $products = $products->paginate(20);

@@ -2,28 +2,9 @@
 
 
 @section('content')
-    <div class="breadcrumb w-100">
-        <div class="container">
-            <ul itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="san-pham.html" style="display: inline;">
-                        <span itemprop="name">
-                            SẢN PHẨM
-                        </span>
-                        <meta itemprop="position" content="1">
-                    </a>
-                </li>
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="dung-cu-bong-chuyen.html" style="display: inline;">
-                        <span itemprop="name">
-                            <h1 style="font-weight: normal; font-size: inherit;display: inherit;">Dụng cụ bóng chuyền</h1>
-                        </span>
-                        <meta itemprop="position" content="2">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @include('client.components.breadcrumb', [
+        'items' => $breadcrumbItems
+    ])
     <div class="product-categories">
         <div class="container">
             <div class="product-categories__data w-100 flex-left">
@@ -168,7 +149,8 @@
                                             </div>
                                             <a class="image-link" href="{{ route('user.details-page', $item->slug) }}"
                                                 aria-label="{{ $item->name }}">
-                                                <img loading="lazy" src="{{ showImageStorage($item->images[0]->image ?? null) }}"
+                                                <img loading="lazy"
+                                                    src="{{ showImageStorage($item->images[0]->image ?? null) }}"
                                                     alt="{{ $item->name }}" title="{{ $item->name }}" width=224px
                                                     height=224px>
                                             </a>
@@ -243,7 +225,7 @@
                                             <div class="content-bottom">
                                                 <div class="content-bottom__wrap">
                                                     <ul class="desciption">
-                                                       
+
                                                     </ul>
                                                     <p class="btn btn-primary btn-add__cart"
                                                         data-id="{{ $item->id }}" data-variant_id="0">Thêm giỏ hàng
