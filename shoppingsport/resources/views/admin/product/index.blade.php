@@ -81,8 +81,7 @@
                                                 <th class="sorting" data-sort="name" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
                                                     aria-label="Tên: activate to sort column ascending" style="width: 150px;">Tên</th>
 
-                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
-                                                    aria-label="Hình ảnh: activate to sort column ascending" style="width: 150px;">Hình ảnh</th>
+                                                
                                                 <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1"
                                                     aria-label="Giá gốc: activate to sort column ascending" style="width: 100px;">Giá gốc</th>
 
@@ -100,7 +99,7 @@
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Tên</th>
 
-                                                <th rowspan="1" colspan="1">Hình ảnh</th>
+                                               
                                                 <th rowspan="1" colspan="1">Giá gốc</th>
                                                 <th rowspan="1" colspan="1">Thương hiệu</th>
                                                 <th rowspan="1" colspan="1">Danh mục</th>
@@ -194,7 +193,7 @@
                             <td>${product.id}</td>
                             <td>${product.name}</td>
 
-                            <td></td>
+                         
                             <td>${Number(product.price_old).toLocaleString('vi-VN')} đ</td>
                              <td>${product.brand ? product.brand.name : 'N/A'}</td>
                             <td>${product.category.name}</td>
