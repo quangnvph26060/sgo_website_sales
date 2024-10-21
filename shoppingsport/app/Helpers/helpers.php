@@ -21,6 +21,18 @@ if (!function_exists('showImageStorage')) {
     }
 }
 
+if (!function_exists('showImageStoragev2')) {
+    function showImageStoragev2($image)
+    {
+        if ($image) {
+
+            return Storage::url($image);
+        }
+
+        return asset('user-default.png');
+    }
+}
+
 if (!function_exists('generateRandomPassword')) {
     function generateRandomPassword($length = 8)
     {

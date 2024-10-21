@@ -38,11 +38,15 @@
                     </svg>
                 </a>
             </div>
+          
+          
             <a class="image-link" href="{{ route('user.details-page', $product->slug) }}"
                 aria-label="{{ $product->name }}">
+                @if(isset($product->images[0]))
                 <img loading="lazy"
-                    src="{{showImageStorage($product->images[0]->image ?? null) }}"
+                    src="{{showImageStoragev2($product->images[0]['image'] ?? null) }}"
                     alt="oreni-or-520-plus-1" title="{{ $product->name }}" width="224px" height="224px" />
+                    @endif
             </a>
         </div>
         <div class="content">
