@@ -6934,6 +6934,10 @@ button:hover {
 .product.list .product-content-fade {
     display: none;
 }
+.main-category{
+   
+    justify-content: start !important;
+}
 .categories {
     border: 1px solid #dee2e6;
     border-radius: 12px;

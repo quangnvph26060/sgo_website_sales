@@ -76,7 +76,7 @@ class NewsController extends Controller
             $logoFileName = 'image_' . $logo->getClientOriginalName();
 
             // Sử dụng storeAs để lưu tệp
-            $path = $logo->storeAs('new', $logoFileName);
+            $path = $logo->storeAs('public/new', $logoFileName);
 
             // Đường dẫn để lưu trong cơ sở dữ liệu
             $validatedData['logo'] = $path; // Đường dẫn tương đối

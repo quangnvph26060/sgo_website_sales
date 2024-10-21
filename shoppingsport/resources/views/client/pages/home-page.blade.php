@@ -96,7 +96,7 @@
                             </a> --}}
                         </div>
                         <div class="short-product__content w-100">
-                            <div class="categories web">
+                            <div class="categories web main-category">
 
                                 @foreach ($productCategories->take(10) as $item)
                                     <div class="category-item">

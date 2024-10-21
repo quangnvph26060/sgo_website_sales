@@ -14,7 +14,7 @@ class CustomerReviewService
         // Kiểm tra xem có file avatar không
         if (isset($data['avatar'])) {
             $logo = $data['avatar'];
-            $directoryPath = 'avatar-customer';
+            $directoryPath = 'public/avatar-customer';
             $logoFileName = 'image_' . $logo->getClientOriginalName();
             $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
             $data['avatar'] = $logoFilePath;

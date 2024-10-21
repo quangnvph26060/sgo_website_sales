@@ -51,7 +51,7 @@ class CategoryService
             Log::info("Creating a new category with name: {$data['name']}");
             $timestamp = Carbon::now()->format('YmdHis');
             $logo = $data['logo'];
-            $directoryPath = 'category';
+            $directoryPath = 'public/category';
             $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
             $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
 
@@ -98,7 +98,7 @@ class CategoryService
             $timestamp = Carbon::now()->format('YmdHis');
             if(isset($data['logo'])){
                 $logo = $data['logo'];
-                $directoryPath = 'category';
+                $directoryPath = 'public/category';
                 $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
                 $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
             }

@@ -37,7 +37,7 @@ class PartnersService
             DB ::beginTransaction();
 
             $logo = $data['logo'];
-            $directoryPath = 'partner';
+            $directoryPath = 'public/partner';
 
             $logoFileName = 'home_' . $logo->getClientOriginalName();
 
