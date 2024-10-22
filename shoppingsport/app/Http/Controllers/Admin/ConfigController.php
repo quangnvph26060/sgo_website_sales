@@ -11,12 +11,26 @@ use Illuminate\Support\Facades\Storage;
 class ConfigController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         $title = 'Thông tin cửa hàng';
         $config = Config::first();
         return view('admin.config.index', compact('config', 'title'));
     }
+    protected function saveFile($request, $fileName, $dataKey)
+    {
+        if ($request->hasFile($fileName)) {
+            $file = $request->file($fileName);
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileNameToStore = $dataKey . '_' . time() . '.' . $fileExtension;
 
+            $filePath = $file->storeAs('public/new', $fileNameToStore);
+
+            return $filePath;
+        }
+
+        return null;
+    }
     public function update(Request $request)
     {
         // Tìm bản ghi WebsiteSetting duy nhất
@@ -89,15 +103,14 @@ class ConfigController extends Controller
             $data['slider3'] = $slider3FilePath;
         }
 
-
-        if($config){
+       
+        if ($config) {
             $config->update($data);
-        }else{
+        } else {
             Config::create($data);
         }
 
 
-         return redirect()->route('admin.config.index')->with('success', 'Cập nhật thông tin thành công');
-
+        return redirect()->route('admin.config.index')->with('success', 'Cập nhật thông tin thành công');
     }
 }

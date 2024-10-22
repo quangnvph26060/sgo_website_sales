@@ -1,26 +1,18 @@
 @extends('client.layouts.master')
 
 @section('content')
-    <div class="breadcrumb w-100">
-        <div class="container">
-            <ul itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="https://thanhloisport.com" style="display: inline;">
-                        <span itemprop="name">
-                            Trang chủ
-                        </span>
-                        <meta itemprop="position" content="1">
-                    </a>
-                </li>
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">
-                        Giới thiệu
-                    </span>
-                    <meta itemprop="position" content="2">
-                </li>
-            </ul>
-        </div>
-    </div>
+@include('client.components.breadcrumb', [
+    'title' => 'Giới thiệu',
+    'items' => [
+        [
+            'name' => 'Trang chủ',
+            'link' => route('user.home-page'),
+        ],
+        [
+            'name' => 'Giới thiệu',
+        ],
+    ],
+])
     <div class=" post_single  w-100">
         <div class="container">
             <div class="post_single__top w-100 flex">
@@ -30,8 +22,8 @@
                     </div>
                     <div class="ck ck-reset ck-editor ck-rounded-corners" role="application" dir="ltr">
                         <div class="ck-content" id="single-content" data-title="Mục lục">
-                            <h2 style="text-align: left;">{{ $newDetail->title }}</h2>
-                            {!! $newDetail->content !!}
+                            <h2 style="text-align: left;">{{ $introduce->title }}</h2>
+                            {!! $introduce->content !!}
                         </div>
                     </div>
                 </div>

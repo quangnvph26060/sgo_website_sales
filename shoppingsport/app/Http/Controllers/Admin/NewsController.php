@@ -71,17 +71,15 @@ class NewsController extends Controller
             'slug' => $slug,
             'content' => $request->content,
         ];
-
-        if (isset($request->logo)) {
-
-            $directoryPath = 'public/new';
-            // Storage::deleteDirectory($directoryPath);
-            // Storage::makeDirectory($directoryPath);
-            $logo = $request->logo;
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
             $logoFileName = 'image_' . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/new/' . $logoFileName;
-            Storage::putFileAs('public/new', $logo, $logoFileName);
-            $validatedData['logo'] = $logoFilePath;
+
+            // Sử dụng storeAs để lưu tệp
+            $path = $logo->storeAs('public/new', $logoFileName);
+
+            // Đường dẫn để lưu trong cơ sở dữ liệu
+            $validatedData['logo'] = $path; // Đường dẫn tương đối
         }
 
         SgoNews::create($validatedData);
@@ -118,12 +116,14 @@ class NewsController extends Controller
 
     // Xử lý cập nhật logo nếu có
     if ($request->hasFile('logo')) {
-        $directoryPath = 'public/new';
         $logo = $request->file('logo');
         $logoFileName = 'image_' . $logo->getClientOriginalName();
-        $logoFilePath = 'storage/new/' . $logoFileName;
-        Storage::putFileAs($directoryPath, $logo, $logoFileName);
-        $validatedData['logo'] = $logoFilePath;
+
+        // Sử dụng storeAs để lưu tệp
+        $path = $logo->storeAs('new', $logoFileName);
+
+        // Đường dẫn để lưu trong cơ sở dữ liệu
+        $validatedData['logo'] = $path; // Đường dẫn tương đối
     }
 
     // Cập nhật bài viết

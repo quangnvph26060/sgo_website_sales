@@ -25,10 +25,12 @@ class WishlistController extends Controller
                 return $cartItem->id === $product->id;
             })->first();
 
+
             if ($wishlistItem) {
+                Cart::instance('wishlist')->remove($wishlistItem->rowId);
                 return  response()->json([
-                    'message' => "Sản phẩm đã có trong danh sách yêu thích!",
-                    'status' => 'error',
+                    'message' => "Đã xóa khỏi danh sách yêu thích!",
+                    'status' => 'success',
                     'type' => $request->type
                 ]);
             }

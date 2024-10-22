@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 
 
-@section('title', $product->title_seo)
+@section('title', $product->title_seo ?? $product->name)
 
 @section('description', $product->description_seo)
 
@@ -11,42 +11,23 @@
 @endsection
 
 @section('content')
-<div class="breadcrumb w-100">
-    <div class="container">
-        <ul itemscope itemtype="https://schema.org/BreadcrumbList">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="index.html" style="display: inline;">
-                    <span itemprop="name">
-                        Trang chủ
-                    </span>
-                    <meta itemprop="position" content="1">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="dung-cu-bong-chuyen.html" style="display: inline;">
-                    <span itemprop="name">
-                        Dụng cụ bóng chuyền
-                    </span>
-                    <meta itemprop="position" content="2">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a itemprop="item" href="giay-bong-chuyen.html" style="display: inline;">
-                    <span itemprop="name">
-                        Giày bóng chuyền
-                    </span>
-                    <meta itemprop="position" content="3">
-                </a>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">
-                    Giày bóng chuyền Beyono Sky - Xanh Lá
-                </span>
-                <meta itemprop="position" content="4">
-            </li>
-        </ul>
-    </div>
-</div>
+
+@include('client.components.breadcrumb', [
+    'items' => [
+        [
+            'name' => 'Trang chủ',
+            'link' => route('user.home-page'),
+        ],
+        [
+            'name' => 'Sản phẩm',
+            'link' => route('user.list-product'),
+        ],
+        [
+            'name' => $product->name, // Tên sản phẩm
+        ],
+    ],
+])
+
 <div class="product-single">
     <div class="container">
         <div class="product-single__wrap w-100">
@@ -59,7 +40,8 @@
 
                                     @foreach ($product->images as $item)
                                         <div class="swiper-slide">
-                                            <img src="{{ $item->image }}" alt="{{ $item->image }}" />
+                                            <img src="{{ showImageStorage($item->image) }}"
+                                                alt="{{ showImageStorage($item->image) }}" />
                                         </div>
                                     @endforeach
                                 </div>
@@ -70,7 +52,8 @@
 
                                     @foreach ($product->images as $item)
                                         <div class="swiper-slide">
-                                            <img src="{{ $item->image }}" alt="{{ $item->image }}" />
+                                            <img src="{{ showImageStorage($item->image) }}"
+                                                alt="{{ showImageStorage($item->image) }}" />
                                         </div>
                                     @endforeach
                                 </div>
@@ -132,11 +115,11 @@
                             <div class="price flex-center-left">
                                 @if (!is_null($product->discount_id) && !is_null($product->discountValue))
                                     <p class="price-old">
-                                        <del>{{ showPrice($product->price_old) }}</del>
+                                        <del>{{ showPrice($product->price_new) }}</del>
                                     </p>
                                 @endif
                                 <p class="price-current">
-                                    <ins>{{ caculateDiscount($product->price_old, $product->discount->value ?? null) }}</ins>
+                                    <ins>{{ caculateDiscount($product->price_new, $product->discount->value ?? null) }}</ins>
                                 </p>
                                 <div class="short-product short_code" id="time-flash-sale" style="display:  none">
                                     <div class="short-product__title flex-center-between"
@@ -174,11 +157,7 @@
                             @endif
 
                             <ul class="description">
-                                <li>Thương hiệu: BEYONO </li>
-                                <li>Giới tính: Unisex</li>
-                                <li>Nơi sản xuất: Việt Nam</li>
-                                <li>Chất liệu da: PU cao cấp kháng nước</li>
-                                <li>kích thước: 37-44.</li>
+                                {!! $product->description_short !!}
                             </ul>
                             <div class="cart flex-center-left">
                                 <div class="cart-quantity" style="">
@@ -188,8 +167,7 @@
                                         autocomplete="off">
                                     <div class="cart-quantity__button plus"></div>
                                 </div>
-                                <input type=hidden name=variant_id
-                                    value="{{ optional($product->type->size->first())->id ?? 0 }}">
+                                <input type=hidden name=variant_id {{-- {{ optional($product->type->size->first())->id  ?? null }} --}} value="0">
                                 <p class="btn btn-primary only-add btn-add__cart " data-id="{{ $product->id }}"
                                     data-require="Vui lòng chọn phân loại hàng" title="Thêm giỏ hàng"
                                     data-none="Hết hàng">Thêm giỏ hàng</p>
@@ -374,121 +352,8 @@
                             <div class="ck ck-reset ck-editor ck-rounded-corners w-100" role="application"
                                 dir="ltr">
                                 <div class="ck-content w-100" id="single-content" data-title="Mục lục">
-                                    <h2>Bảng size:</h2>
-                                    <figure class="image image-style-align-center image" style="max-width:100%;"><img
-                                            style="aspect-ratio:1024/790;"
-                                            src="https://thanhloisport.com/uploads/2024/05/huong-dan-chon-size-giay-bong-chuyen-1024x790.jpg.webp"
-                                            alt="huong-dan-chon-size-giay-bong-chuyen-1024x790" width=1024 height=790
-                                            loading="lazy"></figure>
-                                    <p> </p>
-                                    <h2 class="huong-dan-chon-size"
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);font-family:Mulish;font-size:25px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;line-height:44px;margin:0px 0px 20px;orphans:2;padding:0px;text-align:center;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"
-                                        id="huong-dan-chon-size"><strong>Chi tiết sản phẩm</strong></h2>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Trong
-                                            thế giới thể thao, chỉ có những người dũng cảm, quyết tâm và kiên trì mới có
-                                            thể vươn lên thành công. Và chính đam mê sẽ tiếp cho bạn ngọn lửa bản lĩnh
-                                            ấy để bạn đương đầu với thử thách và chinh phục. </span>
-                                    </p>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Hiểu
-                                            rõ điều đó, BEYONO cho ra mắt giày bóng chuyền Sky mang đến sự ổn định và hỗ
-                                            trợ mạnh mẽ, giúp bạn vững vàng tiến bước, chinh phục những chặng đường xa
-                                            hơn, những mục tiêu cao hơn. </span>
-                                    </p>
-                                    <figure class="image image" style="max-width:100%;"><img
-                                            style="aspect-ratio:2048/2048;"
-                                            src="https://thanhloisport.com/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-2.jpg.webp"
-                                            alt="giay-bong-chuyen-beyono-sky-xanh-la-2" width=2048 height=2048
-                                            loading="lazy"></figure>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Không
-                                            chỉ xoay quanh câu chuyện chọn lựa một đôi giày, đây còn là thông điệp về sự
-                                            quyết đoán chọn theo đuổi đam mê đến cùng.</span>
-                                    </p>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Mỗi
-                                            đôi giày Sky là một nguồn cảm hứng, là lời nhắc nhở về lý do lựa chọn bắt
-                                            đầu, về đam mê cháy bỏng của mỗi người chơi đối với bộ môn bóng chuyền nói
-                                            riêng và thể thao nói chung. Từ đó trở thành là người bạn đồng hành cũng mỗi
-                                            người chơi vượt qua giới hạn và chiến thắng mọi cuộc đấu.</span>
-                                    </p>
-                                    <figure class="image image" style="max-width:100%;"><img
-                                            style="aspect-ratio:1200/1200;"
-                                            src="https://thanhloisport.com/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-3.jpg.webp"
-                                            alt="giay-bong-chuyen-beyono-sky-xanh-la-3" width=1200 height=1200
-                                            loading="lazy"></figure>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Tự
-                                            tin tỏa sáng trên sân đấu cùng BEYONO Sky nhờ loạt tính năng vượt
-                                            trội:</span>
-                                    </p>
-                                    <ul>
-                                        <li
-                                            style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin-bottom:20px;margin-right:0px;margin-top:0px;orphans:2;padding:0px;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                            <span
-                                                style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Đế
-                                                giày áp dụng công nghệ độc quyền, tăng độ bền, bám và giúp chống mài mòn
-                                                hiệu quả.</span>
-                                        </li>
-                                        <li
-                                            style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin-bottom:20px;margin-right:0px;margin-top:0px;orphans:2;padding:0px;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                            <span
-                                                style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Khả
-                                                năng gấp bẻ tối ưu, hỗ trợ tối đa cho bước nhảy.  </span>
-                                        </li>
-                                        <li
-                                            style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin-bottom:20px;margin-right:0px;margin-top:0px;orphans:2;padding:0px;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                            <span
-                                                style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Thiết
-                                                kế được tinh chỉnh cho người Việt, bảo vệ tối đa khỏi chấn thương và
-                                                tăng cường độ ổn định giúp cho cử động nhẹ nhàng.</span>
-                                        </li>
-                                        <li
-                                            style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin-bottom:20px;margin-right:0px;margin-top:0px;orphans:2;padding:0px;text-align:left;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                            <span
-                                                style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Thiết
-                                                kế thời thượng, đẹp mắt với 4 phối màu: Đỏ, Trắng, Xanh dương, Xanh
-                                                lá.</span>
-                                        </li>
-                                    </ul>
-                                    <figure class="image image" style="max-width:100%;"><img
-                                            style="aspect-ratio:2000/2000;"
-                                            src="https://thanhloisport.com/uploads/2024/06/giay-bong-chuyen-beyono-sky-xanh-la-4.jpg.webp"
-                                            alt="giay-bong-chuyen-beyono-sky-xanh-la-4" width=2000 height=2000
-                                            loading="lazy"></figure>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;">Hãy
-                                            để đam mê là động lực chính cho mọi bước tiến. Quản Trọng Nghĩa đã chọn
-                                            BEYONO Sky còn bạn thì sao?</span>
-                                    </p>
-                                    <p
-                                        style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);border-color:rgb(230, 230, 230);box-sizing:border-box;color:rgb(0, 0, 0);display:block;font-family:Mulish;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:500;letter-spacing:normal;margin:0px 0px 20px;orphans:2;padding:0px;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">
-                                        <span
-                                            style="border-color:rgb(230, 230, 230);box-sizing:border-box;font-weight:400;margin:0px;padding:0px;"> Chọn
-                                            đam mê, tiến bước tương lai ngay hôm nay!</span>
-                                    </p>
-                                    <h3><span id="THANH_LOI_SPORT_DUONG_DAU_THU_THACH_DOT_PHA_THANH_CONG">THÀNH LỢI
-                                            SPORT – ĐƯƠNG ĐẦU THỬ THÁCH ĐỘT PHÁ THÀNH CÔNG</span></h3>
-                                    <p>– Điện thoại: <strong>0862.525.296</strong><br>– Zalo :
-                                        <strong>0862.525.296</strong>
-                                    </p>
-                                    <p>THÀNH LỢI SPORT là đơn vị chuyên bán dụng cụ tập thể dục, thể thao và máy tập thể
-                                        hình uy tín nhất tại Việt Nam. Quý khách hàng có nhu cầu mua <strong>Giày Bóng
-                                            Chuyền Beyono Sky </strong>có thể đặt hàng online trực tiếp trên website
-                                        hoặc gọi điện đặt hàng qua số hotline <strong>0862.525.296</strong>.</p>
+
+                                    {!! $product->description !!}
                                 </div>
                             </div>
                         </div>

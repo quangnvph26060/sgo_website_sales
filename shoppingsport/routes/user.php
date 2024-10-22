@@ -36,14 +36,6 @@ Route::name('user.')->group(function () {
         Route::post('ajax/load-variant', 'loadVariant')->name('load-variant');
     });
 
-    Route::controller(AffiliateController::class)->group(function () {
-
-        Route::get('gioi-thieu/{slug?}', 'introduce')->name('introduce');
-        Route::get('tin-tuc', 'news')->name('list-news');
-    });
-
-
-
 
     Route::controller(CheckOutController::class)->group(function () {
         Route::get('checkout', 'index')->name('checkout');
@@ -96,7 +88,15 @@ Route::name('user.')->group(function () {
         Route::get('logout', 'logout')->name('logout');
     });
 
+    Route::controller(AffiliateController::class)->group(function () {
+
+        Route::get('gioi-thieu', 'introduce')->name('introduce');
+        Route::get('tin-tuc/{slug?}', 'news')->name('list-news');
+    });
+
     Route::controller(ListProductController::class)->group(function () {
+        Route::get('tim-kiem', 'search')->name('search');
+        Route::get('san-pham', 'index')->name('list-product');
         Route::get('{slug}', 'index')->name('list');
     });
 });

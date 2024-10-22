@@ -38,10 +38,10 @@ class PartnersService
 
             $logo = $data['logo'];
             $directoryPath = 'public/partner';
-            $logoFileName = 'home_' . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/partner/' . $logoFileName;
 
-            Storage::putFileAs($directoryPath, $logo, $logoFileName);
+            $logoFileName = 'home_' . $logo->getClientOriginalName();
+
+            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
 
             $partnersData = [
                 'name' => $data['name'],
@@ -79,12 +79,11 @@ class PartnersService
             ];
 
             if (isset($data['logo'])) {
-                $directoryPath = 'public/partner';
+                $directoryPath = 'partner';
                 $logo = $data['logo'];
                 $logoFileName = 'home_' . $logo->getClientOriginalName();
-                $logoFilePath = 'storage/partner/' . $logoFileName;
+                $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
 
-                Storage::putFileAs($directoryPath, $logo, $logoFileName);
                 $partnersData['logo'] = $logoFilePath;
             }
 

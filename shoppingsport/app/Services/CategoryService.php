@@ -53,9 +53,9 @@ class CategoryService
             $logo = $data['logo'];
             $directoryPath = 'public/category';
             $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
-            $logoFilePath = 'storage/category/' . $logoFileName;
+            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
 
-            Storage::putFileAs($directoryPath, $logo, $logoFileName);
+
             $category = $this->category->create([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -100,8 +100,7 @@ class CategoryService
                 $logo = $data['logo'];
                 $directoryPath = 'public/category';
                 $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
-                $logoFilePath = 'storage/category/' . $logoFileName;
-                Storage::putFileAs($directoryPath, $logo, $logoFileName);
+                $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
             }
 
             $category->update([

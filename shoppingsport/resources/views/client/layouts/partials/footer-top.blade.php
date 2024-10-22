@@ -68,7 +68,7 @@
                                         </a>
                                     </p>
                                 </li>
-                                <li class="menu-item">
+                                {{-- <li class="menu-item">
                                     <p class="menu-item__title">
                                         <a href="/chinh-sach-van-chuyen-thanh-loi-sport" aria-label="Vận chuyển"
                                             rel="" target="_self">
@@ -83,8 +83,8 @@
                                             Chính sách đổi trả
                                         </a>
                                     </p>
-                                </li>
-                                <li class="menu-item">
+                                </li> --}}
+                                {{-- <li class="menu-item">
                                     <p class="menu-item__title">
                                         <a href="https://shopee.vn/thanhloisport" aria-label="SHOPEE THÀNH LỢI SPORT"
                                             rel="" target="_self">
@@ -107,7 +107,7 @@
                                             TIKTOK THÀNH LỢI SPORT
                                         </a>
                                     </p>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </aside>

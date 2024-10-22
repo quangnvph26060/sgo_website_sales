@@ -29,7 +29,7 @@
                                 </li>
                             @else
                                 <li class="item">
-                                    <a href="https://thanhloisport.com/ghe-massage" aria-label="Ghế MASSAGE">
+                                    <a href="{{ $category->slug }}" aria-label="Ghế MASSAGE">
                                         <span>{{ $category->name }}</span>
                                     </a>
                                 </li>
@@ -53,7 +53,7 @@
                                 href="/gioi-thieu" target="_self">GIỚI THIỆU
                             </a>
                         </li>
-                        <li class="menu_level1">
+                        {{-- <li class="menu_level1">
                             <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                                 href="/chinh-sach-van-chuyen-thanh-loi-sport" target="_self">VẬN CHUYỂN
                             </a>
@@ -62,17 +62,17 @@
                             <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                                 href="/chinh-sach-thanh-toan-thanh-loi-sport" target="_self">THANH TOÁN
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu_level1">
                             <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                                 href="/tin-tuc" target="_self">TIN TỨC
                             </a>
                         </li>
-                        <li class="menu_level1">
+                        {{-- <li class="menu_level1">
                             <a class="menu_item fs-16 lh-22 color_header flex-inline-center h-100" rel=""
                                 href="/lien-he" target="_self">LIÊN HỆ
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
             </div>

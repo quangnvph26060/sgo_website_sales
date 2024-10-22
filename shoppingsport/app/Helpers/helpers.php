@@ -13,6 +13,19 @@ if (!function_exists('showImageStorage')) {
     function showImageStorage($image)
     {
         if ($image && Storage::exists($image)) {
+
+            return Storage::url($image);
+        }
+
+        return asset('user-default.png');
+    }
+}
+
+if (!function_exists('showImageStoragev2')) {
+    function showImageStoragev2($image)
+    {
+        if ($image) {
+
             return Storage::url($image);
         }
 
@@ -73,3 +86,5 @@ if (!function_exists('caculateDiscount')) {
         return number_format($discountedPrice, 0, ',', '.') . 'đ';
     }
 }
+
+
