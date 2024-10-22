@@ -42,12 +42,12 @@ class ConfigController extends Controller
             'footer' => $request->input('footer'),
         ];
 
-        // Lưu trữ logo
-
-        // Tương tự cho các trường slider và banner
         if ($request->hasFile('banner')) {
+            Storage::deleteDirectory('public/banner');
+
             $banner = $request->file('banner');
-            $bannerFileName = 'banner_' . $banner->getClientOriginalName();
+            $timestamp = time(); // Lấy thời gian hiện tại
+            $bannerFileName = 'banner_' . $timestamp . '_' . $banner->getClientOriginalName();
             $bannerFilePath = 'storage/banner/' . $bannerFileName;
 
             Storage::putFileAs('public/banner', $banner, $bannerFileName);
@@ -55,8 +55,11 @@ class ConfigController extends Controller
         }
 
         if ($request->hasFile('slider1')) {
+            Storage::deleteDirectory('public/slider1');
+
             $slider1 = $request->file('slider1');
-            $slider1FileName = 'slider1_' . $slider1->getClientOriginalName();
+            $timestamp = time();
+            $slider1FileName = 'slider1_' . $timestamp . '_' . $slider1->getClientOriginalName();
             $slider1FilePath = 'storage/slider1/' . $slider1FileName;
 
             Storage::putFileAs('public/slider1', $slider1, $slider1FileName);
@@ -64,8 +67,11 @@ class ConfigController extends Controller
         }
 
         if ($request->hasFile('slider2')) {
+            Storage::deleteDirectory('public/slider2');
+
             $slider2 = $request->file('slider2');
-            $slider2FileName = 'slider2_' . $slider2->getClientOriginalName();
+            $timestamp = time();
+            $slider2FileName = 'slider2_' . $timestamp . '_' . $slider2->getClientOriginalName();
             $slider2FilePath = 'storage/slider2/' . $slider2FileName;
 
             Storage::putFileAs('public/slider2', $slider2, $slider2FileName);
@@ -73,13 +79,16 @@ class ConfigController extends Controller
         }
 
         if ($request->hasFile('slider3')) {
+            Storage::deleteDirectory('public/slider3');
             $slider3 = $request->file('slider3');
-            $slider3FileName = 'slider3_' . $slider3->getClientOriginalName();
+            $timestamp = time();
+            $slider3FileName = 'slider3_' . $timestamp . '_' . $slider3->getClientOriginalName();
             $slider3FilePath = 'storage/slider3/' . $slider3FileName;
 
             Storage::putFileAs('public/slider3', $slider3, $slider3FileName);
             $data['slider3'] = $slider3FilePath;
         }
+
 
         if($config){
             $config->update($data);
