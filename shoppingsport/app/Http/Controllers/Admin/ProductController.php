@@ -92,9 +92,8 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')->with('success', 'Cập nhật thành công!');
     }
 
-    public function store(Request $request){
-        $data = $request->all();  // Đảm bảo đây là mảng
-        $result = $this->productService->createProduct($data);
+    public function store(Request $request){  // Đảm bảo đây là mảng
+        $result = $this->productService->createProduct($request);
         if (isset($result['error'])) {
             // Nếu có lỗi, trả về thông báo
             return back()->withErrors(['error' => $result['error']])->withInput();

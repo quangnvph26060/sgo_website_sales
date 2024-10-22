@@ -127,3 +127,10 @@ if (!function_exists('caculateDiscount')) {
         return number_format($discountedPrice, 0, ',', '.') . 'đ';
     }
 }
+
+function deleteImage($path)
+{
+    if ($path && Storage::disk('public')->exists($path)) {
+        Storage::disk('public')->delete($path);
+    }
+}

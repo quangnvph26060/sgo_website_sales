@@ -111,7 +111,7 @@
 
                                     <div class="form-group" style="text-align: center">
                                         <img id="profileImagelogo" style="width:150px; height:auto"
-                                            src="{{ isset($category->logo) && !empty($category->logo) ? asset($category->logo) : asset('images/avatar2.jpg') }}"
+                                            src="{{ showImageStorage($category->logo) }}"
                                             alt="image logo" class="logo">
                                     </div>
 
@@ -279,12 +279,6 @@ CKEDITOR.replace('description_seo', {
                     $("#error_namecategory").html("Nhập tiêu dề danh mục");
                     valid = false;
 
-                }else if (!descriptioncategory.trim()) {
-
-                    scrollToElement("#error_description");
-                    $("#error_description").html("Nhập nội dung danh mục");
-                    valid = false;
-
                 }
 
 
@@ -292,9 +286,6 @@ CKEDITOR.replace('description_seo', {
                     $("#error_namecategory").empty();
                 }
 
-                if (descriptioncategory) {
-                    $("#error_description").empty();
-                }
 
 
                 if (valid) {
