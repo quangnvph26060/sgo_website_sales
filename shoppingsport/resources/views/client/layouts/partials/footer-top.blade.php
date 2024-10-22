@@ -2,7 +2,7 @@
     <div class="container">
         <div class="footer-top__wrap flex-left w-100">
             <div class="footer-left">
-                <a href="https://thanhloisport.com" aria-label="logo footer" class="footer_logo">
+                <a href="/" aria-label="logo footer" class="footer_logo">
                     <img loading="lazy" src="https://thanhloisport.com/uploads/2023/07/logo-thanh-loi-sport.png.webp"
                         alt="logo footer" width="150px" height="50px" />
                 </a>
