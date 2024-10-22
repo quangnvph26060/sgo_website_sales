@@ -48,36 +48,36 @@ class ConfigController extends Controller
         if ($request->hasFile('banner')) {
             $banner = $request->file('banner');
             $bannerFileName = 'banner_' . $banner->getClientOriginalName();
-            $bannerFilePath = 'storage/new/' . $bannerFileName;
+            $bannerFilePath = 'storage/banner/' . $bannerFileName;
 
-            Storage::putFileAs('public/new', $banner, $bannerFileName);
+            Storage::putFileAs('public/banner', $banner, $bannerFileName);
             $data['banner'] = $bannerFilePath;
         }
 
         if ($request->hasFile('slider1')) {
             $slider1 = $request->file('slider1');
             $slider1FileName = 'slider1_' . $slider1->getClientOriginalName();
-            $slider1FilePath = 'storage/new/' . $slider1FileName;
+            $slider1FilePath = 'storage/slider1/' . $slider1FileName;
 
-            Storage::putFileAs('public/new', $slider1, $slider1FileName);
+            Storage::putFileAs('public/slider1', $slider1, $slider1FileName);
             $data['slider1'] = $slider1FilePath;
         }
 
         if ($request->hasFile('slider2')) {
             $slider2 = $request->file('slider2');
             $slider2FileName = 'slider2_' . $slider2->getClientOriginalName();
-            $slider2FilePath = 'storage/new/' . $slider2FileName;
+            $slider2FilePath = 'storage/slider2/' . $slider2FileName;
 
-            Storage::putFileAs('public/new', $slider2, $slider2FileName);
+            Storage::putFileAs('public/slider2', $slider2, $slider2FileName);
             $data['slider2'] = $slider2FilePath;
         }
 
         if ($request->hasFile('slider3')) {
             $slider3 = $request->file('slider3');
             $slider3FileName = 'slider3_' . $slider3->getClientOriginalName();
-            $slider3FilePath = 'storage/new/' . $slider3FileName;
+            $slider3FilePath = 'storage/slider3/' . $slider3FileName;
 
-            Storage::putFileAs('public/new', $slider3, $slider3FileName);
+            Storage::putFileAs('public/slider3', $slider3, $slider3FileName);
             $data['slider3'] = $slider3FilePath;
         }
 
