@@ -16,9 +16,10 @@ class CategoryService
 {
     protected $category;
 
-   public function __construct(Categoris $category){
+    public function __construct(Categoris $category)
+    {
         $this->category = $category;
-   }
+    }
 
     public function getAllCategories(): LengthAwarePaginator
     {
@@ -44,27 +45,23 @@ class CategoryService
         }
     }
 
-    public function createCategory(array $data): Categoris
+    public function createCategory($data): Categoris
     {
         DB::beginTransaction();
         try {
-            Log::info("Creating a new category with name: {$data['name']}");
-            $timestamp = Carbon::now()->format('YmdHis');
-            $logo = $data['logo'];
-            $directoryPath = 'public/category';
-            $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
-            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
+            // Log::info("Creating a new category with name: {$data->name}");
 
+            $logo = saveImages($data, 'logo', 'category');
 
             $category = $this->category->create([
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'parent_id' => $data['parent_id'] ?? null, // Nếu không có parent_id, để null
-                'slug' => Str::slug($data['name']),
-                'title_seo' => $data['title_seo'],
-                'description_seo' => $data['description_seo'],
-                'keyword_seo' => $data['keyword_seo'],
-                'logo' => $logoFilePath
+                'name' => $data->name,
+                'description' => $data->description,
+                'parent_id' => $data->parent_id ?? null, // Nếu không có parent_id, để null
+                'slug' => Str::slug($data->name),
+                'title_seo' => $data->title_seo,
+                'description_seo' => $data->description_seo,
+                'keyword_seo' => $data->keyword_seo,
+                'logo' => $logo
             ]);
 
             DB::commit();
@@ -89,14 +86,14 @@ class CategoryService
         return $category;
     }
 
-    public function updateCategory( array $data, int $id): Categoris
+    public function updateCategory(array $data, int $id): Categoris
     {
         DB::beginTransaction();
         try {
             $category = $this->getCategoryById($id);
             Log::info("Updating category with ID: $id");
             $timestamp = Carbon::now()->format('YmdHis');
-            if(isset($data['logo'])){
+            if (isset($data['logo'])) {
                 $logo = $data['logo'];
                 $directoryPath = 'public/category';
                 $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
@@ -111,7 +108,7 @@ class CategoryService
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
                 'keyword_seo' => $data['keyword_seo'],
-                 'logo' => $logoFilePath ?? ''
+                'logo' => $logoFilePath ?? ''
             ]);
 
             DB::commit();
@@ -149,5 +146,4 @@ class CategoryService
             throw new Exception('Failed to fetch categories by parent_id');
         }
     }
-
 }
