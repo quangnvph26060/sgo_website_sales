@@ -212,9 +212,6 @@
                                 <button class="btn btn-warning btn-sm edit" data-id="${order.id}">
                                     <i class="fas fa-edit"></i> Sửa
                                 </button>
-                                <button class="btn btn-danger btn-sm delete" data-id="${order.id}">
-                                    <i class="fas fa-trash"></i> Xóa
-                                </button>
                                 <button class="btn btn-primary btn-sm view" data-id="${order.id}">
                                     <i class="fas fa-eye"></i> Xem
                                 </button>

@@ -58,31 +58,28 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $slug = Str::slug($request->title, '-');
-        $existingPost = SgoNews::where('slug', $slug)->first();
+
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->title, '-');
+
+        $existingPost = SgoNews::where('slug', $data['slug'])->first();
+
 
         if ($existingPost) {
             // Nếu tồn tại bài viết với slug đó, trả về thông báo lỗi
             return redirect()->back()->withErrors(['title' => 'Tiêu đề bài viết đã  tồn tại, vui lòng chọn một tiêu đề khác!'])->withInput();
         }
-        $validatedData =  [
-            'title' => $request->title,
-            'author_id' => $user->id,
-            'slug' => $slug,
-            'content' => $request->content,
-        ];
+
         if ($request->hasFile('logo')) {
-            $logo = $request->file('logo');
-            $logoFileName = 'image_' . $logo->getClientOriginalName();
-
-            // Sử dụng storeAs để lưu tệp
-            $path = $logo->storeAs('public/new', $logoFileName);
-
-            // Đường dẫn để lưu trong cơ sở dữ liệu
-            $validatedData['logo'] = $path; // Đường dẫn tương đối
+            deleteImage($existingPost->logo);
+            $data['logo'] = saveImages($request, 'logo', 'news', 600, 417);
         }
 
-        SgoNews::create($validatedData);
+        $data['author_id'] = $user->id;
+
+
+        SgoNews::create($data);
 
         return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được tạo thành công!');
     }
@@ -96,47 +93,38 @@ class NewsController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $slug = Str::slug($request->title, '-');
+    {
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title, '-');
 
-    // Kiểm tra xem có bài viết nào khác với slug tương tự không, ngoại trừ bài viết hiện tại
-    $existingPost = SgoNews::where('slug', $slug)->where('id', '!=', $id)->first();
+        // Kiểm tra xem có bài viết nào khác với slug tương tự không, ngoại trừ bài viết hiện tại
+        $existingPost = SgoNews::where('slug', $data['slug'])->where('id', '!=', $id)->first();
 
-    if ($existingPost) {
-        // Nếu tồn tại bài viết với slug đó (ngoại trừ bài viết hiện tại), trả về lỗi
-        return redirect()->back()->withErrors(['title' => 'Tiêu đề bài viết đã tồn tại, vui lòng chọn tiêu đề khác!'])->withInput();
+        if ($existingPost) {
+            // Nếu tồn tại bài viết với slug đó (ngoại trừ bài viết hiện tại), trả về lỗi
+            return redirect()->back()->withErrors(['title' => 'Tiêu đề bài viết đã tồn tại, vui lòng chọn tiêu đề khác!'])->withInput();
+        }
+
+        // Dữ liệu để cập nhật
+
+        // Xử lý cập nhật logo nếu có
+        if ($request->hasFile('logo')) {
+            !is_null($existingPost) && deleteImage($existingPost->logo);
+            $data['logo'] = saveImages($request, 'logo', 'news', 600, 417);
+        }
+
+        // Cập nhật bài viết
+        $sgoNews = SgoNews::findOrFail($id);
+        $sgoNews->update($data);
+
+        return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được cập nhật thành công!');
     }
-
-    // Dữ liệu để cập nhật
-    $validatedData = [
-        'title' => $request->title,
-        'content' => $request->content,
-        'slug' => $slug,
-    ];
-
-    // Xử lý cập nhật logo nếu có
-    if ($request->hasFile('logo')) {
-        $logo = $request->file('logo');
-        $logoFileName = 'image_' . $logo->getClientOriginalName();
-
-        // Sử dụng storeAs để lưu tệp
-        $path = $logo->storeAs('new', $logoFileName);
-
-        // Đường dẫn để lưu trong cơ sở dữ liệu
-        $validatedData['logo'] = $path; // Đường dẫn tương đối
-    }
-
-    // Cập nhật bài viết
-    $sgoNews = SgoNews::findOrFail($id);
-    $sgoNews->update($validatedData);
-
-    return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được cập nhật thành công!');
-}
 
     // Xóa bài báo khỏi cơ sở dữ liệu
     public function destroy($id)
     {
         $sgoNews = SgoNews::find($id);
+        deleteImage($sgoNews->logo);
         $sgoNews->delete();
 
         return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được xóa thành công!');

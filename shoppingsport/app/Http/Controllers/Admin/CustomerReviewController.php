@@ -31,9 +31,8 @@ class CustomerReviewController extends Controller
     // Thêm đánh giá mới
     public function store(Request $request)
     {
-        $data = $request->all();
 
-        $review = $this->reviewService->createReview($data);
+        $review = $this->reviewService->createReview($request);
         return redirect()->route('admin.reviews.index')->with('success', 'Thêm thành công ! ');
     }
 
@@ -49,8 +48,7 @@ class CustomerReviewController extends Controller
     // Cập nhật đánh giá
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $review = $this->reviewService->updateReview($id, $data);
+        $review = $this->reviewService->updateReview($id, $request);
         return redirect()->route('admin.reviews.index')->with('success', 'Thay đổi thành công ! ');
     }
 

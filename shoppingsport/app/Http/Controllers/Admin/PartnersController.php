@@ -25,7 +25,7 @@ class PartnersController extends Controller
     }
 
     public function addsubmit(Request $request){
-        $this->partnersService->createPartner($request->all());
+        $this->partnersService->createPartner($request);
         return redirect()->route('admin.partner.index')->with('success', 'Thêm thành công!');
     }
 

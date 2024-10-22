@@ -31,28 +31,16 @@ class PartnersService
     }
 
     // Tạo mới một mục trong bảng
-    public function createPartner(array $data)
+    public function createPartner($data)
     {
         try {
-            DB ::beginTransaction();
+            DB::beginTransaction();
 
-            $logo = $data['logo'];
-            $directoryPath = 'public/partner';
+            $criteria = $data->all();
 
-            $logoFileName = 'home_' . $logo->getClientOriginalName();
+            $criteria['logo'] = saveImages($data, 'logo', 'partner', 918, 426);
 
-            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
-
-            $partnersData = [
-                'name' => $data['name'],
-                'contact_person' => $data['contact_person'],
-                'phone' => $data['phone'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-                'logo' => $logoFilePath,
-            ];
-
-            $partner = $this->partner->create($partnersData);
+            $partner = $this->partner->create($criteria);
 
             DB::commit();
             return $partner;

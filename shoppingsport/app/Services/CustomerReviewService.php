@@ -9,19 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class CustomerReviewService
 {
     // Thêm đánh giá mới
-    public function createReview(array $data)
+    public function createReview($data)
     {
-        // Kiểm tra xem có file avatar không
-        if (isset($data['avatar'])) {
-            $logo = $data['avatar'];
-            $directoryPath = 'public/avatar-customer';
-            $logoFileName = 'image_' . $logo->getClientOriginalName();
-            $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
-            $data['avatar'] = $logoFilePath;
-
+        $criteria = $data->all();
+        if ($data->hasFile('avatar')) {
+            $criteria['avatar'] = saveImages($data, 'avatar', 'customer_review', 280, 280);
         }
 
-        return CustomerReview::create($data);
+        return CustomerReview::create($criteria);
     }
 
     // Lấy tất cả đánh giá
@@ -37,18 +32,15 @@ class CustomerReviewService
     }
 
     // Cập nhật đánh giá
-    public function updateReview($id, array $data)
+    public function updateReview($id, $data)
     {
-            $review = $this->getReviewById($id);
-
-            if (isset($data['avatar'])) {
-                $logo = $data['avatar'];
-                $logoFileName = 'image_' . $logo->getClientOriginalName();
-                $logoFilePath = $logo->storeAs('avatar', $logoFileName);
-                $data['avatar'] = $logoFilePath;
-            }
-            $review->update($data);
-            return $review;
+        $review = $this->getReviewById($id);
+        $criteria = $data->all();
+        if ($data->hasFile('avatar')) {
+            $data['avatar'] = saveImages($data, 'avatar', 'customer_review', 280, 280);
+        }
+        $review->update($criteria);
+        return $review;
     }
 
     // Xóa đánh giá
