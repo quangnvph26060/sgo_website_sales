@@ -8,6 +8,7 @@ use App\Models\Categoris;
 use App\Models\CategoryBrand;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Can;
 
@@ -163,8 +164,16 @@ class CategoryController extends Controller
         return view('admin.category.brandbycategory', compact('category', 'brand'));
     }
 
+    public function deletecategory($id)
+    {
+
+        Categoris::find($id)->delete();
+        return response()->json(['success' => 'Xóa thành công']);
+    }
+
     public function deletebrandbycategory($id)
     {
+        Log::info(CategoryBrand::find($id));
         CategoryBrand::find($id)->delete();
         return redirect()->back()->with('success', 'Xóa thành công');
     }

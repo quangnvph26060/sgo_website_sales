@@ -211,6 +211,7 @@
                         var finalRoute = editRoute.replace(':id', productId);
                         window.location.href = finalRoute;
                     });
+                    bindDeleteEvent();
 
                     // Cập nhật thông tin bản ghi hiển thị và phân trang
                     updateInfoAndPagination(data, page);
@@ -261,6 +262,59 @@
                 if (page) {
                     fetchProducts(page, $('#search').val(), perPage); // Gọi hàm với số lượng mục hiển thị
                 }
+            });
+        }
+
+        function bindDeleteEvent() {
+            $('.delete').on('click', function () {
+                let category = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Bạn có chắc chắn muốn xóa?',
+                    text: "Hành động này không thể hoàn tác!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/admin/category/delete/category/${category}`,
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                            },
+                            success: function (response) {
+
+                                if (response.success) {
+                                    $(`tr[data-id="${category}"]`).remove(); // Xóa dòng từ bảng
+                                    fetchProducts();
+                                    Swal.fire(
+                                        'Đã xóa!',
+                                        'Sản phẩm đã được xóa danh mục.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Lỗi!',
+                                        'Không thể xóa sản phẩm này.',
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function (xhr) {
+                                console.error(xhr);
+                                Swal.fire(
+                                    'Lỗi!',
+                                    'Có lỗi xảy ra khi xóa.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
             });
         }
 
