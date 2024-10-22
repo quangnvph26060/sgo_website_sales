@@ -232,12 +232,6 @@
                     $("#error_namecategory").html("Nhập tiêu dề danh mục");
                     valid = false;
 
-                }else if (!descriptioncategory.trim()) {
-
-                    scrollToElement("#error_description");
-                    $("#error_description").html("Nhập nội dung danh mục");
-                    valid = false;
-
                 }else if (logo.length == 0) {
                     $("#error_logo").html("Vui lòng chọn logo");
                     $("#logo").focus();
@@ -257,9 +251,7 @@
                     $("#error_namecategory").empty();
                 }
 
-                if (descriptioncategory) {
-                    $("#error_description").empty();
-                }
+               
                 if (logo.length !=0) {
                     $("#error_logo").empty();
                 }
