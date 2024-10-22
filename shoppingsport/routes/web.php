@@ -64,6 +64,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/add_brand', [CategoryController::class, 'storebrand'])->name('store.brand');
             Route::get('/get-brands-category_child/{categoryId}', [CategoryController::class, 'getBrands'])->name('brand.category.child');
             Route::get('/brand-by-category/{id}', [CategoryController::class, 'brandbycategory'])->name('brand.by.category');
+            Route::post('/delete/category/{id}', [CategoryController::class, 'deletecategory'])->name('delete.category');
             Route::post('/delete/brand-by-category/{id}', [CategoryController::class, 'deletebrandbycategory'])->name('delete.brand.by.category');
         });
 
