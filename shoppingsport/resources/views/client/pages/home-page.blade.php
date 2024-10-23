@@ -189,17 +189,17 @@
                                                         <a href="{{ route('user.details-page', $new->slug) }}"
                                                             aria-label="{{ $new->title }}" class="img_link">
                                                             <img loading="lazy" src="{{ showImageStorage($new->logo) }}"
-                                                                alt="Ghế tập bụng, ghế gập bụng là gì? Giá bao nhiêu? Mua ở đâu?"
+                                                                alt="{{ $new->title }}"
                                                                 title="TIN TỨC &amp; SỰ KIỆN" width="280px"
                                                                 height="170px" />
                                                         </a>
-                                                        <a href="https://thanhloisport.com/tin-tuc" aria-label="Tin tức"
+                                                        <a href="{{ route('user.list-news') }}" aria-label="Tin tức"
                                                             class="category text-up fs-10 white fw-600">Tin tức</a>
                                                     </div>
                                                     <div class="special-content">
                                                         <span
                                                             class="date text-up color_desc">{{ \Carbon\Carbon::parse($new->created_at)->format('d/m/Y') }}</span>
-                                                        <a href="{{ route('user.introduce', $new->slug) }}"
+                                                        <a href="{{ route('user.list-news', $new->slug) }}"
                                                             aria-label="{{ $new->title }}" class="title">
                                                             <h3 class="title_box color_head fs-18">
                                                                 {{ $new->title }}
