@@ -47,7 +47,7 @@ class ProductService
             //     // Lưu vào bảng hình ảnh với đường dẫn chính xác
 
             // }
-            $images = saveImages($data, 'image', 'products', 224, 224, true);
+            $images = saveImages($data, 'image', 'products', 600, 500, true);
             foreach ($images as $image) {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -69,7 +69,7 @@ class ProductService
 
         // Cập nhật hình ảnh mới
         if (isset($data->new_images)) {
-            $images = saveImages($data, 'new_images', 'products', 224, 224, true);
+            $images = saveImages($data, 'new_images', 'products', 600, 500, true);
             foreach ($images as $image) {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -79,8 +79,13 @@ class ProductService
         }
 
 
-        if (isset($data->removed_images)) {
-            foreach ($data->removed_images as $item) {
+        if ($data->removed_images) {
+            foreach ((array) $data->removed_images as $item) {
+                // Xóa hình ảnh trong cơ sở dữ liệu
+                $productImage = ProductImage::find($item);
+                if ($productImage) {
+                    $productImage->delete();
+                }
                 deleteImage($item);
             }
 

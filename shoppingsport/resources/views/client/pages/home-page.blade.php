@@ -59,9 +59,8 @@
                                 <div class="banner-list__item">
                                     <div class="wrap">
                                         <div class="thumnail">
-                                            <img loading="lazy"
-                                                src="{{ showImageStorage($item->logo) }}"
-                                                alt="ghe-tap-ta-4" width="400px" height="235px" />
+                                            <img loading="lazy" src="{{ showImageStorage($item->logo) }}" alt="ghe-tap-ta-4"
+                                                width="400px" height="235px" />
                                         </div>
                                         <div class="content">
                                             <div class="content-wrap">
@@ -128,6 +127,18 @@
                                 <div class="short-product__title flex-center-between w-100">
                                     <div class="left flex-inline-center-left">
                                         <p class="child-title">{{ $item->name }}</p>
+                                        @if ($item->children->count() > 0)
+                                            <nav class="left-nav flex-inline-center-left">
+                                                <ul class="flex-inline-center-left">
+                                                    @foreach ($item->children as $child)
+                                                        <li class="tab-item">
+                                                            <a class="tab-link"
+                                                                href="{{ route('user.list', $child->slug) }}">{{ $child->name }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </nav>
+                                        @endif
                                     </div>
                                     <a class="btn-link" href="{{ route('user.list', $item->slug) }}">
                                         xem tất cả

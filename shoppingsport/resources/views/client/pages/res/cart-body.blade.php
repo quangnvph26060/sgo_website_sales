@@ -13,8 +13,7 @@
             </td>
             <td class="product-list__name">
                 <p class="flex-inline-center-left">
-                    <a href="https://thanhloisport.com/ghe-massage-oreni-or-520-plus.html" class="flex-center-left">Ghế
-                        massage Oreni OR-520 Plus</a>
+                    <a href="{{ route('user.details-page', $item->options->slug) }}" class="flex-center-left">{{ $item->name }}</a>
                     <span class="badge flex-inline-center-left"></span>
                 </p>
                 <div class="product-list__description d-none">
