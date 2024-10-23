@@ -87,8 +87,7 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = $request->all();
-        $this->productService->updateProduct($data, $id);
+        $this->productService->updateProduct($request, $id);
         return redirect()->route('admin.product.index')->with('success', 'Cập nhật thành công!');
     }
 
