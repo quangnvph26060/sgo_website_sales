@@ -113,7 +113,7 @@ class CategoryController extends Controller
             // Nếu danh mục đã tồn tại, trả về thông báo lỗi và dừng quá trình
             return redirect()->back()->withErrors(['error' => 'Danh mục đã tồn tại.'])->withInput();
         }
-        $this->categoryService->updateCategory($request->all(), $id);
+        $this->categoryService->updateCategory($request, $id);
         return redirect()->route('admin.category.index', ['type' => 'parent']);
     }
 

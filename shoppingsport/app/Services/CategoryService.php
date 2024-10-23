@@ -86,18 +86,17 @@ class CategoryService
         return $category;
     }
 
-    public function updateCategory(array $data, int $id): Categoris
+    public function updateCategory($data, int $id): Categoris
     {
+        $criteria = $data->all();
+
+
         DB::beginTransaction();
         try {
             $category = $this->getCategoryById($id);
             Log::info("Updating category with ID: $id");
-            $timestamp = Carbon::now()->format('YmdHis');
-            if (isset($data['logo'])) {
-                $logo = $data['logo'];
-                $directoryPath = 'public/category';
-                $logoFileName = 'home_' . $timestamp . $logo->getClientOriginalName();
-                $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
+            if ($criteria['logo']) {
+                $criteria['logo'] = saveImages($data, 'logo', 'category', 600, 453);
             }
 
             $category->update([
@@ -108,7 +107,7 @@ class CategoryService
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
                 'keyword_seo' => $data['keyword_seo'],
-                'logo' => $logoFilePath ?? ''
+                'logo' => $criteria['logo']
             ]);
 
             DB::commit();
