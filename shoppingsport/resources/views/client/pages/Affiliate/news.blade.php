@@ -10,7 +10,7 @@
             <div class="post_single__top w-100 flex">
                 <div class="post_single__detail">
                     <div class="post_single__name w-100">
-                        <h1 class="color_title">Tin tức</h1>
+                        <h1 class="color_title">{{ $newsItem->title }}</h1>
                     </div>
                     @if (is_null($newsItem))
                         <div class="content" style="">

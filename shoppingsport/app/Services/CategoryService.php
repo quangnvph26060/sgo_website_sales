@@ -51,7 +51,7 @@ class CategoryService
         try {
             // Log::info("Creating a new category with name: {$data->name}");
 
-            $logo = saveImages($data, 'logo', 'category');
+            $logo = saveImages($data, 'logo', 'category', 600, 453);
 
             $category = $this->category->create([
                 'name' => $data->name,
