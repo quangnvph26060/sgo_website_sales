@@ -65,14 +65,12 @@ class NewsController extends Controller
 
         $existingPost = SgoNews::where('slug', $data['slug'])->first();
 
-
         if ($existingPost) {
             // Nếu tồn tại bài viết với slug đó, trả về thông báo lỗi
             return redirect()->back()->withErrors(['title' => 'Tiêu đề bài viết đã  tồn tại, vui lòng chọn một tiêu đề khác!'])->withInput();
         }
 
         if ($request->hasFile('logo')) {
-            deleteImage($existingPost->logo);
             $data['logo'] = saveImages($request, 'logo', 'news', 600, 417);
         }
 
@@ -123,10 +121,16 @@ class NewsController extends Controller
     // Xóa bài báo khỏi cơ sở dữ liệu
     public function destroy($id)
     {
+
         $sgoNews = SgoNews::find($id);
         deleteImage($sgoNews->logo);
         $sgoNews->delete();
 
-        return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được xóa thành công!');
+        // return redirect()->route('admin.new.index')->with('success', 'Bài viết đã được xóa thành công!');
+
+        return response()->json([
+            'succuss' => true,
+            'message' => 'Bài viết đã được xóa thành công'
+        ]);
     }
 }

@@ -85,38 +85,9 @@ class ProductService
                 $productImage = ProductImage::find($item);
                 if ($productImage) {
                     $productImage->delete();
+                deleteImage($productImage->image);
                 }
-                deleteImage($item);
             }
-
-            // Kiểm tra và chuyển đổi nếu 'removed_images' là chuỗi JSON
-            // $removedImages = is_string($data['removed_images']) ? json_decode($data['removed_images'], true) : $data['removed_images'];
-
-            // if (is_array($removedImages)) {
-            //     foreach ($removedImages as $item) {
-            //         // Tìm hình ảnh theo ID
-            //         $product_img = ProductImage::find($item);
-            //         if ($product_img) {
-            //             $imagePath = $product_img->image;
-
-            //             // Chỉ lấy phần đường dẫn mà không có 'storage/'
-            //             $relativePath = str_replace('storage/', '', $imagePath);
-
-            //             // Kiểm tra tệp tồn tại
-            //             if (Storage::disk('public')->exists($relativePath)) {
-            //                 Storage::disk('public')->delete($relativePath); // Xóa tệp
-            //                 Log::info("Deleted image: " . $imagePath);
-            //             } else {
-            //                 Log::warning("File does not exist: " . $imagePath);
-            //             }
-
-            //             // Xóa hình ảnh trong cơ sở dữ liệu
-            //             $product_img->delete();
-            //         } else {
-            //             Log::warning("Product image not found with id: " . $item);
-            //         }
-            //     }
-            // }
         }
 
 

@@ -281,13 +281,14 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: `/admin/brand/delete/${brandId}`,
+                            url: `/admin/news/delete/${brandId}`,
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
                             },
                             success: function (response) {
-                                if (response.success) {
+
+                                if (response.succuss) {
                                     $(`tr[data-id="${brandId}"]`).remove(); // Xóa dòng từ bảng
                                     fetchProducts();
                                     Swal.fire(
