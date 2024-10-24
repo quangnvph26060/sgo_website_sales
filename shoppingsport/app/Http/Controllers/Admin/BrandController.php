@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Services\BrandService;
 use Exception;
 use Illuminate\Http\Request;
@@ -88,7 +89,14 @@ class BrandController extends Controller
     }
 
     public function delete($id) {
-        $this->brandService->deleteBrand($id);
+        $productCount = Product::where('brand_id', $id)->count();
+
+        if($productCount){
+            return response()->json(['error' => 'Thương hiệu đang có sản phẩm']);
+        }else{
+            $this->brandService->deleteBrand($id);
         return response()->json(['success' => 'Xóa thành công']);
+        }
+
     }
 }

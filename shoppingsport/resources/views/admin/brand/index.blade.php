@@ -279,8 +279,8 @@
                                     );
                                 } else {
                                     Swal.fire(
-                                        'Lỗi!',
-                                        'Không thể xóa thương hiệu này.',
+                                        'Không xóa được!',
+                                        'Thương hiệu đã có sản phẩm.',
                                         'error'
                                     );
                                 }
