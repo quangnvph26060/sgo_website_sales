@@ -41,7 +41,7 @@
                     <div class="card-body">
                         <div class="">
                             <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                <form method="POST" action="{{ route('admin.new.update', ['id' => $new->id]) }}"
+                                <form method="POST" action="{{ route('admin.new.update', ['id' => $new->id]) }}" id="savenews"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label for="logo" class="form-label">Hình ảnh bài viết</label>
                                                 <div class="custom-file">
-                                                    <input id="logo"
+                                                    <input id="logo-input"
                                                         class="custom-file-input @error('logo') is-invalid @enderror"
                                                         type="file" name="logo" accept="image/*">
                                                     <label class="custom-file-label" for="logo">Chọn ảnh</label>
@@ -59,23 +59,26 @@
 
                                                 <div class="form-group">
                                                     <img id="profileImage" style="width: 150px; height: auto"
-                                                        src="{{ showImageStorage($new->logo) }}" required
+                                                        src="{{ showImageStorage($new->logo) }}"
                                                         alt="image profile" class="avatar">
                                                 </div>
+                                                <p id="error_logo1" class="error"></p>
                                             </div>
 
 
                                             <div class="form-group">
                                                 <label class="form-label" for="title">Tiêu đề bài báo:</label><br>
                                                 <input type="text" class="form-control" id="title" name="title"
-                                                    required style="width:100%; padding: 10px;" required
+                                                     style="width:100%; padding: 10px;"
                                                     value="{{ $new->title }}">
+                                                    <p id="error_title" class="error"></p>
                                             </div>
 
 
                                             <div class="form-group">
                                                 <label class="form-label" for="content">Nội dung bài báo:</label><br>
-                                                <textarea name="content" class="form-control" id="content" rows="10" required cols="80">{{ $new->content }}</textarea>
+                                                <textarea name="content" class="form-control" id="content" rows="10"  cols="80">{{ $new->content }}</textarea>
+                                                <p id="error_content" class="error"></p>
                                             </div>
                                         </div>
 
@@ -83,7 +86,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                            <button  class="btn btn-primary">Lưu</button>
                                         </div>
                                     </div>
                                 </form>
@@ -176,4 +179,58 @@
             fontSize_sizes: '11px;12px;13px;14px;15px;16px;18px;20px;22px;24px;26px;28px;30px;32px;34px;36px',
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+
+        $("#savenews").submit(function(event) {
+            event.preventDefault();
+
+            var logo = $('#logo-input')[0].files;
+            var title = $('#title').val();
+            var content = $("#content").val();
+            var valid = true;
+
+            if (logo.length == 0) {
+                $("#error_logo1").html("Vui lòng chọn logo");
+                $("#logo-input").focus();
+                valid = false;
+            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
+                $("#error_logo1").html("Vui lòng chọn file hình ảnh hợp lệ");
+                $("#logo-input").focus();
+                valid = false;
+            }else if (!title) {
+                $("#title").focus();
+                $("#error_title").html("Nhập tiêu đề bài viết");
+                valid = false;
+            }else if (!content) {
+                $("#content").focus();
+                $("#error_content").html("Nhập nội dung bài viết");
+                valid = false;
+
+            }
+
+            if (logo) {
+                $("#error_logo1").empty();
+            }
+
+            if (title) {
+                $("#error_title").empty();
+            }
+
+            if (content) {
+                $("#error_content").empty();
+            }
+
+
+            if (valid) {
+                $(this).unbind('submit').submit();
+
+            }
+
+        });
+
+
+    })
+</script>
 @endsection

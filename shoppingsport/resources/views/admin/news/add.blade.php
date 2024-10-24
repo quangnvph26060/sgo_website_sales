@@ -5,6 +5,9 @@
     .cke_notifications_area {
         display: none;
     }
+    .error{
+        color: red;
+    }
 </style>
 <div class="page-inner">
     <div class="page-header">
@@ -44,7 +47,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                            <form method="POST" action="{{ route('admin.new.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.new.store') }}" enctype="multipart/form-data" id="savenews">
                                 @csrf
                                 <div class="row">
 
@@ -53,28 +56,33 @@
                                         <div class="form-group">
                                             <label for="logo" class="form-label">Hình ảnh bài viết</label>
                                             <div class="custom-file">
-                                                <input id="logo"
+                                                <input id="logo-input"
                                                     class="custom-file-input  @error('logo') is-invalid @enderror "
-                                                    required type="file" name="logo" accept="image/*">
+                                                     type="file" name="logo" accept="image/*">
                                                 <label class="custom-file-label" for="logo">Chọn ảnh</label>
                                             </div>
+
                                             <div class="form-group">
-                                                <img id="profileImage" style="width: 150px;height: auto"
+                                                <img id="profileImage" style="width: 150px;height: 100px"
                                                     src="{{asset('images/avatar2.jpg') }}" alt="image profile"
                                                     class="avatar">
                                             </div>
+
                                         </div>
+                                        <p id="error_logo1" class="error"></p>
 
                                         <div class="form-group">
                                             <label class="form-label" for="title">Tiêu đề tin tức:</label><br>
                                             <input type="text" class="form-control" id="title" name="title"
-                                                style="width:100%; padding: 10px;" required>
+                                                style="width:100%; padding: 10px;" >
+                                                <p id="error_title" class="error"></p>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="form-label" for="content">Nội dung :</label><br>
-                                            <textarea required name="content" class="form-control" id="content"
+                                            <textarea  name="content" class="form-control" id="content"
                                                 rows="10" cols="80"></textarea><br><br>
+                                                <p id="error_content" class="error"></p>
                                         </div>
                                     </div>
 
@@ -82,7 +90,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <button class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -95,7 +103,7 @@
 </div>
 <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
 <script>
-    document.getElementById('logo').addEventListener('change', function(event) {
+    document.getElementById('logo-input').addEventListener('change', function(event) {
             const input = event.target;
             const reader = new FileReader();
 
@@ -132,6 +140,58 @@
   fontSize_sizes: '11px;12px;13px;14px;15px;16px;18px;20px;22px;24px;26px;28px;30px;32px;34px;36px',
 });
 </script>
+<script>
+    $(document).ready(function() {
+
+        $("#savenews").submit(function(event) {
+            event.preventDefault();
+
+            var logo = $('#logo-input')[0].files;
+            var title = $('#title').val();
+            var content = $("#content").val();
+            var valid = true;
+
+            if (logo.length == 0) {
+                $("#error_logo1").html("Vui lòng chọn logo");
+                $("#logo-input").focus();
+                valid = false;
+            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
+                $("#error_logo1").html("Vui lòng chọn file hình ảnh hợp lệ");
+                $("#logo-input").focus();
+                valid = false;
+            }else if (!title) {
+                $("#title").focus();
+                $("#error_title").html("Nhập tiêu đề bài viết");
+                valid = false;
+            }else if (!content) {
+                $("#content").focus();
+                $("#error_content").html("Nhập nội dung bài viết");
+                valid = false;
+
+            }
+
+            if (logo) {
+                $("#error_logo1").empty();
+            }
+
+            if (title) {
+                $("#error_title").empty();
+            }
+
+            if (content) {
+                $("#error_content").empty();
+            }
+
+
+            if (valid) {
+                $(this).unbind('submit').submit();
+
+            }
+
+        });
+
+
+    })
 </script>
 
 
