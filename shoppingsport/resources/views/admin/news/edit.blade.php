@@ -186,20 +186,12 @@
         $("#savenews").submit(function(event) {
             event.preventDefault();
 
-            var logo = $('#logo-input')[0].files;
+
             var title = $('#title').val();
             var content = $("#content").val();
             var valid = true;
 
-            if (logo.length == 0) {
-                $("#error_logo1").html("Vui lòng chọn logo");
-                $("#logo-input").focus();
-                valid = false;
-            }else if (!logo[0].type.startsWith('image/')) {  // Kiểm tra định dạng file
-                $("#error_logo1").html("Vui lòng chọn file hình ảnh hợp lệ");
-                $("#logo-input").focus();
-                valid = false;
-            }else if (!title) {
+            if (!title) {
                 $("#title").focus();
                 $("#error_title").html("Nhập tiêu đề bài viết");
                 valid = false;
@@ -210,9 +202,6 @@
 
             }
 
-            if (logo) {
-                $("#error_logo1").empty();
-            }
 
             if (title) {
                 $("#error_title").empty();
