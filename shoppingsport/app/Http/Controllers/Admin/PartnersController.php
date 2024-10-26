@@ -35,7 +35,7 @@ class PartnersController extends Controller
         return view('admin.partner.edit', compact('partner', 'title'));
     }
     public function editsubmit(Request $request, $id){
-        $this->partnersService->updatePartiner($request->all(), $id);
+        $this->partnersService->updatePartiner($request, $id);
         return redirect()->route('admin.partner.index')->with('success', 'Cập nhật thành công!');
     }
 

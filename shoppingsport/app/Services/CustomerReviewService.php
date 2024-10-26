@@ -37,7 +37,7 @@ class CustomerReviewService
         $review = $this->getReviewById($id);
         $criteria = $data->all();
         if ($data->hasFile('avatar')) {
-            $data['avatar'] = saveImages($data, 'avatar', 'customer_review', 280, 280);
+            $criteria['avatar'] = saveImages($data, 'avatar', 'customer_review', 280, 280);
         }
         $review->update($criteria);
         return $review;

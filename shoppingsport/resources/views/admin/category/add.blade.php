@@ -88,7 +88,6 @@
 
                                             <textarea name="description" class="form-control" id="descriptioncategory"
                                                 rows="10" cols="80"></textarea>
-                                            <p id="error_description" class="error"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -218,8 +217,6 @@
                 event.preventDefault();
                 var parent_id = $('#parent_id').val();
                 var namecategory = $('#namecategory').val();
-                var descriptioncategory = $("#descriptioncategory").val();
-                // alert(descriptioncategory)
                 var logo = $('#logo')[0].files;
                 var valid = true;
 
@@ -251,7 +248,7 @@
                     $("#error_namecategory").empty();
                 }
 
-               
+
                 if (logo.length !=0) {
                     $("#error_logo").empty();
                 }
@@ -264,20 +261,12 @@
                 event.preventDefault();
 
                 var namecategory = $('#namecategory').val();
-                var descriptioncategory = $("#descriptioncategory").val();
-                // alert(descriptioncategory)
                 var logo = $('#logo')[0].files;
                 var valid = true;
 
                 if (!namecategory) {
                     $("#namecategory").focus();
                     $("#error_namecategory").html("Nhập tiêu dề danh mục");
-                    valid = false;
-
-                }else if (!descriptioncategory.trim()) {
-
-                    scrollToElement("#error_description");
-                    $("#error_description").html("Nhập nội dung danh mục");
                     valid = false;
 
                 }else if (logo.length == 0) {
@@ -296,9 +285,7 @@
                     $("#error_namecategory").empty();
                 }
 
-                if (descriptioncategory) {
-                    $("#error_description").empty();
-                }
+              
                 if (logo.length !=0) {
                     $("#error_logo").empty();
                 }
