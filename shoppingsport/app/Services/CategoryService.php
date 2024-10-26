@@ -102,7 +102,7 @@ class CategoryService
             $category->update([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'parent_id' => $data['parent_id'] ?? null, // Nếu không có parent_id, để null
+                'parent_id' => $data['parent_id'] ?? null, 
                 'slug' => Str::slug($data['name']),
                 'title_seo' => $data['title_seo'],
                 'description_seo' => $data['description_seo'],
