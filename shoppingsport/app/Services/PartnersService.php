@@ -52,30 +52,20 @@ class PartnersService
     }
 
     // Cập nhật mục trong bảng sgo_home
-    public function updatePartiner(array $data, $id)
+    public function updatePartiner($data, $id)
     {
         try {
             DB::beginTransaction();
 
             $partner = $this->partner->find($id);
-            $partnersData = [
-                'name' => $data['name'],
-                'contact_person' => $data['contact_person'],
-                'phone' => $data['phone'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-            ];
+            $criteria = $data->all();
 
             if (isset($data['logo'])) {
-                $directoryPath = 'partner';
-                $logo = $data['logo'];
-                $logoFileName = 'home_' . $logo->getClientOriginalName();
-                $logoFilePath = $logo->storeAs($directoryPath, $logoFileName);
 
-                $partnersData['logo'] = $logoFilePath;
+                $criteria['logo'] = saveImages($data, 'logo', 'partner', 918, 426);
             }
 
-            $partner->update($partnersData);
+            $partner->update($criteria);
             DB::commit();
             return $partner;
         } catch (Exception $e) {

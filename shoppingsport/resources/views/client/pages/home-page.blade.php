@@ -97,7 +97,7 @@
                         <div class="short-product__content w-100">
                             <div class="categories web main-category">
 
-                                @foreach ($productCategories->take(10) as $item)
+                                @foreach ($productCategories->take(12) as $item)
                                     <div class="category-item">
                                         <a class="category-inner" href="{{ route('user.list', $item->slug) }}">
                                             <div class="entry-media">
