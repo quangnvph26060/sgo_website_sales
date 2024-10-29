@@ -5,7 +5,7 @@
                 <p class="copyright">{{$config->footer}}</p>
             </div>
             <div class="right flex-center-right">
-                <img src="https://thanhloisport.com/assets/ecommerce/images/credit-cards.png" alt="credit-cards"
+                <img src="{{asset('assets/client-assets/image/credit-cards.png')}}" alt="credit-cards"
                     loading="lazy" width="364" height="32" />
             </div>
         </div>

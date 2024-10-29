@@ -5,7 +5,7 @@
         <div class="container">
             <ul itemscope="" itemtype="https://schema.org/BreadcrumbList">
                 <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="https://thanhloisport.com" style="display: inline;">
+                    <a itemprop="item" href="{{route('user.home-page')}}" style="display: inline;">
                         <span itemprop="name">
                             Trang chủ
                         </span>
@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="https://thanhloisport.com/order-success/G9JE8133" style="display: inline;">
+                    <a itemprop="item" href="{{route('user.order-success', $order->code)}}" style="display: inline;">
                         <span itemprop="name">
                             Đặt hàng thành công
                         </span>

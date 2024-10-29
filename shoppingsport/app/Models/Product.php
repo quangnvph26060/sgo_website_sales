@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Brand;
-use App\Models\Categoris;
 use App\Models\Discount;
+use App\Models\Categoris;
+use Illuminate\Support\Str;
 use App\Models\ProductImage;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -35,6 +36,14 @@ class Product extends Model
         'description_seo',
         'keyword_seo'
     ];
+
+    public static function boot(){
+        parent::boot();
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->name);
+        });
+    }
 
     public function category()
 

@@ -3,7 +3,7 @@
         <div class="footer-top__wrap flex-left w-100">
             <div class="footer-left">
                 <a href="/" aria-label="logo footer" class="footer_logo">
-                    <img loading="lazy" src="https://thanhloisport.com/uploads/2023/07/logo-thanh-loi-sport.png.webp"
+                    <img loading="lazy" src="{{asset('assets/client-assets/image/logo-thanh-loi-sport.jpg')}}"
                         alt="logo footer" width="150px" height="50px" />
                 </a>
                 <p class="footer-left__title">

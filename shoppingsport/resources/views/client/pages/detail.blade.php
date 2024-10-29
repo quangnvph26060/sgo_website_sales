@@ -200,7 +200,7 @@
                                                 <div class="form-custom form-data w-100 " style="">
                                                     <div class="form-custom__wrap w-100">
                                                         <p class="title text-center">Liên hệ</p>
-                                                        <form action="https://thanhloisport.com/ajax/form-sender/1"
+                                                        <form action=""
                                                             method="post" class="content" id="form_custom_1"
                                                             enctype="multipart/form-data">
                                                             <input type=hidden name=_token

@@ -3,27 +3,25 @@
 @section('content')
     <div class="warranty-table-container">
         <div class="warranty-table-header">
-            <h2>Đơn bán hàng &raquo; Bảo hành</h2>
+            <div class="actions">
+                <button class="create-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Kích hoạt bảo hành</button>
+            </div>
+            <h1>KÍCH HOẠT BẢO HÀNH</h1>
             <div class="search-bar">
-                <input type="text" placeholder="Tra cứu số điện thoại" id="search" />
+                <input type="text" placeholder="Tra cứu bảo hành" id="search" />
                 <button type="button" class="search-btn"><i class="fa fa-search"></i></button>
             </div>
-        </div>
 
-        <div class="actions">
-            <button class="create-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Tạo</button>
-            <button class="refresh-btn"><i class="fa fa-refresh"></i></button>
         </div>
 
         <table class="warranty-table">
             <thead>
                 <tr>
-                    <th>Khách hàng</th>
-                    <th>Điện thoại</th>
-                    <th>Địa chỉ</th>
-                    <th>Sản phẩm</th>
-                    <th>Thời gian bảo hành</th>
-                    <th></th>
+                    <th scope="col">Khách hàng</th>
+                    <th scope="col">Điện thoại</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col">Thời gian bảo hành</th>
                 </tr>
             </thead>
             <tbody id="warranty-table-body">
@@ -34,7 +32,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Đăng ký bảo hành</h5>
@@ -101,7 +99,6 @@
 @endsection
 
 @push('script')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -215,7 +212,7 @@
                             $('#exampleModal').modal('hide');
                             // Có thể gọi lại hàm để làm mới danh sách bảo hành ở đây
                         } else {
-                            showMessage('error', response.error || response.message );
+                            showMessage('error', response.error || response.message);
                         }
                     },
                     error: function(xhr, status, error) {
@@ -258,12 +255,11 @@
                                 // Append to the table
                                 $('#warranty-table-body').append(`
                                     <tr>
-                                        <td>${item.customer_name}</td>
-                                        <td>${item.phone_number}</td>
-                                        <td>${item.address}</td>
-                                        <td>${item.product.name}</td>
+                                        <td data-label="Tên">${item.customer_name}</td>
+                                        <td data-label="Số điện thoại">${item.phone_number}</td>
+                                        <td data-label="Địa chỉ">${item.address}</td>
+                                        <td data-label="Sản phẩm">${item.product.name}</td>
                                         <td>${formattedRegistrationDate} - ${formattedExpirationDate}</td>
-                                        <td></td>
                                     </tr>
                                 `);
                             });
@@ -289,6 +285,93 @@
             padding: 20px 100px !important;
         }
 
+        @media (max-width: 768px) {
+            .warranty-table-header h1 {
+                font-size: 1.3rem !important;
+                margin-bottom: 10px;
+            }
+
+            main {
+                padding: 10px !important;
+                margin-top: 110px;
+            }
+
+            .warranty-table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .actions {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .actions button {
+                width: 100%;
+                padding: 10px;
+                text-align: center;
+                margin: 0;
+            }
+
+            .search-bar {
+                width: 100%;
+                display: flex;
+                margin-top: 10px;
+            }
+
+            .search-bar input {
+                flex-grow: 1;
+                border-radius: 5px 5px 0 0;
+            }
+
+            .search-bar button {
+                width: 100%;
+                border-radius: 0 0 5px 5px;
+                margin-top: 5px;
+            }
+
+
+            table {
+                display: block;
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+                /* Ẩn tiêu đề bảng */
+            }
+
+            tbody,
+            tr {
+                display: block;
+                /* Chuyển sang dạng khối để dễ dàng hiển thị */
+                width: 100%;
+                margin-bottom: 1rem;
+                /* Khoảng cách giữa các hàng */
+            }
+
+            td {
+                font-size: 0.875rem !important;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                /* Căn chỉnh nội dung */
+                padding: 0.5rem;
+                border: 1px solid #dee2e6;
+                /* Thêm viền */
+            }
+
+            td::before {
+                content: attr(data-label);
+                /* Hiển thị tên cột */
+                font-weight: bold;
+                margin-right: 1rem;
+                /* Khoảng cách giữa tên cột và nội dung */
+            }
+        }
+
+
+
         .warranty-table-container {
             background-color: #ffffff;
             padding: 20px;
@@ -303,8 +386,8 @@
             margin-bottom: 20px;
         }
 
-        .warranty-table-header h2 {
-            font-size: 1.2rem;
+        .warranty-table-header h1 {
+            font-size: 2rem;
             color: #333;
         }
 
@@ -320,6 +403,7 @@
             outline: none;
         }
 
+
         .search-bar button {
             padding: 8px 12px;
             background-color: #007bff;
@@ -333,9 +417,7 @@
             font-size: 1rem;
         }
 
-        .actions {
-            margin-bottom: 20px;
-        }
+       
 
         .actions button {
             padding: 10px 15px;

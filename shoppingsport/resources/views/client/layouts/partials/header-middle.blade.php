@@ -10,7 +10,7 @@
                 <div class="left-logo">
                     <a href="{{ route('user.home-page') }}" aria-label="logo">
                         <img loading="lazy"
-                            src="https://thanhloisport.com/uploads/2023/09/logo-thanh-loi-sport-800x800.png.webp"
+                            src="{{asset('assets/client-assets/image/logo-thanh-loi-sport-800x800.jpg')}}"
                             alt="logo" width="160px" height="40px" />
                     </a>
                 </div>

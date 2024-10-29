@@ -9,8 +9,6 @@
                             <a href="{{ route('user.login') }}" aria-label="Tài khoản">Tài khoản</a>
                         </li>
                         <li class="item">
-                            {{-- <a href="https://thanhloisport.com/wishlist-product" aria-label="Sản phẩm yêu thích">Sản
-                                phẩm yêu thích</a> --}}
                         </li>
                     </ul>
                 </nav>
