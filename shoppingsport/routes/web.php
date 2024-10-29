@@ -1,24 +1,25 @@
 <?php
 
 
-use App\Http\Controllers\Admin\PartnersController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ConfigController;
-use App\Http\Controllers\Admin\CustomerReviewController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\IntroductionController;
-use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Client\HomeController;
-
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PartnersController;
+use App\Http\Controllers\Admin\WarrantyController;
+use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Admin\IntroductionController;
+use App\Http\Controllers\Admin\CustomerReviewController;
 
 
 /*
@@ -144,6 +145,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('', [IntroductionController::class, 'index'])->name('index');
             Route::post('', [IntroductionController::class, 'update'])->name('update');
         });
+
+        route::get('warranty', [WarrantyController::class, 'index'])->name('warranty');
 
 
     });
