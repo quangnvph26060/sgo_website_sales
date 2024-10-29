@@ -15,11 +15,11 @@
         content="{{ $config->title_seo ?? 'THÀNH LỢI SPORT - PHÂN PHỐI THIẾT BỊ VÀ DỤNG CỤ THỂ THAO CHÍNH HÃNG' }}">
     <meta property="og:description"
         content="{{ $config->description_seo ?? 'THÀNH LỢI SPORT - PHÂN PHỐI THIẾT BỊ VÀ DỤNG CỤ THỂ THAO CHÍNH HÃNG' }}">
-    {{-- <meta property="og:image" content="https://www.example.com/hinh-anh.jpg"> --}}
-    <meta property="og:url" content="{{ $config->website ?? 'https://thanhloisport.com' }}">
+
+    <meta property="og:url" content="{{ $config->website ?? url('/') }}">
     <meta name="robots" content="index, follow">
 
-    <link href="https://thanhloisport.com/wp-content/uploads/2021/11/cropped-Icon-Logo-thanh-loi-sport.png"
+    <link href="{{asset('assets/client-assets/image/cropped-Icon-Logo-thanh-loi-sport.png')}}"
         type=image/x-icon rel="shortcut icon">
 
     @include('client.layouts.partials.style')

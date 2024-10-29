@@ -19,14 +19,15 @@ class WishlistController extends Controller
     {
 
         if ($request->ajax()) {
-            $product = Product::find($request->id);
+            $product = Product::with('images', 'discount')->find($request->id);
 
             $wishlistItem = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
                 return $cartItem->id === $product->id;
             })->first();
 
 
-            if ($wishlistItem) {
+
+            if ($wishlistItem && $request->type == 'remove') {
                 Cart::instance('wishlist')->remove($wishlistItem->rowId);
                 return  response()->json([
                     'message' => "Đã xóa khỏi danh sách yêu thích!",
@@ -35,14 +36,13 @@ class WishlistController extends Controller
                 ]);
             }
 
-
             Cart::instance('wishlist')->add([
                 'id' => $product->id,
                 'name' => $product->name,
-                'price' => $product->price_new,
+                'price' => $this->caculatePrice($product->price_new, $product->discount->value ?? null),
                 'qty' => 1,
                 'options' => [
-                    'image' => showImageStorage($product->image),
+                    'image' => showImageStorage($product->images->first()->image),
                     'slug' => $product->slug
                 ]
             ]);
@@ -55,5 +55,14 @@ class WishlistController extends Controller
                 'type' => $request->type
             ]);
         }
+    }
+
+    function caculatePrice($price, $discount)
+    {
+        if (is_null($discount)) {
+            return $price;
+        }
+
+        return $price - ($price * $discount / 100);
     }
 }

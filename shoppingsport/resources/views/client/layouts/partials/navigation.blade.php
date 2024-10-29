@@ -2,7 +2,7 @@
     <div class="navigation-wrap">
         <div class="navigation-top flex-center-between">
             <a href="/" class="navigation-top__logo" aria-label="logo">
-                <img loading="lazy" src="https://thanhloisport.com/uploads/2023/09/logo-thanh-loi-sport-800x800.png.webp"
+                <img loading="lazy" src="{{asset('assets/client-assets/image/logo-thanh-loi-sport-800x800.jpg')}}"
                     alt="logo" width="160px" height="40px" />
             </a>
             <span class="navigation-top__close">

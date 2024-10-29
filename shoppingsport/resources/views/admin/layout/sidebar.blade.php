@@ -137,7 +137,7 @@
                     </div>
                 </li>
 
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#product">
                         <i class="fas fa-cube"></i>
                         <p>Sản phẩm</p>
@@ -157,7 +157,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#image">

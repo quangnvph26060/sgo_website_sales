@@ -52,10 +52,10 @@
                                                     </a>
                                                 </div>
                                                 <a class="image-link"
-                                                    href="https://thanhloisport.com/chay-bo-dien-impulse-pt400.html"
+                                                    href="{{ route('user.details-page', $item->options->slug) }}"
                                                     aria-label="Máy chạy bộ điện Impulse PT400">
                                                     <img loading="lazy"
-                                                        src="https://thanhloisport.com/thumbnails/products/medium/wp-content/uploads/2022/07/may-chay-bo-co-lon-Impulse-PT400-300-1.jpg.webp"
+                                                        src="{{ $item->options->image }}"
                                                         alt="may-chay-bo-co-lon-Impulse-PT400-300-1"
                                                         title="Máy chạy bộ điện Impulse PT400" width=224px height=224px>
                                                 </a>
@@ -63,7 +63,7 @@
                                             <div class="content">
                                                 <div class="content-top">
                                                     <h3 class="content-top__title">
-                                                        <a href="https://thanhloisport.com/chay-bo-dien-impulse-pt400.html"
+                                                        <a href="{{ route('user.details-page', $item->options->slug) }}"
                                                             aria-label="Máy chạy bộ điện Impulse PT400">{{ $item->name }}</a>
                                                     </h3>
                                                     <div class="content-top__vote flex-center-left">
