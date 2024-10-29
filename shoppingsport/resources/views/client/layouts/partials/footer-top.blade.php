@@ -118,7 +118,7 @@
                         <div class="widget-content">
                             <ul class="widget-menu__list">
 
-                                @foreach ($categories as $item)
+                                @foreach ($categories->take(10) as $item)
                                     <li class="menu-item">
                                         <p class="menu-item__title">
                                             <a href="{{ route('user.list', $item->slug) }}" aria-label="{{ $item->name }}" rel=""

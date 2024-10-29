@@ -252,6 +252,15 @@
                 </li>
 
 
+                <li class="nav-item">
+                    <a href="{{route('admin.warranty')}}">
+                        <i class="fas fa-wrench"></i>
+                        <p>Thông tin bảo hành</p>
+                    </a>
+
+                </li>
+
+
             </ul>
         </div>
     </div>

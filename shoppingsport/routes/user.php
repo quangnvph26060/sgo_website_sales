@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\CheckOutController;
 use App\Http\Controllers\Client\HomePageController;
+use App\Http\Controllers\Client\WarrantyController;
 use App\Http\Controllers\Client\WishlistController;
 use App\Http\Controllers\Client\AffiliateController;
 use App\Http\Controllers\Client\ListProductController;
@@ -94,9 +95,19 @@ Route::name('user.')->group(function () {
         Route::get('tin-tuc/{slug?}', 'news')->name('list-news');
     });
 
+    route::controller(WarrantyController::class)->group(function () {
+        Route::get('bao-hanh', 'warranty')->name('warranty');
+
+        route::post('bao-hanh', 'store')->name('warranty.store');
+
+        route::get('bao-hanh/look-up', 'lookUp')->name('warranty.look-up');
+    });
+
     Route::controller(ListProductController::class)->group(function () {
         Route::get('tim-kiem', 'search')->name('search');
         Route::get('san-pham', 'index')->name('list-product');
         Route::get('{slug}', 'index')->name('list');
     });
+
+
 });
