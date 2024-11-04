@@ -3,6 +3,7 @@
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 if (!function_exists('formatPrice')) {
     function formatPrice($price)
@@ -14,8 +15,11 @@ if (!function_exists('formatPrice')) {
 if (!function_exists('showImageStorage')) {
     function showImageStorage($image)
     {
-        if ($image && Storage::disk('public')->exists($image)) {
-            return Storage::disk('public')->url($image);
+        /** @var FilesystemAdapter $storage */
+        $storage = Storage::disk('public');
+
+        if ($image && $storage->exists($image)) {
+            return $storage->url($image);
         }
 
         return asset('user-default.png');

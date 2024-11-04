@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title',  $config->title )</title>
-    <meta name="description" content="@yield('description',  $config->description )">
-    <meta name="keywords" content="@yield('keywords',  $config->keywords )">
+    {{-- @dd($config) --}}
+    <title>@yield('title',  $config->title_seo ?? $config->name )</title>
+    <meta name="description" content="@yield('description',  $config->description ?? $description_seo  )">
+    <meta name="keywords" content="@yield('keywords',  $config->meta_seo )">
 
 
     <meta property="og:title"

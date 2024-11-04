@@ -4,9 +4,9 @@
     <div class="warranty-table-container">
         <div class="warranty-table-header">
             <div class="actions">
-                <button class="create-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Kích hoạt bảo hành</button>
+                <button class="create-btn btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Kích hoạt bảo hành</button>
             </div>
-            <h1>KÍCH HOẠT BẢO HÀNH</h1>
+            <h1 class="fw-bold">KÍCH HOẠT BẢO HÀNH</h1>
             <div class="search-bar">
                 <input type="text" placeholder="Tra cứu bảo hành" id="search" />
                 <button type="button" class="search-btn"><i class="fa fa-search"></i></button>
@@ -417,7 +417,7 @@
             font-size: 1rem;
         }
 
-       
+
 
         .actions button {
             padding: 10px 15px;
